@@ -45,7 +45,8 @@ app.use(limiter);
 
 
 
-
+import UserRouter from './Routes/users/users.js';
+app.use('/user', UserRouter);
 
 
 
@@ -77,11 +78,6 @@ app.get('/', (req, res) => {
       </html>
     `);
 });
-
-
-
-
-
 
 
 export default app;

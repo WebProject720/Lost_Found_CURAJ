@@ -9,8 +9,10 @@ const Layout = () => {
       <main className="">
         <div className="login-container">
           <div className="login-box">
-          <img src='.\src\assets\lost.jpeg' alt="Login Logo" className="login-logo" />
-          <Outlet />
+            <div className="w-full flex content-center justify-center">
+              <img src='.\src\assets\lost.jpeg' alt="Login Logo" className="login-logo" />
+            </div>
+            <Outlet />
           </div>
         </div>
       </main>

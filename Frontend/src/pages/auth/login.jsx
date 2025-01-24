@@ -1,5 +1,5 @@
-import navigate from "navigate";
 import { Link } from "react-router";
+import { Button } from "../../components/utility/button";
 
 const Login = () => {
   return (
@@ -28,9 +28,9 @@ const Login = () => {
             className="login-input"
           />
         </div>
-        <button type="submit" className="login-button">
-          Login
-        </button>
+        <div>
+          <Button value='Login'></Button>
+        </div>
       </form>
       <div className="bottom-buttons">
         <Link className="new-registration" to="/register">
