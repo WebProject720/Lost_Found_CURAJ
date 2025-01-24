@@ -1,16 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+// import logo from "./assets/curaj-logo.png";
+// import loginlogo from "./assets/lost.jpeg";
+import { createBrowserRouter,RouterProvider } from 'react-router';
+import Layout from './layout/authLayout';
+import Login from './pages/auth/login';
+import Register from './pages/auth/register';
 
-function App() {
-  const [count, setCount] = useState(0)
+const router=createBrowserRouter([
+  {
+    path:"/",
+    element:<Layout/>,
+    children:[
+      {
+        path:"/",
+        element:<Login/>
+      },
+      {
+        path:"register",
+        element:<Register/>
+      }
+    ]
+  }
+])
 
+const App=()=>{
   return (
-    <>
-     <b>Welcome</b>
-    </>
+    <RouterProvider router={router}></RouterProvider>
   )
 }
 
-export default App
+
+
+export default App;
