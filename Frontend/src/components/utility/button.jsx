@@ -1,13 +1,14 @@
-export const Button=(props,ref)=>{
+export const Button = (props) => {
     return (
         <div>
-            <input 
-            className={props.className}
-            type={props.type||'button'}
-            ref={ref}
+            <button
+                className={`bg-blue-800 rounded-[4px] px-4 py-2 text-white font-extrabold ${props.className}
+                hover:bg-blue-700 hover:cursor-pointer
+                transition-all duration-500`}
+                type={props.type || 'button'}
             >
                 {props.children}
-            </input>
+            </button>
         </div>
     )
 }

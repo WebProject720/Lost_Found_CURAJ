@@ -1,10 +1,12 @@
 import { Link } from "react-router";
 
 
-export const Button_Link = (props,ref) => {
+export const Button_Link = (props) => {
     return (
         <div className="">
-            <Link ref={ref} to={props.to} className={`new-registration ${props.className}`}>
+            <Link to={props.to} className={`bg-blue-800 rounded-[4px] px-4 py-2 text-white font-extrabold ${props.className}
+                hover:bg-blue-700 hover:cursor-pointer
+                transition-all duration-500`}>
                 {props.children}
             </Link>
         </div>
