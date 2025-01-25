@@ -1,14 +1,12 @@
 import { Link } from "react-router";
 
 
-const Button_Link = ({ to, className,children }) => {
+export const Button_Link = (props,ref) => {
     return (
-        <div>
-            <Link to={to} className={`new-registration ${className}`}>
-            {children}
+        <div className="">
+            <Link ref={ref} to={props.to} className={`new-registration ${props.className}`}>
+                {props.children}
             </Link>
         </div>
     )
 }
-
-export default  Button_Link;

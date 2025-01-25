@@ -1,16 +1,16 @@
 import { Outlet } from "react-router";
 import Header from "../components/header";
+import { Images } from "../constant";
 
 const Layout = () => {
   return (
-    <div>
-      <link rel="stylesheet" href=".\src\CSS\auth.css" />
+    <div className="bg-amber-200 min-h-screen">
       <Header />
       <main className="">
-        <div className="login-container">
-          <div className="login-box">
+        <div className="">
+          <div className="">
             <div className="w-full flex content-center justify-center">
-              <img src='.\src\assets\lost.jpeg' alt="Login Logo" className="login-logo" />
+              <img src={Images.logo} alt="Login Logo" className="w-[50px]" />
             </div>
             <Outlet />
           </div>

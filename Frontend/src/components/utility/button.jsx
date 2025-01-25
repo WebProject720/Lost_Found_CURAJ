@@ -1,7 +1,13 @@
-export const Button=({value,classes,type="Button"})=>{
+export const Button=(props,ref)=>{
     return (
         <div>
-            <input type={type} className={`login-button text-center ${classes} `} value={value} />
+            <input 
+            className={props.className}
+            type={props.type||'button'}
+            ref={ref}
+            >
+                {props.children}
+            </input>
         </div>
     )
 }
