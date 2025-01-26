@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import 'dotenv/config'
-import { otp } from '../Models/models.js';
+import { otp } from '../Models/otp.model.js';
 
 const genOTP = () => {
     return Math.floor(1000 + Math.random() * 9000);
@@ -9,6 +9,7 @@ const genOTP = () => {
 export const sendMail = async (tagertEmail) => {
     const OTP = genOTP();
 
+    
     try {
         const transport = nodemailer.createTransport({
             host: "smtp.gmail.com",
@@ -20,6 +21,7 @@ export const sendMail = async (tagertEmail) => {
                 pass: process.env.EMAIL_SENDER_PASSWORD,
             },
         });
+        
         const mailOptions = {
             from: process.env.EMAIL_SENDER,
             to: tagertEmail,
@@ -34,7 +36,6 @@ export const sendMail = async (tagertEmail) => {
 
         const email = await transport.sendMail(mailOptions);
         if (!email) {
-            // console.log(email);
             return {status:false,error:email,msg:'Invalid Email ID'};
         }
         const del = await otp.deleteOne({ email: tagertEmail });
