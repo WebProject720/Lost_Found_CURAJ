@@ -45,7 +45,7 @@ export const verify = async (req, res) => {
             const user = await User.findOneAndUpdate(
                 {
                     $or: [{ email }, { username }]
-                }, { isEmailVerified: true });
+                }, { isVerified: true });
             if (!user) {
                 return res.json(
                     new ApiResponse('User not Verified', null, null, 404)
