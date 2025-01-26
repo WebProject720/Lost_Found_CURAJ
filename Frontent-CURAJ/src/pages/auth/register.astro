@@ -27,7 +27,7 @@ import AuthLayout from "../../layouts/AuthLayout.astro";
               Invalid Email
             </p> */
           }
-          <p class="text-center text-green-600">Registration Success !!</p>
+          <!-- <p class="text-center text-green-600">Registration Success !!</p> -->
         </div>
         <div class="flex w-full justify-center">
           <Button type="submit">Submit</Button>
@@ -36,8 +36,8 @@ import AuthLayout from "../../layouts/AuthLayout.astro";
       <Line />
       <div class="w-full flex items-center justify-center">
         <div class="flex flex-row gap-5 flex-wrap justify-evenly w-full">
-          <Button_Link to="/auth" class="bg-green-500">Login</Button_Link>
-          <Button_Link class="bg-gray-400 text-black border-0 border-black"
+          <Button_Link to="/auth" className="bg-green-500 hover:bg-green-300">Login</Button_Link>
+          <Button_Link className="bg-gray-400 text-black border-0 border-black hover:bg-gray-300"
             >Forget Password</Button_Link
           >
         </div>

@@ -4,10 +4,10 @@ import { Images } from "../constants.astro";
 ---
 
 <header
-  class="bg-gray-100 p-2 fixed w-screen flex items-center flex-row justify-between"
+  class="bg-gray-100 border-b-2 border-gray-400/20 p-2 fixed w-screen flex items-center flex-row justify-between shadow-xl shadow-gray-300"
 >
-  <div class="">
-    <Image src={Images.curaj_full_logo} alt="Logo" class="h-16" />
+  <div class="w-full h-full">
+    <Image src={Images.curaj_full_logo} alt="Logo" class="h-20 phone:h-auto phone:w-40" />
   </div>
   <div></div>
   <div class="font-bold">

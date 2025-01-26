@@ -5,9 +5,9 @@ export const Input = (props) => {
                 {props.label}
             </label>
             <input
-                className={`bg-gray-100 border-black outline-none border-[2px] 
+                className={`bg-gray-100 border-gray-400 outline-none border-[2px] 
                     rounded-full p-2 
-                    focus:bg-gray-200
+                    focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
                     transition-all duration-500
                      ${props.className}`}
                 type={props.type}
