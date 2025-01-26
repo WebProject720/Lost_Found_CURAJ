@@ -13,6 +13,9 @@ export default {
 			},
 			textColor:{
 				
+			},
+			fontFamily:{
+				sans:[]
 			}
 		},
 	},
