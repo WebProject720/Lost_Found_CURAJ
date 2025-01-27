@@ -1,20 +1,11 @@
-export const Loader = (props) => {
+import React, { forwardRef } from "react"
+export const Loader = forwardRef(({ className }, ref) => {
     return (
-        <div className="flex justify-between items-center gap-1 flex-col flex-nowrap">
-            <div className="size-12 bg-transparent border-l-0 border-r-0  border-black  rounded-full
-        border-0">
-                <div className="size-full flex animate-ping bg-blue-600 rounded-full justify-center items-center">
-                    <div className="size-2/3 bg-blue-400 flex rounded-full justify-center items-center">
-                        <div className="size-2/3 bg-blue-300 rounded-full flex justify-center items-center">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <p>
-                    {props.children}
-                </p>
+        <div className={`size-4 phone:size-6 bg-transparent border-t-0 border-[2px]
+        animate-spin
+         border-white p-1 rounded-full ${className}`} ref={ref} >
+            <div className="bg-transparent w-full h-full rounded-full">
             </div>
         </div>
     )
-}
+})

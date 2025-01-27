@@ -1,5 +1,7 @@
 ---
 // export const prerender = false;
+import { RegisterRequest } from "../../APIs/auth/register.astro";
+import RegisterBlock  from "../../blocks/RegisterBlock.jsx";
 import {
   Input,
   Button,
@@ -49,75 +51,9 @@ import AuthLayout from "../../layouts/AuthLayout.astro";
 ---
 
 <AuthLayout>
-  <div class="flex flex-col gap-2">
-    <div class="flex flex-nowrap gap-5 flex-col">
-      <div class="py-3">
-        <h1 class="text-black font-bold text-2xl">
-          <center> Registration </center>
-        </h1>
-      </div>
-      <Line />
-      <form
-        class="flex flex-col gap-5"
-        method="POST"
-        enctype="application/x-www-form-urlencoded"
-        id="RegistrationForm"
-      >
-        <Input
-          type="text"
-          label="Username"
-          placeholder="Username"
-          name="username"
-          minLength="4"
-        />
-        <Input
-          type="text"
-          label="Enrollment"
-          placeholder="Enrollment"
-          name="enrollment"
-          text="@curaj.ac.in"
-          minLength="4"
-        />
-        <Input
-          type="password"
-          label="Password"
-          name="password"
-          placeholder="Password"
-          minLength="4"
-        />
-        <div class="w-full">
-          {
-              <p class="text-center text-red-600">
-                <span id="error"></span>
-              </p>
-              <p class="text-center text-green-600">
-                <span id="success"></span>
-              </p>
-              <div id="loader">
-
-              </div>
-          }
-        </div>
-        <div class="flex w-full justify-center">
-          <Button type="submit">Submit</Button>
-        </div>
-      </form>
-      <Line />
-      <div class="w-full flex items-center justify-center">
-        <div class="flex flex-row gap-5 flex-wrap justify-evenly w-full">
-          <Button_Link to="/auth" className="bg-green-500 hover:bg-green-300"
-            >Login</Button_Link
-          >
-          <Button_Link
-            className="bg-gray-400 text-black border-0 border-black hover:bg-gray-300"
-            >Forget Password</Button_Link
-          >
-        </div>
-      </div>
-    </div>
-  </div>
+  <RegisterBlock client:load></RegisterBlock>
 </AuthLayout>
-<script>
+<!-- <script>
 import { RegisterRequest } from "../../APIs/auth/register.astro";
   document
     .getElementById("RegistrationForm")
@@ -150,4 +86,4 @@ import { RegisterRequest } from "../../APIs/auth/register.astro";
 
 
     });
-</script>
+</script> -->

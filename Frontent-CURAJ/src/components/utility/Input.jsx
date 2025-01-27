@@ -1,4 +1,4 @@
-export const Input = (props) => {
+export const Input = ({className="",...props}) => {
     return (
         <div className="flex flex-col gap-1">
             <label htmlFor={props.id} className="font-bold">
@@ -10,10 +10,10 @@ export const Input = (props) => {
                     rounded-full p-2  
                     focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
                     transition-all duration-500 
-                     ${props.className} ${props.text ? 'w-4/6 rounded-r-none' : 'w-full'}`}
+                     ${props.text ? 'w-4/6 rounded-r-none' : 'w-full'} ${className||''} `}
                     {...props}
                 />
-                <div className={`rounded-r-full border-l-0 border-gray-400 border-[2px] p-2 hover:cursor-not-allowed 
+                <div className={`rounded-r-full overflow-hidden border-l-0 border-gray-400 border-[2px] p-2 hover:cursor-not-allowed 
                 bg-gray-200
                     text-gray-500 font-bold
                     ${props.text ? 'w-2/6' : 'hidden'}`}>

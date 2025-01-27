@@ -17,7 +17,8 @@ export const register = async (req, res) => {
         const cookie = req?.cookies[process.env.TokenName];
 
         
-
+        console.log((enroll && username && password));
+        
 
         if (cookie) {
             return res.status(300).json(

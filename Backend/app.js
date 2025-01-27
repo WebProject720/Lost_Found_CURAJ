@@ -27,7 +27,7 @@ var corsOptions = isProduction ? {
     optionsSuccessStatus: 200,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
 } : {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:4321',
     credentials: true
 };
 
@@ -46,7 +46,7 @@ app.use(limiter);
 
 
 import UserRouter from './Routes/users/users.js';
-app.use('/user', UserRouter);
+app.use('/users', UserRouter);
 
 
 

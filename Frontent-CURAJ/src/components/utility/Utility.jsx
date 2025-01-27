@@ -4,7 +4,7 @@ import {Button_Link} from "./Btn_link";
 import { Line } from "./Lline";
 import { Loader } from "./Loader";
 import { LoaderCircle } from "./LoaderCircle";
+import { AlertBox } from "./AlertBox";
 
-
-export { LoaderCircle,Loader,Button, Input, Button_Link,Line };
+export {AlertBox, LoaderCircle,Loader,Button, Input, Button_Link,Line };
 

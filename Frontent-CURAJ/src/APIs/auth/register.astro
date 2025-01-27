@@ -1,35 +1,29 @@
 ---
-import  axios  from "axios";
-import {SERVER} from '../../constants.astro'
-const route = "/users";
+import axios from "axios";
+import { SERVER } from "../../constants.astro";
 
-type data={
-    username:String,
-    enroll:String,
-    password:String
-}
-export const RegisterRequest = async ({username,enroll,password}:data) => {
-    console.log("Server",{username,enroll,password});
-    
+type data = {
+    username: String;
+    enroll: String;
+    password: String;
+};
+export const RegisterRequest = async (data: data) => {
     try {
-        await axios.post(SERVER + '/users/register',{username,enroll,password}).then((response) => {
-            console.log(response);
-            return { status: true, data: response, msg: 'Registration Successful' }
-        }).catch((error) => {
-            console.log(error);
-            return {
-                status: false,
-                error: error,
-                msg: 'Registration Failed !'
-            }
-        })
-    } catch (error) {
-        console.log(error);
+        const response = await axios.post(SERVER + "/users/register", data);
+        console.log(response);
+        return {
+            status: true,
+            data: response.data, // Extract actual data from response
+            msg: "Registration Successful",
+        };
+    } catch (error: any) {
+        const errorData = error?.response?.data; // Safely handle error data
+        console.log(errorData || error);
         return {
             status: false,
-            error: error,
-            msg: 'Registration Failed !'
-        }
+            error: errorData || error,
+            msg: "Registration Failed!",
+        };
     }
-}
+};
 ---
