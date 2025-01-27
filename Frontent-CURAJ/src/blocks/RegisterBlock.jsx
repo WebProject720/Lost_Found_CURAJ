@@ -87,19 +87,19 @@ export default function RegisterBlock(props) {
                         minLength="4"
                         className={`${error ? 'border-red-400 bg-red-100' : null}`}
                         {...register('username')}
-                    />
+                        />
                     <Input
                         type="text"
                         label="Enrollment"
                         placeholder="Enrollment"
                         name="enrollment"
                         text="@curaj.ac.in"
-                        className={`${error ? 'border-red-400' : null}`}
+                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
                         minLength="4"
                         {...register('enrollment')}
-                    />
+                        />
                     <Input
-                        className={`${error ? 'border-red-400' : null}`}
+                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
                         type="password"
                         label="Password"
                         name="password"
