@@ -11,10 +11,7 @@ export const Input = (props) => {
                     focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
                     transition-all duration-500 
                      ${props.className} ${props.text ? 'w-4/6 rounded-r-none' : 'w-full'}`}
-                    type={props.type}
-                    placeholder={props.placeholder}
-                    name={props.name}
-                    id={props.id}
+                    {...props}
                 />
                 <div className={`rounded-r-full border-l-0 border-gray-400 border-[2px] p-2 hover:cursor-not-allowed 
                 bg-gray-200
