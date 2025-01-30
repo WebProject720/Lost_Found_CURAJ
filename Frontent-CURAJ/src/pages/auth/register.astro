@@ -11,79 +11,8 @@ import {
   Loader
 } from "../../components/utility/Utility";
 import AuthLayout from "../../layouts/AuthLayout.astro";
-
-// import { RegisterRequest } from "../../APIs/auth/register";
-
-// Astro.request.headers.set("Cache-Control", "public, max-age=3600");
-// const errors = {
-//   username: "",
-//   enrollment: "",
-//   password: "",
-//   error: "",
-//   status: true,
-// };
-// if (Astro.request.method === "POST") {
-//   try {
-//     const body = await Astro.request.formData();
-//     const username = body.get("username");
-//     const enrollment = body.get("enrollment");
-//     const password = body.get("password");
-//     const data = { username, enrollment, password };
-//     if (!(errors.username && errors.enrollment && errors.password)) {
-//       errors.error = "All Field required";
-//       errors.status = false;
-//       return new Response(
-//         JSON.stringify({ error: "All fields are required", status: false }),
-//         { status: 400, headers: { "Content-Type": "application/json" } }
-//       );
-//       return new Response(null);
-//     }
-//     console.log(data);
-//   } catch (error) {
-//     if (error instanceof Error) {
-//       console.error(error.message);
-//     }
-//   }
-// }
-// const log = () => {
-//   console.log("hello");
-// };
 ---
 
 <AuthLayout>
   <RegisterBlock client:load></RegisterBlock>
 </AuthLayout>
-<!-- <script>
-import { RegisterRequest } from "../../APIs/auth/register.astro";
-  document
-    .getElementById("RegistrationForm")
-    ?.addEventListener("submit", (e: SubmitEvent) => {
-      e.preventDefault();
-      const form = new FormData(e.target as HTMLFormElement);
-      const username = form.get("username");
-      const enrollment = form.get("enrollment");
-      const password = form.get("password");
-
-      const error=document.getElementById('error');
-      const success=document.getElementById('success');
-      const loader=document.getElementById('loader');
-
-      if(!(username&&enrollment&&password)){
-        error!.innerText="All field required";
-        return
-      }
-      type data={
-    username:String,
-    enroll:String,
-    password:String
-}
-      const data=({ username , enroll:enrollment, password });
-      RegisterRequest({ username , enroll:enrollment, password }as data).then((response)=>{
-        console.log(response);
-      }).catch((error)=>{
-        console.log(error);
-      })
-
-
-    });
-</script> -->

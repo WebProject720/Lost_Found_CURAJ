@@ -107,6 +107,15 @@ export default function RegisterBlock(props) {
                         minLength="4"
                         {...register('password')}
                     />
+                    <Input
+                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
+                        type="password"
+                        label="Confirm Password"
+                        name="password"
+                        placeholder="Confirm Password"
+                        minLength="4"
+                        {...register('repassword')}
+                    />
                     <div className="w-full">
                         {
                             !error ? null :

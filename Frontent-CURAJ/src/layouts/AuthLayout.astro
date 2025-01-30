@@ -9,14 +9,16 @@ import { Images } from "../constants.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href='/src/assets/logo.jpg' >
+    <link rel="icon" href="/src/assets/logo.jpg" />
     <meta name="generator" content={Astro.generator} />
     <title>Lost & Found - CURAJ</title>
   </head>
   <body>
-    <div class="bg-gray-200 bg-red_color flex flex-col min-h-screen">
+    <div class="bg-gray-200 bg-red_color flex flex-col min-h-[90vh]">
       <Header />
-      <main class="mt-[150px] phone:mt-[100px]">
+      <main
+        class="mt-[10px] phone:mt-[10px] min-h-screen flex justify-center items-center"
+      >
         <div
           class="w-full h-full flex-col phone:px-4 flex flex-wrap justify-between items-center content-center"
         >
@@ -47,13 +49,13 @@ import { Images } from "../constants.astro";
 </html>
 
 <style is:global>
-  @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  @import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
   html,
   body {
     margin: 0;
     width: 100%;
     height: 100%;
-    font-family: "Cabin","Poppins","monospace";
+    font-family: "Cabin", "Poppins", "monospace";
   }
 </style>
