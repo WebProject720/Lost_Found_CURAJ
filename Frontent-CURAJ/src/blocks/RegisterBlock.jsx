@@ -19,7 +19,8 @@ export default function RegisterBlock(props) {
         defaultValues: {
             username: '',
             password: '',
-            email: ''
+            email: '',
+            repassword: ''
         },
     });
     const [isLoading, setLoading] = useState(false);
@@ -41,13 +42,18 @@ export default function RegisterBlock(props) {
 
     useEffect(() => {
         setError(false);
-    }, [watch('username'), watch('password'), watch('enrollment')])
+    }, [watch('username'), watch('password'), watch('enrollment'), watch('repassword')])
 
 
     async function FormSubmit(data) {
-        if (!(data.username && data.enrollment && data.password)) {
+        if (!(data.username && data.enrollment && data.password && data.repassword)) {
             setError(true);
             setAlertFun(false, 'All field required');
+            return
+        }
+        if(data.password!=data.register){
+            setError(true);
+            setAlertFun(false,'Password not same');
             return
         }
         const formData = { username: data.username, enrollment: data.enrollment, password: data.password }
@@ -61,7 +67,7 @@ export default function RegisterBlock(props) {
                 navigate('/auth/verify');
             } else {
                 setError(true);
-                setAlertFun(false, res.error.message||'Try Again !!');
+                setAlertFun(false, res.error.message || 'Try Again !!');
             }
         })
     }
@@ -87,7 +93,7 @@ export default function RegisterBlock(props) {
                         minLength="4"
                         className={`${error ? 'border-red-400 bg-red-100' : null}`}
                         {...register('username')}
-                        />
+                    />
                     <Input
                         type="text"
                         label="Enrollment"
@@ -97,23 +103,23 @@ export default function RegisterBlock(props) {
                         className={`${error ? 'border-red-400 bg-red-100' : null}`}
                         minLength="4"
                         {...register('enrollment')}
-                        />
+                    />
                     <Input
                         className={`${error ? 'border-red-400 bg-red-100' : null}`}
                         type="password"
                         label="Password"
                         name="password"
+                        minLength='4'
                         placeholder="Password"
-                        minLength="4"
                         {...register('password')}
                     />
                     <Input
                         className={`${error ? 'border-red-400 bg-red-100' : null}`}
                         type="password"
                         label="Confirm Password"
-                        name="password"
+                        name="repassword"
+                        minLength='4'
                         placeholder="Confirm Password"
-                        minLength="4"
                         {...register('repassword')}
                     />
                     <div className="w-full">
@@ -146,7 +152,7 @@ export default function RegisterBlock(props) {
                         <Button_Link to="/auth" className="bg-green-500 hover:bg-green-300">
                             Login
                         </Button_Link>
-                        <Button_Link className="bg-gray-400 text-black border-0 border-black hover:bg-gray-300">
+                        <Button_Link to="/auth/reset-password" className="bg-gray-400 text-black border-0 border-black hover:bg-gray-300">
                             Forget Password
                         </Button_Link>
                     </div>

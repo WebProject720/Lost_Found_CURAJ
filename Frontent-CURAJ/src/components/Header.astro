@@ -25,7 +25,6 @@ import { Images } from "../constants.astro";
     let headerHeight = document.getElementById("header")?.offsetHeight;
     let afterHeader = document.getElementsByTagName('main')[0];
 
-    console.log(afterHeader, headerHeight);
     if (afterHeader) {
       afterHeader.style.marginTop = `${(headerHeight||0)+5}px`;
     }
