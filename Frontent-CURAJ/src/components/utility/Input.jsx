@@ -6,7 +6,6 @@ export const Input = ({ className = "", ...props }) => {
     const [type, setType] = useState(props.type || 'text');
 
     const onClick = () => {
-        console.log(eye, type);
 
         if (type == 'text') {
             setEye(Images.eye_close);
@@ -48,9 +47,9 @@ export const Input = ({ className = "", ...props }) => {
                 bg-gray-200 flex items-center justify-center
                     text-gray-500 font-bold
                     ${props.type == "password" ? 'w-auto' : 'hidden'}`}>
-                    <button type="button" onClick={onClick} className=" p-2 bg-transparent border-transparent outline-none">
-                        <img className="size-10 inline-block" src={eye}></img>
-                    </button>
+                    {/* <button type="button"  className=" p-2 bg-transparent border-transparent outline-none"> */}
+                    <img onClick={onClick} className="size-10 p-2 inline-block" src={eye}></img>
+                    {/* </button> */}
                 </div>
             </div>
         </div>

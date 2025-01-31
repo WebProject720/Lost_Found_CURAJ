@@ -7,10 +7,9 @@ type data = {
     enroll: String;
     password: String;
 };
-export const RegisterRequest = async (data: data) => {
+export const RegisterRequest = async (data: data,path:String) => {
     try {
-        const response = await axios.post(SERVER + "/users/register", data);
-        console.log(response);
+        const response = await axios.post(SERVER + path, data);
         return {
             status: true,
             data: response.data, // Extract actual data from response
@@ -18,7 +17,6 @@ export const RegisterRequest = async (data: data) => {
         };
     } catch (error: any) {
         const errorData = error?.response?.data; // Safely handle error data
-        console.log(errorData || error);
         return {
             status: false,
             error: errorData || error,

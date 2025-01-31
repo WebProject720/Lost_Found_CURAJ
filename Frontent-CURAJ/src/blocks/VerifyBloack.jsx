@@ -11,13 +11,10 @@ import { RegisterRequest } from "../APIs/auth/register.astro";
 import { navigate } from "astro:transitions/client";
 
 
-export default function RegisterBlock(props) {
+export default function VerifyBloack(props) {
     const { register, handleSubmit, watch } = useForm({
         defaultValues: {
-            username: '',
-            password: '',
-            email: '',
-            repassword: ''
+            otp: ''
         },
     });
     const [isLoading, setLoading] = useState(false);
@@ -39,29 +36,26 @@ export default function RegisterBlock(props) {
 
     useEffect(() => {
         setError(false);
-    }, [watch('username'), watch('password'), watch('enrollment'), watch('repassword')])
+    }, [watch('otp')])
 
 
     async function FormSubmit(data) {
-        if (!(data.username && data.enrollment && data.password && data.repassword)) {
+        if (!(data.otp)) {
             setError(true);
-            setAlertFun(false, 'All field required');
+            setAlertFun(false, 'Enter OTP');
             return
         }
-        if (data.password != data.repassword) {
-            setError(true);
-            setAlertFun(false, 'Password not same');
-            return
-        }
-        const formData = { username: data.username, enrollment: data.enrollment, password: data.password }
+        const userID = sessionStorage.getItem('UserID');
+        const formData = { OTP: data.otp, email: userID }
         setLoading(true);
-        await RegisterRequest(formData, "/users/register").then((res) => {
+        await RegisterRequest(formData, "/users/verify").then((res) => {
             setLoading(false);
             if (res?.status) {
                 setError(true);
                 setAlertFun(true, 'Registration Successfull');
-                sessionStorage.setItem('UserID',data.enrollment);
-                navigate('/auth/verify');
+                console.log("Go to /dashboard");
+                
+                // navigate('/dashboard');
             } else {
                 setError(true);
                 setAlertFun(false, res.error.message || 'Try Again !!');
@@ -73,7 +67,7 @@ export default function RegisterBlock(props) {
             <div className="flex flex-nowrap gap-5 flex-col">
                 <div className="py-3">
                     <h1 className="text-black font-bold text-2xl">
-                        <center> Registration </center>
+                        <center> Verification </center>
                     </h1>
                 </div>
                 <Line />
@@ -83,41 +77,14 @@ export default function RegisterBlock(props) {
                     onSubmit={handleSubmit(FormSubmit)}
                 >
                     <Input
-                        type="text"
-                        label="Username"
-                        placeholder="Username"
-                        name="username"
-                        minLength="4"
+                        min="1000"
+                        max="9999"
+                        label="OTP"
+                        type="number"
+                        placeholder="4 Digit OTP"
                         className={`${error ? 'border-red-400 bg-red-100' : null}`}
-                        {...register('username')}
-                    />
-                    <Input
-                        type="text"
-                        label="Enrollment"
-                        placeholder="Enrollment"
-                        name="enrollment"
-                        text="@curaj.ac.in"
-                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
-                        minLength="4"
-                        {...register('enrollment')}
-                    />
-                    <Input
-                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
-                        type="password"
-                        label="Password"
-                        name="password"
-                        minLength='4'
-                        placeholder="Password"
-                        {...register('password')}
-                    />
-                    <Input
-                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
-                        type="password"
-                        label="Confirm Password"
-                        name="repassword"
-                        minLength='4'
-                        placeholder="Confirm Password"
-                        {...register('repassword')}
+                        {...register('otp')}
+                        required
                     />
                     <div className="w-full">
                         {

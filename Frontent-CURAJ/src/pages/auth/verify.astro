@@ -1,52 +1,8 @@
 ---
 import AuthLayout from "../../layouts/AuthLayout.astro";
-import {
-    Input,
-    Button,
-    Button_Link,
-    Line,
-} from "../../components/utility/Utility";
+import VerifyBlock from "../../blocks/VerifyBloack.jsx";
 ---
 
-<AuthLayout>
-    <div class="flex flex-col gap-2">
-        <div class="flex flex-nowrap gap-5 flex-col">
-            <div class="py-3">
-                <h1 class="text-black font-bold text-2xl">
-                    <center> Verification </center>
-                </h1>
-            </div>
-            <Line />
-            <form action="" class="flex flex-col gap-5">
-                <Input  min="1000" max="9999" label="OTP" type="number" placeholder="4 Digit OTP" required/>
-                <div class="w-full">
-                    {
-                        /* <p class="text-center text-red-600">
-                  Invalid Email
-                </p> */
-                    }
-                    <!-- <p class="text-center text-green-600">Registration Success !!</p> -->
-                </div>
-                <div class="flex w-full justify-center">
-                    <Button type="submit">Submit</Button>
-                </div>
-            </form>
-            <Line />
-            <div class="w-full flex items-center justify-center">
-                <div
-                    class="flex flex-row gap-5 flex-wrap justify-evenly w-full"
-                >
-                    <Button_Link
-                        to="/auth"
-                        className="bg-green-500 hover:bg-green-300"
-                        >Login</Button_Link
-                    >
-                    <Button_Link
-                        className="bg-gray-400 text-black border-0 border-black hover:bg-gray-300"
-                        >Forget Password</Button_Link
-                    >
-                </div>
-            </div>
-        </div>
-    </div>
+<AuthLayout >
+    <VerifyBlock client:load />
 </AuthLayout>
