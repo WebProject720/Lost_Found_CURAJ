@@ -7,8 +7,8 @@ import {
     Loader,
 } from "../components/utility/Utility";
 import { useForm } from "react-hook-form";
-import { RegisterRequest } from "../APIs/auth/register.astro";
 import { navigate } from "astro:transitions/client";
+import { authAPI } from "../APIs/auth/authAPI.astro";
 
 
 export default function VerifyBloack(props) {
@@ -18,7 +18,6 @@ export default function VerifyBloack(props) {
         },
     });
     const [isLoading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
     const [alertParams, setAlertParam] = useState({
         status: false,
         Msg: "",
@@ -35,28 +34,24 @@ export default function VerifyBloack(props) {
 
 
     useEffect(() => {
-        setError(false);
+        setAlertFun(false,'');
     }, [watch('otp')])
 
 
     async function FormSubmit(data) {
         if (!(data.otp)) {
-            setError(true);
             setAlertFun(false, 'Enter OTP');
             return
         }
         const userID = sessionStorage.getItem('UserID');
         const formData = { OTP: data.otp, email: userID }
         setLoading(true);
-        await RegisterRequest(formData, "/users/verify").then((res) => {
+        await authAPI(formData, "/users/verify").then((res) => {
             setLoading(false);
             if (res?.status) {
-                setError(true);
                 setAlertFun(true, 'User Verified');
-
                 navigate('/dashboard');
             } else {
-                setError(true);
                 setAlertFun(false, res.error.message || 'Try Again !!');
             }
         })

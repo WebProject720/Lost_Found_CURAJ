@@ -7,8 +7,8 @@ import {
     Loader,
 } from "../components/utility/Utility";
 import { useForm } from "react-hook-form";
-import { RegisterRequest } from "../APIs/auth/register.astro";
 import { navigate } from "astro:transitions/client";
+import { authAPI } from "../APIs/auth/authAPI.astro";
 
 
 export default function RegisterBlock(props) {
@@ -21,7 +21,6 @@ export default function RegisterBlock(props) {
         },
     });
     const [isLoading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
     const [alertParams, setAlertParam] = useState({
         status: false,
         Msg: "",
@@ -38,32 +37,28 @@ export default function RegisterBlock(props) {
 
 
     useEffect(() => {
-        setError(false);
+        setAlertFun(false,'');
     }, [watch('username'), watch('password'), watch('enrollment'), watch('repassword')])
 
 
     async function FormSubmit(data) {
         if (!(data.username && data.enrollment && data.password && data.repassword)) {
-            setError(true);
             setAlertFun(false, 'All field required');
             return
         }
         if (data.password != data.repassword) {
-            setError(true);
             setAlertFun(false, 'Password not same');
             return
         }
         const formData = { username: data.username, enrollment: data.enrollment, password: data.password }
         setLoading(true);
-        await RegisterRequest(formData, "/users/register").then((res) => {
+        await authAPI(formData, "/users/register").then((res) => {
             setLoading(false);
             if (res?.status) {
-                setError(true);
                 setAlertFun(true, 'Registration Successfull');
                 sessionStorage.setItem('UserID', data.enrollment);
                 navigate('/auth/verify');
             } else {
-                setError(true);
                 setAlertFun(false, res.error.message || 'Try Again !!');
             }
         })
@@ -88,7 +83,7 @@ export default function RegisterBlock(props) {
                         placeholder="Username"
                         name="username"
                         minLength="4"
-                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
+                        className={`${alertParams.Msg ? !alertParams.status ? 'border-red-400 bg-red-100' : 'border-green-500 bg-green-200' : null}`}
                         {...register('username')}
                     />
                     <Input

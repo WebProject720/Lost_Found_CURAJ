@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
     Input,
     Button,
-    Button_Link,
-    Line,
     Loader,
 } from "../components/utility/Utility";
 import { useForm } from "react-hook-form";
-import { RegisterRequest } from "../APIs/auth/register.astro";
+import { authAPI } from "../APIs/auth/authAPI.astro";
 import { navigate } from "astro:transitions/client";
+import { setUserLogin, setUserInfo } from "../store";
+
 
 export default function LoginBlock(props) {
+
     const { register, handleSubmit, watch } = useForm({
         defaultValues: {
             username: '',
@@ -46,10 +47,13 @@ export default function LoginBlock(props) {
 
         const formData = { identifier: data.username, password: data.password }
         setLoading(true);
-        await RegisterRequest(formData, "/users/login").then((res) => {
+        await authAPI(formData, "/users/login").then((res) => {
             setLoading(false);
             if (res?.status) {
                 setAlertFun(true, 'Login Successfull');
+                const { data } = (res.data) || {};
+                setUserInfo(data.user);
+                setUserLogin(true);
                 navigate('/dashboard');
             } else {
                 setAlertFun(false, res.error.message || 'Try Again !!');
