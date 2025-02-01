@@ -52,10 +52,9 @@ export default function VerifyBloack(props) {
             setLoading(false);
             if (res?.status) {
                 setError(true);
-                setAlertFun(true, 'Registration Successfull');
-                console.log("Go to /dashboard");
-                
-                // navigate('/dashboard');
+                setAlertFun(true, 'User Verified');
+
+                navigate('/dashboard');
             } else {
                 setError(true);
                 setAlertFun(false, res.error.message || 'Try Again !!');
@@ -82,21 +81,22 @@ export default function VerifyBloack(props) {
                         label="OTP"
                         type="number"
                         placeholder="4 Digit OTP"
-                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
+                        className={`${alertParams.Msg ? !alertParams.status ? 'border-red-400 bg-red-100' : 'border-green-500 bg-green-200' : null}`}
                         {...register('otp')}
                         required
                     />
                     <div className="w-full">
                         {
-                            !error ? null :
-                                alertParams.status ?
-                                    <p className="text-green-500 text-center">
-                                        {alertParams.Msg}
-                                    </p>
-                                    :
-                                    <p className="text-red-500 text-center">
-                                        {alertParams.Msg}
-                                    </p>
+                            alertParams.Msg ? alertParams.status ?
+                                <p className="text-green-500 text-center">
+                                    {alertParams.Msg}
+                                </p>
+                                :
+                                <p className="text-red-500 text-center">
+                                    {alertParams.Msg}
+                                </p>
+                                :
+                                null
                         }
                     </div>
                     <div className={`flex w-full justify-center ${isLoading ? 'disabled' : ''}`}>

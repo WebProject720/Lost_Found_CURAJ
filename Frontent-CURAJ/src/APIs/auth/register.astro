@@ -9,7 +9,7 @@ type data = {
 };
 export const RegisterRequest = async (data: data,path:String) => {
     try {
-        const response = await axios.post(SERVER + path, data);
+        const response = await axios.post(SERVER + path, data,{withCredentials:true});
         return {
             status: true,
             data: response.data, // Extract actual data from response

@@ -29,7 +29,7 @@ export const Input = ({ className = "", ...props }) => {
                     rounded-md p-2  
                     focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
                     transition-all duration-500 
-                     ${props.text ? 'w-4/6 rounded-r-none' : 'w-full'} ${className || ''} 
+                     ${props.text ? 'w-4/6 rounded-r-none' : 'w-full'} 
                      ${props.type == "password" ? 'rounded-r-none' : 'w-full'} ${className || ''} 
                      `}
                     {...props}

@@ -60,7 +60,7 @@ export default function RegisterBlock(props) {
             if (res?.status) {
                 setError(true);
                 setAlertFun(true, 'Registration Successfull');
-                sessionStorage.setItem('UserID',data.enrollment);
+                sessionStorage.setItem('UserID', data.enrollment);
                 navigate('/auth/verify');
             } else {
                 setError(true);
@@ -97,21 +97,21 @@ export default function RegisterBlock(props) {
                         placeholder="Enrollment"
                         name="enrollment"
                         text="@curaj.ac.in"
-                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
                         minLength="4"
                         {...register('enrollment')}
+                        className={`${alertParams.Msg ? !alertParams.status ? 'border-red-400 bg-red-100' : 'border-green-500 bg-green-200' : null}`}
                     />
                     <Input
-                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
                         type="password"
                         label="Password"
                         name="password"
                         minLength='4'
                         placeholder="Password"
                         {...register('password')}
+                        className={`${alertParams.Msg ? !alertParams.status ? 'border-red-400 bg-red-100' : 'border-green-500 bg-green-200' : null}`}
                     />
                     <Input
-                        className={`${error ? 'border-red-400 bg-red-100' : null}`}
+                        className={`${alertParams.Msg ? !alertParams.status ? 'border-red-400 bg-red-100' : 'border-green-500 bg-green-200' : null}`}
                         type="password"
                         label="Confirm Password"
                         name="repassword"
@@ -121,15 +121,16 @@ export default function RegisterBlock(props) {
                     />
                     <div className="w-full">
                         {
-                            !error ? null :
-                                alertParams.status ?
-                                    <p className="text-green-500 text-center">
-                                        {alertParams.Msg}
-                                    </p>
-                                    :
-                                    <p className="text-red-500 text-center">
-                                        {alertParams.Msg}
-                                    </p>
+                            alertParams.Msg ? alertParams.status ?
+                                <p className="text-green-500 text-center">
+                                    {alertParams.Msg}
+                                </p>
+                                :
+                                <p className="text-red-500 text-center">
+                                    {alertParams.Msg}
+                                </p>
+                                :
+                                null
                         }
                     </div>
                     <div className={`flex w-full justify-center ${isLoading ? 'disabled' : ''}`}>

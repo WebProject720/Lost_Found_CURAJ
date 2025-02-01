@@ -1,11 +1,8 @@
 ---
+import LoginBlock from "../../blocks/LoginBlock";
 import {
-  Loader,
-  Input,
-  Button,
   Button_Link,
   Line,
-  LoaderCircle,
 } from "../../components/utility/Utility";
 import AuthLayout from "../../layouts/AuthLayout.astro";
 ---
@@ -19,21 +16,7 @@ import AuthLayout from "../../layouts/AuthLayout.astro";
         </h1>
       </div>
       <Line />
-      <form action="" class="flex flex-col gap-5">
-        <Input label="Username" placeholder="Username" />
-        <Input
-          client:load
-          type="password"
-          label="Password"
-          placeholder="Password"
-        />
-        <div class="flex w-full justify-center">
-          <Button type="submit">Submit</Button>
-        </div>
-      </form>
-      <!-- <div class="w-full flex justify-center">
-        <LoaderCircle> Loading... </LoaderCircle>
-      </div> -->
+      <LoginBlock client:load/>
       <Line />
       <div class="w-full flex items-center justify-center">
         <div class="flex flex-row gap-5 flex-wrap justify-evenly w-full">
