@@ -59,23 +59,25 @@ import { Loader } from "../components/utility/Loader";
   </body>
 </html>
 <script>
+
   import { navigate } from "astro:transitions/client";
   import { UserAPI } from "../APIs/users/usersAPI";
+
   let loaderDiv = document.getElementById("loader-container");
   let container = document.getElementById("container");
   container?.classList.add("hidden");
   loaderDiv?.classList.add("flex");
+
   await UserAPI(null, "/isuserlogged")
     .then((res) => {
       console.log(res);
-      container?.classList.remove("hidden");
-      loaderDiv?.classList.add("hidden");
       if (res.status) {
         navigate("/dashboard");
       }
+      container?.classList.remove("hidden");
+      loaderDiv?.classList.add("hidden");
     })
     .catch((error) => {
-      console.log(error);
       container?.classList.remove("hidden");
       loaderDiv?.classList.add("hidden");
       console.log(error);
