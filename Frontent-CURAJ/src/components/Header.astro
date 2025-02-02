@@ -1,12 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import { Images } from "../constants.astro";
-
 ---
 
 <header
   id="header"
-  class="bg-gray-100 top-0 border-b-2 border-gray-400/20 p-2 fixed w-screen flex items-center flex-row justify-between shadow-xl shadow-gray-300"
+  class="bg-gray-100 top-0 border-b-2 border-gray-400/20 p-2 fixed w-screen flex items-center flex-row justify-between shadow-xl shadow-gray-300 px-8"
 >
   <div class="w-full h-full">
     <Image
@@ -21,13 +20,13 @@ import { Images } from "../constants.astro";
       <slot />
     </div>
   </div>
-
-  <script>
-    let headerHeight = document.getElementById("header")?.offsetHeight;
-    let afterHeader = document.getElementsByTagName('main')[0];
-
-    if (afterHeader) {
-      afterHeader.style.marginTop = `${(headerHeight||0)+5}px`;
-    }
-  </script>
 </header>
+
+<script>
+  let headerHeight = document.getElementById("header")?.offsetHeight;
+  let afterHeader = document.getElementsByTagName("main")[0];
+
+  if (afterHeader) {
+    afterHeader.style.marginTop = `${(headerHeight || 0) + 5}px`;
+  }
+</script>

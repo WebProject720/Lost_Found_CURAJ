@@ -34,7 +34,7 @@ export default function VerifyBloack(props) {
 
 
     useEffect(() => {
-        setAlertFun(false,'');
+        setAlertFun(false, '');
     }, [watch('otp')])
 
 
@@ -44,7 +44,7 @@ export default function VerifyBloack(props) {
             return
         }
         const userID = sessionStorage.getItem('UserID');
-        const formData = { OTP: data.otp, email: userID }
+        const formData = { OTP: data.otp?.trim(), email: userID?.trim() }
         setLoading(true);
         await authAPI(formData, "/users/verify").then((res) => {
             setLoading(false);
@@ -95,7 +95,7 @@ export default function VerifyBloack(props) {
                         }
                     </div>
                     <div className={`flex w-full justify-center ${isLoading ? 'disabled' : ''}`}>
-                        <Button type="submit">
+                        <Button type="submit" disabled={isLoading}>
                             {
                                 isLoading ?
                                     <Loader></Loader>

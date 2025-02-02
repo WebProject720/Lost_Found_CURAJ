@@ -46,11 +46,15 @@ export default function RegisterBlock(props) {
             setAlertFun(false, 'All field required');
             return
         }
+        if(data.username.includes(' ')){
+            setAlertFun(false, 'Space not allowed in username');
+            return
+        }
         if (data.password != data.repassword) {
             setAlertFun(false, 'Password not same');
             return
         }
-        const formData = { username: data.username, enrollment: data.enrollment, password: data.password }
+        const formData = { username: data.username?.trim(), enrollment: data.enrollment?.trim(), password: data.password?.trim() }
         setLoading(true);
         await authAPI(formData, "/users/register").then((res) => {
             setLoading(false);
@@ -129,7 +133,7 @@ export default function RegisterBlock(props) {
                         }
                     </div>
                     <div className={`flex w-full justify-center ${isLoading ? 'disabled' : ''}`}>
-                        <Button type="submit">
+                        <Button type="submit" disabled={isLoading}>
                             {
                                 isLoading ?
                                     <Loader></Loader>

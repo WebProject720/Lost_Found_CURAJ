@@ -44,8 +44,11 @@ export default function LoginBlock(props) {
             setAlertFun(false, 'All field required');
             return
         }
-
-        const formData = { identifier: data.username, password: data.password }
+        if(data.username.includes(' ')){
+            setAlertFun(false, 'Space not allowed in username');
+            return
+        }
+        const formData = { identifier: data.username?.trim(), password: data.password?.trim() }
         setLoading(true);
         await authAPI(formData, "/users/login").then((res) => {
             setLoading(false);
@@ -95,8 +98,8 @@ export default function LoginBlock(props) {
                         null
                 }
             </div>
-            <div className={`flex w-full justify-center ${isLoading ? 'disabled' : ''}`}>
-                <Button type="submit">
+            <div className={`flex w-full justify-center `}>
+                <Button type="submit" disabled={isLoading}>
                     {
                         isLoading ?
                             <Loader></Loader>

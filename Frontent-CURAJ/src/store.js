@@ -28,7 +28,7 @@ const updateStore = (data) => {
 };
 
 // Set user login state
-export const setUserLogin = (bool) => {
+const setUserLogin = (bool) => {
     const store = getStoreData();
     if (bool) {
         store.isUserLogged = true;
@@ -39,12 +39,17 @@ export const setUserLogin = (bool) => {
 };
 
 // Set user info
-export const setUserInfo = (data) => {
+const setUserInfo = (data) => {
     const store = getStoreData();
     store.loggedUser = data;
     store.isUserLogged = true;
     updateStore(store);
 };
 
+const logout = () => {
+    updateStore(defaultUser);
+    window.localStorage.clear(APP_NAME);
+}
+
 // Export getter function
-export { getStoreData, updateStore };
+export { getStoreData, updateStore, setUserLogin, setUserInfo, logout };
