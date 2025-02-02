@@ -22,14 +22,18 @@ import { Loader } from "../components/utility/Loader";
       <Loader />
     </div>
     <div  id="container">
-      <Header>
-        <Navbar client:only />
-      </Header>
-      <main>
-        <div>
+      <div class="z-50">
+        <Header>
+          <Navbar client:only />
+        </Header>
+      </div>
+      <main class="flex relative w-full">
+        <div class="desktop:absolute z-10 h-fit  desktop:w-1/4 ">
+          <Sidebar />
+        </div>
+        <div class="desktop:w-3/4 bg-gray-300">
           <slot />
         </div>
-        <Sidebar />
       </main>
     </div>
   </body>

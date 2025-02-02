@@ -14,8 +14,11 @@ export default function Navbar() {
     const user = store.loggedUser;
 
     return (
-        <div>
-            <div className="flex cursor-pointer group gap-2 items-center justify-center bg-gray-200 p-2 rounded-md">
+        <div className="flex items-center justify-center gap-2">
+            <div className="">
+                <Button onClick={logoutUser}>Logout</Button>
+            </div>
+            <div className="flex flex-row cursor-pointer group gap-2 items-center justify-center bg-gray-200 p-2 rounded-md">
                 <div>
                     <img src={Images.userIcon} className="w-20"></img>
                 </div>
@@ -31,10 +34,8 @@ export default function Navbar() {
                         {user?.email || ''}
                     </p>
                 </div>
-                <div className="fixed hidden top-16 right-10 group-hover:flex ">
-                    <Button onClick={logoutUser}>Logout</Button>
-                </div>
             </div>
+
         </div>
     )
 }
