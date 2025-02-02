@@ -16,12 +16,12 @@ import { Loader } from "../components/utility/Loader";
   </head>
   <body class="relative">
     <div
-      class="w-screen h-screen flex justify-center items-center"
+      class="w-screen h-screen justify-center items-center hidden"
       id="loader-container"
     >
       <Loader />
     </div>
-    <div  id="loader-container">
+    <div  id="container">
       <Header>
         <Navbar client:only />
       </Header>
@@ -42,16 +42,17 @@ import { Loader } from "../components/utility/Loader";
 
   let loaderDiv = document.getElementById("loader-container");
   let container = document.getElementById("container");
-  container?.classList.add("hidden");
-  loaderDiv?.classList.add("flex");
-
+  
   if (!user.isUserLogged || !user.loggedUser) {
+    container?.classList.add("hidden");
+    loaderDiv?.classList.add("flex");
     UserAPI(null, "/getuser")
       .then((res) => {
         if (res.status) {
           console.log(res);
           setUserLogin(true);
           setUserInfo(res.data);
+          console.log(loaderDiv,container);
           container?.classList.remove("hidden");
           loaderDiv?.classList.add("hidden");
         } else {

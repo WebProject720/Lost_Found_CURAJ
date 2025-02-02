@@ -28,7 +28,7 @@ export const Input = ({ className = "", ...props }) => {
                     className={`bg-gray-100 border-gray-400 outline-none border-[1px] 
                     rounded-md p-2  
                     focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
-                    transition-all duration-500 
+                    transition-all duration-500 phone:p-1
                      ${props.text ? 'w-4/6 rounded-r-none' : 'w-full'} 
                      ${props.type == "password" ? 'rounded-r-none' : 'w-full'} ${className || ''} 
                      `}

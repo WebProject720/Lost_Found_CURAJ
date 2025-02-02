@@ -70,7 +70,6 @@ import { Loader } from "../components/utility/Loader";
 
   await UserAPI(null, "/isuserlogged")
     .then((res) => {
-      console.log(res);
       if (res.status) {
         navigate("/dashboard");
       }
