@@ -53,10 +53,8 @@ import { Loader } from "../components/utility/Loader";
     UserAPI(null, "/getuser")
       .then((res) => {
         if (res.status) {
-          console.log(res);
           setUserLogin(true);
           setUserInfo(res.data);
-          console.log(loaderDiv,container);
           container?.classList.remove("hidden");
           loaderDiv?.classList.add("hidden");
         } else {
