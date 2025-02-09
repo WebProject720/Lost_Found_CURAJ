@@ -1,13 +1,13 @@
 ---
 import DashLayout from "../../layouts/DashLayout.astro";
-
-
 ---
-
 <DashLayout>
-    <h1>
-        <center>
-            Welcome to Lost & Found - CURAJ
-        </center>
-    </h1>
+  <div
+    class="absolute top-[120px] left-[355px] w-[1272px] h-[659px] bg-white shadow-lg rounded-lg border border-gray-300 p-6"
+  >
+    <h2 class="text-2xl font-bold text-gray-400 mb-4">Reports</h2>
+    <div>
+      <slot />
+    </div>
+  </div>
 </DashLayout>

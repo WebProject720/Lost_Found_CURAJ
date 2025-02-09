@@ -14,30 +14,27 @@ import { Loader } from "../components/utility/Loader";
     <meta name="generator" content={Astro.generator} />
     <title>Lost & Found - CURAJ</title>
   </head>
-  <body class="relative">
+  <body class="relative flex flex-col h-screen">
     <div
       class="w-screen h-screen justify-center items-center hidden"
       id="loader-container"
     >
       <Loader />
     </div>
-    <div  id="container">
+    <div id="container">
       <div class="z-50">
-        <Header>
+        <Header class="w-full fixed top-0 left-0">
           <Navbar client:only />
         </Header>
       </div>
-      <main class="flex relative w-full">
-        <div class="desktop:absolute z-10 h-fit  desktop:w-1/4 ">
-          <Sidebar />
-        </div>
-        <div class="desktop:w-3/4 bg-gray-300">
-          <slot />
-        </div>
-      </main>
+      <div class="flex flex-row w-full h-full pt-20">
+        <Sidebar class="w-64 flex-shrink-0" />
+      </div>
+        <slot />
     </div>
   </body>
 </html>
+
 <script>
   import { navigate } from "astro:transitions/client";
   import { setUserLogin, setUserInfo, logout, getStoreData } from "../store";
@@ -79,4 +76,4 @@ import { Loader } from "../components/utility/Loader";
     height: 100%;
     font-family: "Cabin", "Poppins", "monospace";
   }
-</style>
+</style>  this is dashlayout 
