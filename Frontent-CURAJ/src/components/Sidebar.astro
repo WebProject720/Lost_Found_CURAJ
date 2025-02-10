@@ -1,30 +1,38 @@
-<div
-  class="h-screen w-72 bg-gray-100 border-r border-gray-300 text-gray-800 flex flex-col p-4 shadow-lg fixed"
->
-  <div class="mt-12"></div>
-  <nav class="space-y-4">
-    <a
-      href="/dashboard"
-      class="flex items-center px-4 py-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition text-gray-800 text-lg font-medium"
-    >
-      <img
-        src="https://getdrawings.com/free-icon-bw/adwords-icon-10.png"
-        alt="Dashboard Icon"
-        class="h-6 w-6 mr-3"
-      />
-      Dashboard
-    </a>
-    <a
-    href="/dashboard/add"
-      class="flex items-center w-full px-4 py-3 bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200 transition text-lg font-medium"
-      
-    >
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/2798/2798102.png"
-        alt="Report Icon"
-        class="h-6 w-6 mr-3"
-      />
-      Add Report
-    </a>
-  </nav>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sidebar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200">
+
+    <div class="hidden md:flex h-screen w-72 bg-gray-100 border-r border-gray-300 text-gray-800 flex-col p-4 shadow-lg fixed">
+        <div class="mt-12"></div>
+        <nav class="space-y-4">
+            <a href="/dashboard" class="flex items-center px-4 py-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition text-gray-800 text-lg font-medium">
+                <img src="https://getdrawings.com/free-icon-bw/adwords-icon-10.png" alt="Dashboard Icon" class="h-6 w-6 mr-3">
+                Dashboard
+            </a>
+            <a href="/dashboard/add" class="flex items-center w-full px-4 py-3 bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200 transition text-lg font-medium">
+                <img src="https://cdn-icons-png.flaticon.com/512/2798/2798102.png" alt="Report Icon" class="h-6 w-6 mr-3">
+                Add Report
+            </a>
+        </nav>
+    </div>
+
+    <!-- Mobile-->
+    <div class="fixed bottom-0 inset-x-0 bg-gray-100 border-t border-gray-300 text-gray-800 flex md:hidden p-2 justify-around shadow-lg">
+        <a href="/dashboard" class="flex flex-col items-center text-gray-800 hover:text-gray-600">
+            <img src="https://getdrawings.com/free-icon-bw/adwords-icon-10.png" alt="Dashboard Icon" class="h-6 w-6">
+            <span class="text-sm">Dashboard</span>
+        </a>
+        <a href="/dashboard/add" class="flex flex-col items-center text-gray-800 hover:text-gray-600">
+            <img src="https://cdn-icons-png.flaticon.com/512/2798/2798102.png" alt="Report Icon" class="h-6 w-6">
+            <span class="text-sm">Add Report</span>
+        </a>
+    </div>
+
+</body>
+</html>
