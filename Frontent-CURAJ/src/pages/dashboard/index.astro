@@ -1,13 +1,69 @@
 ---
 import DashLayout from "../../layouts/DashLayout.astro";
+
+// Messages list
+const allMessages = Array.from({ length: 8 }).map((_, index) => ({
+  id: index + 1,
+  username: `User ${index + 1}`,
+  title: `Message Title ${index + 1}`,
+  description: "This is a sample message description for testing...",
+  timestamp: new Date().toLocaleString(),
+}));
+
+// Show 3 messages on mobile, 5 on desktop
+const isMobile = globalThis?.window?.innerWidth <= 768;
+const messages = isMobile ? allMessages.slice(0, 3) : allMessages;
 ---
+
 <DashLayout>
-  <div
-    class="absolute top-[120px] left-[355px] w-[1272px] h-[659px] bg-white shadow-lg rounded-lg border border-gray-300 p-6"
-  >
-    <h2 class="text-2xl font-bold text-gray-400 mb-4">Reports</h2>
-    <div>
-      <slot />
+    <div class="bg-white-200 fixed inset-0 pt-20 md:pt-24 md:ml-72 overflow-auto flex justify-center">
+        <div class="bg-white p-5  rounded-lg max-w-7xl w-full">
+            
+             <div class="flex justify-between items-center mb-4">
+                <input 
+                    type="text" 
+                    placeholder="Search Messages..." 
+                    class="border p-2 rounded w-1/3 bg-gray-50"
+                />
+                <select class="border p-2 rounded bg-gray-50 focus:ring-cyan-100">
+                    <option value="5">5 per page</option>
+                    <option value="10">10 per page</option>
+                    <option value="20">20 per page</option>
+                </select>
+            </div>
+
+            <!-- Messages List -->
+            <div class="space-y-4">
+                {messages.map((message) => (
+                    <div class="bg-white p-4 shadow rounded-lg flex items-center gap-4 border border-gray-200">
+                        <img 
+                            src="https://via.placeholder.com/50" 
+                            alt="User" 
+                            class="w-12 h-12 rounded-full"
+                        />
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold">{message.username}</h3>
+                            <p class="text-gray-600 font-medium">{message.title}</p>
+                            <p class="text-gray-500 text-sm truncate">{message.description}</p>
+                            <p class="text-xs text-gray-400">{message.timestamp}</p>
+                        </div>
+                        <!-- Reply Icon -->
+                        <a href="#" title="Reply">
+                            <img 
+                                src="https://cdn-icons-png.flaticon.com/512/481/481675.png" 
+                                alt="Reply Icon" 
+                                class="w-6 h-6"
+                            />
+                        </a>
+                    </div>
+                ))}
+            </div>
+
+            <!-- Pagination Buttons -->
+            <div class="flex justify-between items-center mt-4 pb-4">
+                <button class="bg-cyan-800 text-white px-4 py-2 rounded">Previous</button>
+                <button class="bg-cyan-800 text-white px-4 py-2 rounded">Next</button>
+            </div>
+        </div>
     </div>
-  </div>
 </DashLayout>

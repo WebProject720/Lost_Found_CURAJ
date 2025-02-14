@@ -23,14 +23,15 @@ import { Loader } from "../components/utility/Loader";
     </div>
     <div id="container">
       <div class="z-50">
-        <Header class="w-full fixed top-0 left-0">
+        <!-- <Header class="w-full fixed top-0 left-0">
           <Navbar client:only />
-        </Header>
+        </Header> -->
       </div>
-      <div class="flex flex-row w-full h-full pt-20">
+      <div class="flex flex-row w-full h-full pt-20 md:flex">
         <Sidebar class="w-64 flex-shrink-0" />
       </div>
         <slot />
+
     </div>
   </body>
 </html>

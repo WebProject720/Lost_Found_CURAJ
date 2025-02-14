@@ -1,65 +1,61 @@
 ---
 import DashLayout from "../../layouts/DashLayout.astro";
 ---
-
 <DashLayout>
-  <div
-    class="absolute top-[120px] left-[355px] w-[1272px] h-[659px] bg-gray-100 shadow-lg rounded-lg border border-gray-300 p-6 flex items-center justify-center"
-  >
-    <form class="w-full max-w-5xl bg-gray-200 p-6 rounded-lg shadow-md border-gray-300">
-      <h2 class="text-2xl font-bold text-gray-600 mb-6 text-center">
-        Add Report
-      </h2>
+  <div class="bg-white-200 fixed inset-0 pt-20 md:pt-32 md:ml-72 overflow-auto">
+    <div class="bg-white p-10  rounded-lg w-full md:ml-48 max-w-5xl pt-3">
+      <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">Add Report</h2>
 
-      <div class="mb-4">
-        <label for="subject" class="block text-gray-700 font-medium"
-          >Subject</label
-        >
-        <input
-          type="text"
-          id="subject"
-          name="subject"
-          class="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-          placeholder="Enter subject"
-          required
-        />
-      </div>
+      <form class="space-y-4">
+        <!-- Subject Input -->
+        <div>
+          <label for="subject" class="block text-gray-700 font-medium">Subject</label>
+          <input 
+            type="text"
+            id="subject" 
+            name="subject" 
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-800 focus:outline-none bg-gray-50" 
+            placeholder="Enter subject" 
+            required 
+          />
+        </div>
 
-      <div class="mb-4">
-        <label for="description" class="block text-gray-700 font-medium"
-          >Description</label
-        >
-        <textarea
-          id="description"
-          name="description"
-          rows="6"
-          class="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-          placeholder="Enter detailed description"
-          required></textarea>
-      </div>
+        <!-- Description Textarea -->
+        <div>
+          <label for="description" class="block text-gray-700 font-medium">Description</label>
+          <textarea 
+            id="description" 
+            name="description" 
+            rows="10" 
+            class="w-full p-3 border bg-gray-50 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-800 focus:outline-none resize-none" 
+            placeholder="Enter detailed description" 
+            required
+          ></textarea>
+        </div>
 
-      <div class="mb-4">
-        <label for="image" class="block text-gray-700 font-medium"
-          >Upload Image</label
-        >
-        <input
-          type="file"
-          id="image"
-          name="image"
-          class="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-          accept="image/*"
-          required
-        />
-      </div>
+        <!-- Upload Image -->
+        <div>
+          <label for="image" class="block text-gray-700 font-medium">Upload Image</label>
+          <input 
+            type="file" 
+            id="image" 
+            name="image" 
+            class="w-full p-3 border bg-gray-50 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-800 focus:outline-none" 
+            accept="image/*" 
+            required
+          />
+        </div>
 
-      <div class="flex justify-end">
-        <button
-          type="submit"
-          class="w-32 bg-cyan-800 text-white py-3 px-4 rounded-lg hover:bg-cyan-600 transition"
-        >
-          Send Report
-        </button>
-      </div>
-    </form>
+        <!-- Submit Button -->
+        <div class="flex justify-center">
+          <button 
+            type="submit" 
+            class="w-32 bg-cyan-800 text-white py-3 px-4 rounded-lg hover:bg-cyan-600 transition"
+          >
+            Send Report
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </DashLayout>
