@@ -1,5 +1,7 @@
 ---
+import Image from "astro/components/Image.astro";
 import DashLayout from "../../layouts/DashLayout.astro";
+import { Images } from "../../constants.astro";
 
 // Messages list
 const allMessages = Array.from({ length: 8 }).map((_, index) => ({
@@ -13,6 +15,7 @@ const allMessages = Array.from({ length: 8 }).map((_, index) => ({
 // Show 3 messages on mobile, 5 on desktop
 const isMobile = globalThis?.window?.innerWidth <= 768;
 const messages = isMobile ? allMessages.slice(0, 3) : allMessages;
+
 ---
 
 <DashLayout>
@@ -37,14 +40,14 @@ const messages = isMobile ? allMessages.slice(0, 3) : allMessages;
                 {messages.map((message) => (
                     <div class="bg-white p-4 shadow rounded-lg flex items-center gap-4 border border-gray-200">
                         <img 
-                            src="https://via.placeholder.com/50" 
+                            src={Images.userIcon} 
                             alt="User" 
                             class="w-12 h-12 rounded-full"
                         />
-                        <div class="flex-1">
+                        <div class="flex-1 overflow-hidden">
                             <h3 class="text-lg font-semibold">{message.username}</h3>
                             <p class="text-gray-600 font-medium">{message.title}</p>
-                            <p class="text-gray-500 text-sm truncate">{message.description}</p>
+                            <p class="text-gray-500 text-sm truncate overflow-hidden">{message.description}</p>
                             <p class="text-xs text-gray-400">{message.timestamp}</p>
                         </div>
                         <!-- Reply Icon -->

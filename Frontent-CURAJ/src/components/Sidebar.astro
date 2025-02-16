@@ -1,74 +1,109 @@
 ---
 import { Image } from "astro:assets";
 import curajLogo from "../assets/curaj-logo.png";
+import { Images } from "../constants.astro";
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-200">
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="hidden md:flex h-screen w-72 bg-slate-200 border-r border-gray-300 text-gray-800 flex-col p-4 shadow-lg fixed top-0 left-0 z-20">
+<!-- Sidebar -->
+<div>
+    <div
+        id="sidebar"
+        class="hidden md:flex h-screen w-72 bg-slate-200 border-r border-gray-300 text-gray-800 flex-col p-4 shadow-lg fixed top-0 left-0 z-20"
+    >
         <div class="flex items-center justify-between mb-6">
             <Image src={curajLogo} alt="Logo" class="h-12 w-auto" />
-            <button id="close-btn" class="md:hidden text-gray-800 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            <button
+                id="close-btn"
+                class="md:hidden text-gray-800 focus:outline-none"
+            >
+                <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
         <nav class="mt-6 flex flex-col gap-4">
-            <a href="/dashboard" class="flex items-center px-4 py-3 w-full bg-slate-200 rounded-lg hover:bg-slate-300 transition text-gray-800 text-lg font-medium">
-                <img src="https://getdrawings.com/free-icon-bw/adwords-icon-10.png" alt="Dashboard Icon" class="h-6 w-6 mr-3">
+            <a
+                href="/dashboard"
+                class="flex items-center px-4 py-3 w-full bg-slate-200 rounded-lg hover:bg-slate-300 transition text-gray-800 text-lg font-medium"
+            >
+                <img
+                    src="https://getdrawings.com/free-icon-bw/adwords-icon-10.png"
+                    alt="Dashboard Icon"
+                    class="h-6 w-6 mr-3"
+                />
                 Dashboard
             </a>
-            <a href="/dashboard/add" class="flex items-center px-4 py-3 w-full bg-slate-200 rounded-lg hover:bg-slate-300 transition text-gray-800 text-lg font-medium">
-                <img src="https://cdn-icons-png.flaticon.com/512/2798/2798102.png" alt="Report Icon" class="h-6 w-6 mr-3">
+            <a
+                href="/dashboard/add"
+                class="flex items-center px-4 py-3 w-full bg-slate-200 rounded-lg hover:bg-slate-300 transition text-gray-800 text-lg font-medium"
+            >
+                <img
+                    src="https://cdn-icons-png.flaticon.com/512/2798/2798102.png"
+                    alt="Report Icon"
+                    class="h-6 w-6 mr-3"
+                />
                 Add Report
             </a>
         </nav>
     </div>
 
     <div class="md:ml-72 flex flex-col w-full">
-        
-        <header class="bg-slate-200 shadow-md p-4 flex justify-between items-center fixed top-0 md:top-0 left-0 md:left-72 w-full md:w-[calc(100%-18rem)] z-10">
-            <button id="menu-btn" class="md:hidden text-gray-800 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        <header
+            class="bg-slate-200 shadow-md p-4 flex justify-between items-center fixed top-0 md:top-0 left-0 md:left-72 w-full md:w-[calc(100%-18rem)] z-10"
+        >
+            <button
+                id="menu-btn"
+                class="md:hidden text-gray-800 focus:outline-none"
+            >
+                <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
             <h1 class="text-xl font-semibold text-gray-700">Dashboard</h1>
             <div>
-                <img src="https://via.placeholder.com/40" class="h-10 w-10 rounded-full" alt="User">
+                <img
+                    src={Images.userIcon}
+                    class="h-10 w-10 rounded-full"
+                    alt="User"
+                />
             </div>
         </header>
-        
     </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuBtn = document.getElementById("menu-btn");
+        const closeBtn = document.getElementById("close-btn");
+        const sidebar = document.getElementById("sidebar");
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const menuBtn = document.getElementById('menu-btn');
-            const closeBtn = document.getElementById('close-btn');
-            const sidebar = document.getElementById('sidebar');
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener("click", () => {
+                sidebar.classList.toggle("hidden");
+            });
+        }
 
-            if (menuBtn && sidebar) {
-                menuBtn.addEventListener('click', () => {
-                    sidebar.classList.toggle('hidden');
-                });
-            }
-
-            if (closeBtn && sidebar) {
-                closeBtn.addEventListener('click', () => {
-                    sidebar.classList.add('hidden');
-                });
-            }
-        });
-    </script>
-    
-</body>
-</html>
+        if (closeBtn && sidebar) {
+            closeBtn.addEventListener("click", () => {
+                sidebar.classList.add("hidden");
+            });
+        }
+    });
+</script>

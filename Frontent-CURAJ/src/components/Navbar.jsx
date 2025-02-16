@@ -1,4 +1,3 @@
-import { navigate } from "astro:transitions/client";
 import { Images } from "../constants.astro";
 import { Button } from "./utility/Button";
 import { getStoreData } from "../store";
