@@ -11,6 +11,8 @@ export default function Navbar() {
 
     if (!store.isUserLogged || !store.loggedUser) return;
     const user = store.loggedUser;
+    console.log(user);
+
 
     return (
         <div className="flex items-center justify-center gap-2">

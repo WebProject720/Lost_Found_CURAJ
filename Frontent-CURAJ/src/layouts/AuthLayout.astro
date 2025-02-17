@@ -10,7 +10,11 @@ import { Loader } from "../components/utility/Loader";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/src/assets/logo.jpg" />
+    <link
+      rel="icon"
+      href="https://www.curaj.ac.in/sites/default/files/favicon.ico"
+      type="image"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>Lost & Found - CURAJ</title>
   </head>
@@ -55,30 +59,29 @@ import { Loader } from "../components/utility/Loader";
         </div>
       </main>
     </div>
-    
   </body>
 </html>
 <script>
-
   import { navigate } from "astro:transitions/client";
   import { UserAPI } from "../APIs/users/usersAPI";
 
   let loaderDiv = document.getElementById("loader-container");
   let container = document.getElementById("container");
-  container?.classList.add("hidden");
-  loaderDiv?.classList.add("flex");
+  // container?.classList.add("hidden");
+  loaderDiv?.classList.add("hidden");
 
   await UserAPI(null, "/isuserlogged")
     .then((res) => {
+      console.log(res);
       if (res.status) {
         navigate("/dashboard");
       }
-      container?.classList.remove("hidden");
-      loaderDiv?.classList.add("hidden");
+      // container?.classList.remove("hidden");
+      // loaderDiv?.classList.add("hidden");
     })
     .catch((error) => {
-      container?.classList.remove("hidden");
-      loaderDiv?.classList.add("hidden");
+      // container?.classList.remove("hidden");
+      // loaderDiv?.classList.add("hidden");
       console.log(error);
     });
 </script>
