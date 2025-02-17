@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import Header from "../components/Header.astro";
+import { Navbar } from "../components/Navbar";
 import { Images } from "../constants.astro";
 import { Loader } from "../components/utility/Loader";
 ---
@@ -29,7 +29,7 @@ import { Loader } from "../components/utility/Loader";
       class="bg-gray-200 bg-red_color flex flex-col min-h-[90vh]"
       id="container"
     >
-      <Header />
+      <Navbar />
       <main
         class="mt-[10px] phone:mt-[10px] min-h-screen flex justify-center items-center"
       >
