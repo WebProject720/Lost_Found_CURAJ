@@ -1,71 +1,35 @@
 ---
 import { Image } from "astro:assets";
 import curajLogo from "../assets/curaj-logo.png";
-import { Navbar } from "./Navbar";
 ---
 
 <!-- Sidebar -->
-<div class="flex">
-    <div
-        id="sidebar"
-        class="phone:hidden transition-all duration-1000 md:flex h-screen w-72 bg-slate-200 border-r border-gray-300 text-gray-800 flex-col p-4 shadow-lg fixed top-0 left-0 z-40"
-    >
-        <div class="mt-6 flex flex-col gap-4">
-            <a
-                href="/dashboard"
-                class="flex items-center px-4 py-3 w-full bg-slate-200 rounded-lg hover:bg-slate-300 transition text-gray-800 text-lg font-medium"
-            >
-                <img
-                    src="https://getdrawings.com/free-icon-bw/adwords-icon-10.png"
-                    alt="Dashboard Icon"
-                    class="h-6 w-6 mr-3"
-                />
-                Dashboard
-            </a>
-            <a
-                href="/dashboard/add"
-                class="flex items-center px-4 py-3 w-full bg-slate-200 rounded-lg hover:bg-slate-300 transition text-gray-800 text-lg font-medium"
-            >
-                <img
-                    src="https://cdn-icons-png.flaticon.com/512/2798/2798102.png"
-                    alt="Report Icon"
-                    class="h-6 w-6 mr-3"
-                />
-                Add Report
-            </a>
-        </div>
-    </div>
-    <div id="navbar" class="md:ml-72 flex flex-row z-20">
-        <div class="z-30">
-            <Navbar client:only>
-                <button
-                    id="toggle-btn"
-                    class="hidden phone:flex size-11 relative"
-                    onclick="(ShowSideBar)"
-                >
-                    <img
-                        class="size-full"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAUElEQVR4nO3RMQ7AMAgDwPz/0+6ejQka7iTvNpwDAOyQoSl7ZgiwRIamrLtwDAF2ytCUdReOIZdnPgIskaEp6y4cQy7dl4+PXJ75CABwfuYDDCg35ZEtCawAAAAASUVORK5CYII="
-                        alt="line-width"
-                    />
-                </button>
-            </Navbar>
-        </div>
+<div
+    id="sidebar"
+    class="transition-all phone:z-50 duration-1000 fixed h-screen w-72 bg-slate-200 border-r border-gray-300 text-gray-800 flex-col p-4 shadow-lg top-16 left-0 z-40"
+>
+    <div class="mt-6 flex flex-col gap-4">
+        <a
+            href="/dashboard"
+            class="flex items-center px-4 py-3 w-full bg-slate-200 rounded-lg hover:bg-slate-300 transition text-gray-800 text-lg font-medium"
+        >
+            <img
+                src="https://getdrawings.com/free-icon-bw/adwords-icon-10.png"
+                alt="Dashboard Icon"
+                class="h-6 w-6 mr-3"
+            />
+            Dashboard
+        </a>
+        <a
+            href="/dashboard/add"
+            class="flex items-center px-4 py-3 w-full bg-slate-200 rounded-lg hover:bg-slate-300 transition text-gray-800 text-lg font-medium"
+        >
+            <img
+                src="https://cdn-icons-png.flaticon.com/512/2798/2798102.png"
+                alt="Report Icon"
+                class="h-6 w-6 mr-3"
+            />
+            Add Report
+        </a>
     </div>
 </div>
-
-<script>
-    const ShowSideBar = () => {
-        const menuBtn = document.getElementById("toggle-btn");
-        const sidebar = document.getElementById("sidebar");
-        if (menuBtn && sidebar) {
-            menuBtn.addEventListener("click", (e) => {
-                console.log(sidebar);
-                sidebar.classList.contains("!flex")
-                    ? sidebar.classList.remove("!flex")
-                    : sidebar.classList.add("!flex");
-                console.log(sidebar);
-            });
-        }
-    };
-</script>

@@ -57,7 +57,7 @@ export default function LoginBlock(props) {
                 const { data } = (res.data) || {};
                 setUserInfo(data.user);
                 setUserLogin(true);
-                navigate('/dashboard');
+                // navigate('/dashboard');
             } else {
                 setAlertFun(false, res.error.message || 'Try Again !!');
             }
