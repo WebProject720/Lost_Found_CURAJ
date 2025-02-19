@@ -31,7 +31,7 @@ export const NavActions = (props) => {
         ) : (
           <div className="flex items-center justify-center gap-2">
             <div className="">
-              <Button onClick={logout}>
+              <Button onClick={logout} disabled={loading}>
                 {
                   loading ? <Loader></Loader> :
                     "logout"
