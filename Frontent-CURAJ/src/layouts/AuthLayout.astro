@@ -72,7 +72,6 @@ import Nav from "../components/Nav.astro";
 
   await UserAPI(null, "/isuserlogged")
     .then((res) => {
-      console.log(res);
       if (res.status) {
         navigate("/dashboard");
       }
