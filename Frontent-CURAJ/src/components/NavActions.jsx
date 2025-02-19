@@ -34,7 +34,7 @@ export const NavActions = (props) => {
               <Button onClick={logout}>
                 {
                   loading ? <Loader></Loader> :
-                    Logout
+                    "logout"
                 }
               </Button>
             </div>
