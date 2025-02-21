@@ -28,15 +28,16 @@ const user = store.loggedUser;
         <div id="">
             <div class="hidden phone:flex">
                 <button
-                    id="toggle-btn"
-                    class="hidden phone:flex size-11 relative"
-                >
-                    <img
-                        class="size-full"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAUElEQVR4nO3RMQ7AMAgDwPz/0+6ejQka7iTvNpwDAOyQoSl7ZgiwRIamrLtwDAF2ytCUdReOIZdnPgIskaEp6y4cQy7dl4+PXJ75CABwfuYDDCg35ZEtCawAAAAASUVORK5CYII="
-                        alt="line-width"
-                    />
-                </button>
+                id="toggle-btn"
+                class="phone:flex size-10 relative bg-gray-100 p-2 rounded-md shadow-md hover:bg-gray-300 transition"
+            >
+                <img
+                    id="toggle-icon"
+                    class="size-full transition-transform duration-300"
+                    src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png"
+                    alt="Open Menu"
+                />
+            </button>
             </div>
         </div>
     </div>
