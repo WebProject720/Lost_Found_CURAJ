@@ -4,61 +4,85 @@ import { Button } from "./utility/Button";
 import { getStoreData } from "../store";
 import { logoutUser } from "../APIs/auth/logout";
 import { NavActions } from "./NavActions";
+
 const store = getStoreData();
 const user = store.loggedUser;
 ---
 
 <header
-    class="z-50 fixed bg-gray-100 top-0 border-b-2 border-gray-400/20 px-5 py-2 w-screen flex items-center flex-row justify-between shadow-xl shadow-gray-300"
+  class="z-50 fixed bg-gray-100 top-0 border-b-2 border-gray-400/20 px-5 py-2 w-screen flex items-center flex-row justify-between shadow-xl shadow-gray-300"
 >
-    <div class="w-full h-full">
+  <div class="w-full h-full">
+    <img
+      src={Images.curaj_full_logo.src}
+      alt="Logo"
+      class="h-16 w-auto phone:h-auto phone:w-40"
+    />
+  </div>
+  <div>
+    <h1></h1>
+  </div>
+  <div class="flex flex-row gap-2 items-center" id="actions">
+    <div class="font-bold">
+      <NavActions client:load />
+    </div>
+
+    <div class="hidden phone:flex">
+      <button
+        id="toggle-btn"
+        class="phone:flex size-10 relative bg-gray-100 p-2 rounded-md shadow-md hover:bg-gray-300 transition"
+      >
         <img
-            src={Images.curaj_full_logo.src}
-            alt="Logo"
-            class="h-16 w-auto phone:h-auto phone:w-40"
+          id="toggle-icon-open"
+          class="size-full transition-transform duration-300"
+          src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png"
+          alt="Open Menu"
         />
+        <img
+          id="toggle-icon-close"
+          class="size-full transition-transform duration-300 hidden"
+          src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png"
+          alt="Close Menu"
+        />
+      </button>
     </div>
-    <div>
-        <h1></h1>
-    </div>
-    <div class="flex flex-row gap-2 items-center " id="actions">
-        <div class="font-bold ">
-            <NavActions client:load />
-        </div>
-        <div id="">
-            <div class="hidden phone:flex">
-                <button
-                id="toggle-btn"
-                class="phone:flex size-10 relative bg-gray-100 p-2 rounded-md shadow-md hover:bg-gray-300 transition"
-            >
-                <img
-                    id="toggle-icon"
-                    class="size-full transition-transform duration-300"
-                    src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png"
-                    alt="Open Menu"
-                />
-            </button>
-            </div>
-        </div>
-    </div>
+  </div>
 </header>
-<script>
-    function ToggleSideBar() {
-        let sidebarBox = document.getElementById("sidebarBox");
-        if (sidebarBox) {
-            sidebarBox
-                ? sidebarBox.classList.contains("phone:hidden")
-                    ? sidebarBox.classList.remove("phone:hidden")
-                    : sidebarBox.classList.add("phone:hidden")
-                : null;
-        }
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("toggle-btn");
+    const sidebarBox = document.getElementById("sidebarBox");
+    const iconOpen = document.getElementById("toggle-icon-open");
+    const iconClose = document.getElementById("toggle-icon-close");
+
+    if (!toggleBtn || !iconOpen || !iconClose) {
+      console.error("Error: Toggle button or icons not found.");
+      return;
     }
-    document.addEventListener("DOMContentLoaded", function () {
-        let toggleBtn = document.getElementById("toggle-btn");
-        toggleBtn ? toggleBtn?.addEventListener("click", ToggleSideBar) : null;
-    });
+
+    function ToggleSideBar() {
+      if (!sidebarBox) {
+        console.error("Error: Sidebar not found.");
+        return;
+      }
+
+      sidebarBox.classList.toggle("phone:hidden");
+
+      const isHidden = sidebarBox.classList.contains("phone:hidden");
+      iconOpen.classList.toggle("hidden", !isHidden);
+      iconClose.classList.toggle("hidden", isHidden);
+    }
+
+    toggleBtn.addEventListener("click", ToggleSideBar);
+  });
 </script>
-<script>
-    (window.location.href.includes('auth'))?
-    document.getElementById('actions')?.classList.add('hidden'):null
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    const actions = document.getElementById("actions");
+    if (window.location.href.includes("auth") && actions) {
+      actions.classList.add("hidden");
+    }
+  });
 </script>
