@@ -14,7 +14,7 @@ export const Profile = () => {
 
     }, [])
     return (
-        <div className="flex flex-row items-center  bg-gray-100 rounded-md p-2">
+        <div className="flex flex-row items-center  bg-slate-200 rounded-md p-2">
             <div className="flex flex-row cursor-pointer group gap-2 items-center justify-center bg-transparent p-2 rounded-md">
                 <div>
                     <img
