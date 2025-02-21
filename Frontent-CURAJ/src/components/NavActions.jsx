@@ -11,11 +11,9 @@ export const NavActions = (props) => {
   const [user, setUser] = useState(null);
   const [loading, SetLoading] = useState(false);
   useEffect(() => {
-    // if (typeof window !== undefined) {
     const storeData = getStoreData();
     setStore(storeData);
     setUser(storeData.loggedUser);
-    // }
   }, [])
 
   const logout = () => {
@@ -34,7 +32,7 @@ export const NavActions = (props) => {
               <Button onClick={logout} disabled={loading}>
                 {
                   loading ? <Loader></Loader> :
-                    "logout"
+                    "Logout"
                 }
               </Button>
             </div>

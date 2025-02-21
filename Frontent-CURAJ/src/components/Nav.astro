@@ -21,8 +21,8 @@ const user = store.loggedUser;
     <div>
         <h1></h1>
     </div>
-    <div class="flex flex-row gap-2 items-center " id="actions">
-        <div class="font-bold ">
+    <div class="flex flex-row gap-2 items-center" id="actions">
+        <div class="font-bold">
             <NavActions client:load />
         </div>
         <div id="">
@@ -33,7 +33,7 @@ const user = store.loggedUser;
                 >
                     <img
                         class="size-full"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAUElEQVR4nO3RMQ7AMAgDwPz/0+6ejQka7iTvNpwDAOyQoSl7ZgiwRIamrLtwDAF2ytCUdReOIZdnPgIskaEp6y4cQy7dl4+PXJ75CABwfuYDDCg35ZEtCawAAAAASUVORK5CYII="
+                        src="https://img.icons8.com/?size=100&id=32447&format=png&color=000000"
                         alt="line-width"
                     />
                 </button>
@@ -44,12 +44,16 @@ const user = store.loggedUser;
 <script>
     function ToggleSideBar() {
         let sidebarBox = document.getElementById("sidebarBox");
+        let mainElement = document.getElementsByTagName("main")[0];
+
         if (sidebarBox) {
-            sidebarBox
-                ? sidebarBox.classList.contains("phone:hidden")
-                    ? sidebarBox.classList.remove("phone:hidden")
-                    : sidebarBox.classList.add("phone:hidden")
-                : null;
+            if (sidebarBox.classList.contains("phone:hidden")) {
+                sidebarBox.classList.remove("phone:hidden");
+                mainElement.style.opacity='0.2';
+            } else {
+                sidebarBox.classList.add("phone:hidden");
+                mainElement.style.opacity='1';
+            }
         }
     }
     document.addEventListener("DOMContentLoaded", function () {
@@ -58,6 +62,7 @@ const user = store.loggedUser;
     });
 </script>
 <script>
-    (window.location.href.includes('auth'))?
-    document.getElementById('actions')?.classList.add('hidden'):null
+    window.location.href.includes("auth") || window.location.pathname == "/"
+        ? document.getElementById("actions")?.classList.add("hidden")
+        : null;
 </script>
