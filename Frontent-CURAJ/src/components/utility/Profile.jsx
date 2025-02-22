@@ -10,8 +10,6 @@ export const Profile = () => {
         const storeData = getStoreData();
         setStore(storeData);
         setUser(storeData.loggedUser);
-        console.log(storeData.loggedUser);
-
     }, [])
     return (
         <div className="flex flex-row items-center  bg-slate-200 rounded-md p-2">

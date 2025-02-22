@@ -26,13 +26,13 @@ import { Loader } from "../components/utility/Loader";
       </div>
       <div class="flex flex-row relative">
         <div
-          class="flex flex-row absolute transition-all duration-700 ease-linear phone:hidden phone:z-50 h-full pt-20"
+          class="hidden desktop:!hidden flex-row absolute transition-all duration-700 ease-linear phone:z-50 h-full pt-20"
           id="sidebarBox"
         >
           <Sidebar class="" />
         </div>
         <main
-          class="phone:w-screen  w-full phone:!ml-0 phone:z-20"
+          class="phone:w-screen desktop:!opacity-100 w-full phone:!ml-0 phone:z-20"
           id="main-container"
         >
           <slot />
@@ -42,15 +42,15 @@ import { Loader } from "../components/utility/Loader";
   </body>
 </html>
 <script>
-  let sidebar = document.getElementById("sidebar");
-  let mainContainer = document.getElementById("main-container");
-  const ContainerWidth = () => {
-    mainContainer
-      ? (mainContainer.style.marginLeft = `calc( ${sidebar?.offsetWidth}px)`)
-      : null;
-  };
-  ContainerWidth();
-  window.addEventListener("resize", ContainerWidth);
+  // let sidebar = document.getElementById("sidebar");
+  // let mainContainer = document.getElementById("main-container");
+  // const ContainerWidth = () => {
+  //   mainContainer
+  //     ? (mainContainer.style.marginLeft = `calc( ${sidebar?.offsetWidth}px)`)
+  //     : null;
+  // };
+  // ContainerWidth();
+  // window.addEventListener("resize", ContainerWidth);
 </script>
 <script>
   import { navigate } from "astro:transitions/client";
