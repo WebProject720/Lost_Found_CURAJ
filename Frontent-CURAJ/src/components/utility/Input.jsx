@@ -18,15 +18,15 @@ export const Input = ({ className = "", ...props }) => {
 
     return (
         <div className="flex flex-col gap-1">
-            <label htmlFor={props.id} className="font-bold">
+            <label htmlFor={props.id} className="font-extralight">
                 {props.label}
             </label>
 
 
-            <div className="flex flex-row group items-stretch w-full gap-0 flex-nowrap h-12 ">
+            <div className="flex flex-row group items-stretch w-full gap-0 flex-nowrap h-10 phone:h-9 ">
                 <input
                     className={`bg-gray-100 border-gray-400 outline-none border-[1px] 
-                    rounded-md p-2  
+                    rounded-md p-2 
                     focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
                     transition-all duration-500 phone:p-1
                      ${props.text ? 'w-4/6 rounded-r-none' : 'w-full'} 

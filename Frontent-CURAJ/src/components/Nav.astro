@@ -32,8 +32,8 @@ const user = store.loggedUser;
                     class="hidden phone:flex size-11 relative"
                 >
                     <img
+                        src={Images.menubarToggle.src}
                         class="size-full"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAUElEQVR4nO3RMQ7AMAgDwPz/0+6ejQka7iTvNpwDAOyQoSl7ZgiwRIamrLtwDAF2ytCUdReOIZdnPgIskaEp6y4cQy7dl4+PXJ75CABwfuYDDCg35ZEtCawAAAAASUVORK5CYII="
                         alt="line-width"
                     />
                 </button>
@@ -49,10 +49,10 @@ const user = store.loggedUser;
         if (sidebarBox) {
             if (sidebarBox.classList.contains("phone:hidden")) {
                 sidebarBox.classList.remove("phone:hidden");
-                mainElement.style.opacity='0.2';
+                mainElement.style.opacity = "0.2";
             } else {
                 sidebarBox.classList.add("phone:hidden");
-                mainElement.style.opacity='1';
+                mainElement.style.opacity = "1";
             }
         }
     }
