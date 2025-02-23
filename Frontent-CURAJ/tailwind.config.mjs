@@ -4,18 +4,18 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				
+
 			},
 			screens: {
-				phone: {'max':'620px'},
-				tablet: {max:'1620px',min:'621px'},//w-3/4
-				desktop:"1621px"
+				phone: { 'max': '620px' },
+				tablet: { max: '1020px' },//w-3/4
+				desktop: "1021px"
 			},
-			textColor:{
-				
+			textColor: {
+
 			},
-			fontFamily:{
-				sans:[]
+			fontFamily: {
+				sans: []
 			}
 		},
 	},

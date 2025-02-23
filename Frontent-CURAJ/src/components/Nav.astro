@@ -1,17 +1,12 @@
 ---
 import { Images } from "../constants.astro";
-import { Button } from "./utility/Button";
-import { getStoreData } from "../store";
-import { logoutUser } from "../APIs/auth/logout";
 import { NavActions } from "./NavActions";
-const store = getStoreData();
-const user = store.loggedUser;
 ---
 
 <header
     class="z-50 fixed bg-gray-100 top-0 border-b-2 border-gray-400/20 px-5 py-2 w-screen flex items-center flex-row justify-between shadow-xl shadow-gray-300"
 >
-    <div class="w-full h-full">
+    <div class="w-fit h-full">
         <img
             src={Images.curaj_full_logo.src}
             alt="Logo"
@@ -21,23 +16,20 @@ const user = store.loggedUser;
     <div>
         <h1></h1>
     </div>
-    <div class="flex flex-row gap-2 items-center " id="actions">
-        <div class="font-bold ">
-            <NavActions client:load />
+    <div class="flex flex-row gap-2 items-center" id="actions">
+        <div class="font-bold tablet:hidden">
+            <NavActions class="" client:load />
         </div>
         <div id="">
-            <div class="hidden phone:flex">
-                <button
-                id="toggle-btn"
-                class="phone:flex size-10 relative bg-gray-100 p-2 rounded-md shadow-md hover:bg-gray-300 transition"
-            >
-                <img
-                    id="toggle-icon"
-                    class="size-full transition-transform duration-300"
-                    src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png"
-                    alt="Open Menu"
-                />
-            </button>
+            <div class="hidden tablet:flex">
+                <button id="toggle-btn" class="size-11 relative">
+                    <img
+                        src={Images.menubarToggle.src}
+                        class="h-10 hover:bg-gray-300 active:bg-gray-400 p-2 rounded-md
+                        hover:rotate-180 active:rotate-180 transition-all duration-400"
+                        alt="line-width"
+                    />
+                </button>
             </div>
         </div>
     </div>
@@ -45,12 +37,16 @@ const user = store.loggedUser;
 <script>
     function ToggleSideBar() {
         let sidebarBox = document.getElementById("sidebarBox");
+        let mainElement = document.getElementsByTagName("main")[0];
+
         if (sidebarBox) {
-            sidebarBox
-                ? sidebarBox.classList.contains("phone:hidden")
-                    ? sidebarBox.classList.remove("phone:hidden")
-                    : sidebarBox.classList.add("phone:hidden")
-                : null;
+            if (sidebarBox.classList.contains("hidden")) {
+                sidebarBox.classList.remove("hidden");
+                mainElement.style.opacity = "0.2";
+            } else {
+                sidebarBox.classList.add("hidden");
+                mainElement.style.opacity = "1";
+            }
         }
     }
     document.addEventListener("DOMContentLoaded", function () {
@@ -59,6 +55,7 @@ const user = store.loggedUser;
     });
 </script>
 <script>
-    (window.location.href.includes('auth'))?
-    document.getElementById('actions')?.classList.add('hidden'):null
+    window.location.href.includes("auth") || window.location.pathname == "/"
+        ? document.getElementById("actions")?.classList.add("hidden")
+        : null;
 </script>

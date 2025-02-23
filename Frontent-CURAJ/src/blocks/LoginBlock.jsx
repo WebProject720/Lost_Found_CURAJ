@@ -70,7 +70,7 @@ export default function LoginBlock(props) {
             <Input
                 type="text"
                 label="Username"
-                placeholder="Username"
+                placeholder="Username Or Email ID"
                 name="username"
                 minLength="4"
                 className={`${alertParams.Msg ? !alertParams.status ? 'border-red-400 bg-red-100' : 'border-green-500 bg-green-200' : null}`}

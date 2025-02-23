@@ -1,37 +1,17 @@
 ---
+import { NavActions } from "./NavActions";
 import { Profile } from "./utility/Profile";
 ---
 
 <!-- Sidebar -->
 <div
     id="sidebar"
-    class="transition-all phone:z-50 duration-1000 fixed h-screen w-72 bg-slate-200 border-r border-gray-300 text-gray-800 flex-col p-4 shadow-lg top-20 left-0 z-40"
+    class="transition-all phone:z-50 duration-1000 fixed h-screen w-72 bg-slate-200 border-r border-gray-300 text-gray-800 flex-col p-4 shadow-lg top-16 left-0 z-40"
 >
-    <div>
+    <div class="border-b-[1px] border-black">
         <Profile client:load />
     </div>
-    <div class="mt-6 flex flex-col gap-4">
-        <a
-            href="/dashboard"
-            class="flex items-center px-4 py-3 w-full bg-slate-200 rounded-lg hover:bg-slate-300 transition text-gray-800 text-lg font-medium"
-        >
-            <img
-                src="https://getdrawings.com/free-icon-bw/adwords-icon-10.png"
-                alt="Dashboard Icon"
-                class="h-6 w-6 mr-3"
-            />
-            Dashboard
-        </a>
-        <a
-            href="/dashboard/add"
-            class="flex items-center px-4 py-3 w-full bg-slate-200 rounded-lg hover:bg-slate-300 transition text-gray-800 text-lg font-medium"
-        >
-            <img
-                src="https://cdn-icons-png.flaticon.com/512/2798/2798102.png"
-                alt="Report Icon"
-                class="h-6 w-6 mr-3"
-            />
-            Add Report
-        </a>
+    <div class="font-bold">
+        <NavActions class="" client:load />
     </div>
 </div>
