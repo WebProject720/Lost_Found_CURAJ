@@ -1,0 +1,109 @@
+---
+import { Button } from "../../../components/utility/Button";
+import { Loader } from "../../../components/utility/Loader";
+import DashLayout from "../../../layouts/DashLayout.astro";
+---
+
+<DashLayout>
+  <div
+    class="bg-transparent w-full pt-3 desktop:pt-9 h-fit flex justify-center items-center inset-0 overflow-auto"
+  >
+    <div class="bg-gray-100 p-10 rounded-lg w-fit desktop:w-1/2 max-w-5xl pt-3">
+      <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">
+        Add Report
+      </h2>
+
+      <form class="space-y-4" id="addForm">
+        <div>
+          <label for="subject" class="block text-gray-700 font-medium"
+            >Subject</label
+          >
+          <input
+            type="text"
+            id="subject"
+            name="title"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-800 focus:outline-none bg-gray-50"
+            placeholder="Enter subject"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="description" class="block text-gray-700 font-medium"
+            >Description</label
+          >
+          <textarea
+            id="description"
+            name="description"
+            rows="10"
+            class="w-full p-3 border bg-gray-50 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-800 focus:outline-none resize-none"
+            placeholder="Enter detailed description"
+            required></textarea>
+        </div>
+
+        <div>
+          <label for="image" class="block text-gray-700 font-medium"
+            >Upload Image</label
+          >
+          <input
+            type="file"
+            id="image"
+            name="image"
+            class="w-full p-3 border bg-gray-50 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-800 focus:outline-none"
+            accept="image/*"
+          />
+        </div>
+
+        <div class="flex justify-center">
+          <Button id="SubmitBtn">Save</Button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    import { navigate } from "astro:transitions/client";
+    import { ReportsAPIs } from "../../../APIs/reports/reportsAPI";
+
+    const form = document.getElementById("addForm");
+    const SubmitBtn = document.getElementById("SubmitBtn");
+    if (form) {
+      form.addEventListener("submit", async (data) => {
+        data.preventDefault();
+
+        //Submit Btn
+        if (SubmitBtn) {
+          SubmitBtn.innerHTML = `Loading...`;
+        }
+
+        const form = data.target as HTMLFormElement;
+        const formData = new FormData(form);
+        const Report: { [key: string]: any } = {};
+        formData.forEach((value, key: any) => {
+          key !== "image" ? (Report[key] = value) : null;
+        });
+
+        //calling api for submitting form
+        await ReportsAPIs("/add", Report).then((res) => {
+          console.log(res);
+          SubmitBtn ? (SubmitBtn.innerHTML = res.message || "Failed") : null;
+          if (!res.success) {
+            for (const element of form.elements) {
+              const e = element as HTMLInputElement;
+              e.disabled = true;
+            }
+          } else {
+            setTimeout(() => {
+              navigate("/dashboard/reports");
+            }, 3000);
+          }
+        });
+
+        //Disable Elements
+        for (const element of form.elements) {
+          const e = element as HTMLInputElement;
+          e.disabled = true;
+        }
+      });
+    }
+  </script>
+</DashLayout>

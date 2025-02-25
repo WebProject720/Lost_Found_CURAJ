@@ -2,7 +2,6 @@
 import curaj_logo from "./assets/CURAJ_LOGO.gif";
 import curaj_full_logo from "./assets/curaj-logo.png";
 import logo from "./assets/logo.png";
-import menubar from "./assets/menubar.png";
 import ToggleButton from "./assets/togglebtn-1.png";
 
 export const Images = {
@@ -21,4 +20,10 @@ export const Images = {
 export const SERVER_Production =
     "https://backend-curaj-lost-found.onrender.com";
 export const SERVER = "http://localhost:5000";
+
+export const SERVER_URL = () => {
+    return import.meta.env.PUBLIC_PRODUCTION=="true"
+        ? SERVER_Production
+        : SERVER;
+};
 ---

@@ -35,6 +35,21 @@ import { NavActions } from "./NavActions";
     </div>
 </header>
 <script>
+    //Set bottom margin to parent So next sibling get upper margin
+    const header = document.getElementsByTagName("header");
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const parentChild = document.getElementById("header-container");
+        parentChild
+            ? (parentChild.style.height = `${header[0].offsetHeight + 2}px`)
+            : null;
+    });
+    document.addEventListener("resize", () => {
+        const parentChild = document.getElementById("header-container");
+        parentChild
+            ? (parentChild.style.height = `${header[0].offsetHeight + 2}px`)
+            : null;
+    });
     function ToggleSideBar() {
         let sidebarBox = document.getElementById("sidebarBox");
         let mainElement = document.getElementsByTagName("main")[0];

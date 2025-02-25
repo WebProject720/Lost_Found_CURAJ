@@ -34,15 +34,21 @@ export const NavActions = (props) => {
 
   const actions = [
     {
-      name: "Add Report",
-      route: "/dashboard/add",
-      icon: Icons.AddReportIcon || null
-    },
-    {
       name: "Dashboard",
       route: "/dashboard",
       icon: Icons.dashboardIcon || null
     },
+    {
+      name: "Reports",
+      route: "/dashboard/reports",
+      icon: Icons.AddReportIcon || null
+    },
+    {
+      name: "Add Report",
+      route: "/dashboard/reports/add",
+      icon: Icons.AddReportIcon || null
+    },
+
     {
       name: "About Us",
       route: "#",
