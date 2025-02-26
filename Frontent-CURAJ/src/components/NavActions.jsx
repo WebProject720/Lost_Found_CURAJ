@@ -56,7 +56,7 @@ export const NavActions = (props) => {
     },
     {
       name: user?.username || null,
-      route: "#",
+      route: "/dashboard/reports/pro",
       icon: Icons.userIcon || null
     }
   ]
