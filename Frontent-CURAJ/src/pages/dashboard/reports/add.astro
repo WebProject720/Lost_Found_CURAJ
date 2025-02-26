@@ -22,7 +22,11 @@ import DashLayout from "../../../layouts/DashLayout.astro";
             type="text"
             id="subject"
             name="title"
-            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-800 focus:outline-none bg-gray-50"
+            class="w-full tablet:p-1   resize-none
+            bg-gray-100 border-gray-400 outline-none border-[1px] 
+                    rounded-md p-2 
+                    focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
+                    transition-all duration-500 phone:p-1"
             placeholder="Enter subject"
             required
           />
@@ -36,7 +40,11 @@ import DashLayout from "../../../layouts/DashLayout.astro";
             id="description"
             name="description"
             rows="10"
-            class="w-full p-3 border bg-gray-50 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-800 focus:outline-none resize-none"
+            class="w-full tablet:p-1 resize-none
+            bg-gray-100 border-gray-400 outline-none border-[1px]
+                    rounded-md p-2
+                    focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
+                    transition-all duration-500 phone:p-1"
             placeholder="Enter detailed description"
             required></textarea>
         </div>
@@ -49,7 +57,11 @@ import DashLayout from "../../../layouts/DashLayout.astro";
             type="file"
             id="image"
             name="image"
-            class="w-full p-3 border bg-gray-50 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-800 focus:outline-none"
+            class="w-full tablet:p-1 resize-none
+            bg-gray-100 border-gray-400 outline-none border-[1px]
+                    rounded-md p-2
+                    focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
+                    transition-all duration-500 phone:p-1"
             accept="image/*"
           />
         </div>
@@ -94,7 +106,7 @@ import DashLayout from "../../../layouts/DashLayout.astro";
           } else {
             setTimeout(() => {
               navigate("/dashboard/reports");
-            }, 3000);
+            }, 1000);
           }
         });
 

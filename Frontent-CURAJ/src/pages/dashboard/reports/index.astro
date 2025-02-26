@@ -18,12 +18,17 @@ import { Input } from "../../../components/utility/Input";
                     <option value="20">20 per page</option>
                 </select>
             </div>
+            <!-- No Data found -->
+
             <!-- Messages List -->
+            <div
+                class="min-h-screen flex items-center justify-center w-full mt-4"
+                id="loading-button"
+            >
+                <Loader />
+            </div>
             <div class="space-y-4" id="reports-container"></div>
 
-            <div class="flex justify-center mt-4" id="loading-button">
-                <Loader/>
-            </div>
             <!-- Pagination Buttons -->
             <div class="flex justify-between items-center mt-4 pb-4">
                 <Button>Previous</Button>
@@ -38,12 +43,23 @@ import { Input } from "../../../components/utility/Input";
         import { Images } from "../../../constants.astro";
         (async function () {
             if (loadingButton) {
-                loadingButton.style.display = 'block';
+                loadingButton.style.display = "block";
             }
             const FetchReports = await ReportsGetRequests("/getall");
             if (loadingButton) {
-                loadingButton.style.display = 'none';
-            }            
+                loadingButton.style.display = "none";
+            }
+            if (FetchReports.data.length <= 0) {
+                container
+                    ? (container.innerHTML = `
+                    <div
+                class="flex w-full min-h-48 justify-items-center justify-center items-center"
+            >
+                <h1 class="text-center font-extrabold">No Data Found</h1>
+            </div>
+                `)
+                    : null;
+            }
             if (FetchReports.data) {
                 FetchReports.data.forEach(
                     (
@@ -53,6 +69,7 @@ import { Input } from "../../../components/utility/Input";
                             title: string;
                             description: string;
                             _id: string;
+                            email: string;
                         },
                         key: number,
                     ) => {
@@ -66,7 +83,7 @@ import { Input } from "../../../components/utility/Input";
                                 />
                                 <div class="flex-1 overflow-hidden">
                                     <div class="flex gap-2 flex-wrap items-center justify-between">
-                                        <h3 class="text-lg font-semibold">${report.userDetails.username}</h3>
+                                        <h3 class="text-sm font-extralight">${report.userDetails.email}</h3>
                                         <p class="text-xs text-gray-400">${new Date(report.createdAt).toLocaleString()}</p>
                                         </div>
                                          <p class="text-gray-600 font-medium">${report.title}</p>
