@@ -1,32 +1,32 @@
 import { useState, useEffect } from "react";
-import { getStoreData } from "../../store"
+import { getStoreData } from "../../store";
 import { Images } from "../../constants.astro";
-
 
 export const Profile = () => {
     const [store, setStore] = useState(null);
     const [user, setUser] = useState(null);
+
     useEffect(() => {
         const storeData = getStoreData();
         setStore(storeData);
         setUser(storeData.loggedUser);
-    }, [])
+    }, []);
+
     return (
-        <div className="flex flex-row items-center  bg-white rounded-md p-2">
-            <div className="flex flex-row cursor-pointer group gap-2 items-center justify-center bg-transparent p-2 rounded-md">
-                <div>
-                    <img
-                        src={Images?.userIcon}
-                        className="desktop:w-25 w-20"
-                    />
-                </div>
+        <div className="flex flex-col md:flex-row items-center  p-4 w-full max-w-md md:max-w-lg lg:max-w-xl">
+            <div className="relative mb-4 md:mb-0">
+                <img
+                    src={user?.profilePic || Images?.userIcon}
+                    className="w-24 h-24 rounded-full border-4 border-gray-200 shadow-sm object-cover"
+                    alt="User Profile"
+                />
             </div>
-            <div className="text-xl flex flex-col items-start gap-0">
-                <h1>
-                    <center>{user?.username || "Username"}</center>
+            <div className="flex flex-col text-center md:text-left md:ml-4">
+                <h1 className="text-lg font-semibold text-gray-800">
+                    {user?.username || "Username"}
                 </h1>
-                <p className="text-base font-light">{user?.email || ""}</p>
+                <p className="text-sm text-gray-500">{user?.email || "user@example.com"}</p>
             </div>
         </div>
-    )
-}
+    );
+};

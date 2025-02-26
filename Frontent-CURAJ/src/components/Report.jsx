@@ -15,7 +15,6 @@ export const Reports = async (...props) => {
         })();
     }, [])
 
-
     return (
         <div className="space-y-4" id="">
             {reports && reports.map((report,key) => (
