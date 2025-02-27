@@ -39,12 +39,12 @@ export const NavActions = (props) => {
       icon: Icons.dashboardIcon || null
     },
     {
-      name: "Reports",
+      name: "Complains",
       route: "/dashboard/reports",
       icon: Icons.AddReportIcon || null
     },
     {
-      name: "Add Report",
+      name: "New Complain",
       route: "/dashboard/reports/add",
       icon: Icons.AddReportIcon || null
     },
