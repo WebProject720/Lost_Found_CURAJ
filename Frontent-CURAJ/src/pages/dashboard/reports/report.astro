@@ -1,11 +1,91 @@
 ---
+import { Button } from "../../../components/utility/Button";
+
 import DashLayout from "../../../layouts/DashLayout.astro";
+
+// Dummy Data for Testing
+const report = {
+    userDetails: {
+        username: "John Doe",
+        profileImage: "https://via.placeholder.com/100",
+    },
+    createdAt: "2024-02-27T14:30:00Z",
+    title: "Internet Not Working",
+    description: "The internet connection in the cyber cafe is not working properly. Please fix it as soon as possible.",
+    image: "https://images.jdmagicbox.com/quickquotes/images_main/intex-cpu-for-2220903153-4noe5slf.jpg",
+};
 ---
 
 <DashLayout>
-  <h1>
-    <center>
-      Report
-    </center>
-  </h1>
+    <div class="bg-white inset-0 w-full overflow-auto flex justify-center mt-10">
+        <div class="bg-white p-5 rounded-lg max-w-5xl w-full shadow-lg">
+            <h1 class="text-2xl font-bold text-center mb-4">Complaint Details</h1>
+
+            <div class="flex items-center gap-4 border-b pb-4 mb-4">
+                <img src={report.userDetails.profileImage}
+                     alt="User Image" 
+                     class="w-16 h-16 rounded-full border border-gray-300" />
+                <div>
+                    <h2 class="text-lg font-semibold">{report.userDetails.username}</h2>
+                    <p class="text-xs text-gray-500">{new Date(report.createdAt).toLocaleString()}</p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-2">{report.title}</h3>
+            <p class="text-gray-700">{report.description}</p>
+
+            <div class="mt-4 flex justify-center">
+                <img src={report.image} alt="Report Image" class="w-72 h-auto rounded-lg shadow-md" />
+            </div>
+
+            <div class="mt-6 flex justify-between items-center text-xl" >
+                <a href="/dashboard/reports" class="text-black px-4 py-2 rounded-lg hover:underline">
+                    ← Back to Reports
+                </a>
+                <button id="replyBtn" class="text-black px-4 py-2 rounded-lg flex items-center gap-2 hover:underline">
+                    <img src="https://cdn-icons-png.flaticon.com/512/481/481675.png" alt="Reply" class="w-6 h-5" />
+                    Reply
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="replyForm" class="fixed inset-0 flex justify-center items-center bg-gray-900 bg-opacity-50 transition-all duration-500 opacity-0 pointer-events-none">
+        <div class="bg-gray-100 p-5 shadow-lg rounded-lg w-full max-w-4xl">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-lg font-semibold">Submit Your Reply</h3>
+                <button id="closeBtn" class="text-gray-500 hover:text-gray-800 text-4xl">&times;</button>
+            </div>
+            <textarea 
+                placeholder="Write your response..." 
+                class="w-full p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
+                rows="6">
+            </textarea>
+            <div class="mt-3 flex justify-end">
+                <Button id="SubmitBtn">Send Reply</Button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const replyBtn = document.getElementById("replyBtn");
+            const replyForm = document.getElementById("replyForm");
+            const closeBtn = document.getElementById("closeBtn");
+
+            if (replyBtn && replyForm && closeBtn) {
+                replyBtn.addEventListener("click", () => {
+                    replyForm.classList.toggle("opacity-0");
+                    replyForm.classList.toggle("pointer-events-none");
+                });
+
+                closeBtn.addEventListener("click", () => {
+                    replyForm.classList.toggle("opacity-0");
+                    replyForm.classList.toggle("pointer-events-none");
+                });
+            } else {
+                console.error("Error: replyBtn, replyForm, or closeBtn not found.");
+            }
+        });
+    </script>
 </DashLayout>
