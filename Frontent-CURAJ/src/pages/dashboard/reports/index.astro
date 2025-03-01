@@ -1,8 +1,8 @@
 ---
 import DashLayout from "../../../layouts/DashLayout.astro";
 import { Button } from "../../../components/utility/Button";
-import { Loader } from "../../../components/utility/Loader";
 import { Input } from "../../../components/utility/Input";
+import { Complains } from "../../../blocks/Complains.jsx";
 ---
 
 <DashLayout>
@@ -18,74 +18,13 @@ import { Input } from "../../../components/utility/Input";
                     <option value="20">20 per page</option>
                 </select>
             </div>
-            <!-- Messages List -->
-            <div class="space-y-4" id="reports-container"></div>
-
-            <div class="flex justify-center mt-4" id="loading-button">
-                <Loader/>
+            <div class="flex flex-col min-h-80 justify-center gap-2">
+                <Complains client:load />
             </div>
-            <!-- Pagination Buttons -->
             <div class="flex justify-between items-center mt-4 pb-4">
                 <Button>Previous</Button>
                 <Button>Next</Button>
             </div>
         </div>
     </div>
-    <script>
-        const container = document.getElementById("reports-container");
-        const loadingButton = document.getElementById("loading-button");
-        import { ReportsGetRequests } from "../../../APIs/reports/reportsAPI";
-        import { Images } from "../../../constants.astro";
-        (async function () {
-            if (loadingButton) {
-                loadingButton.style.display = 'block';
-            }
-            const FetchReports = await ReportsGetRequests("/getall");
-            if (loadingButton) {
-                loadingButton.style.display = 'none';
-            }            
-            if (FetchReports.data) {
-                FetchReports.data.forEach(
-                    (
-                        report: {
-                            userDetails: any;
-                            createdAt: string;
-                            title: string;
-                            description: string;
-                            _id: string;
-                        },
-                        key: number,
-                    ) => {
-                        container
-                            ? (container.innerHTML += `
-                            <div key=${key} class="bg-white p-4 min-h-fit shadow rounded-lg flex items-center gap-4 border border-gray-200">
-                                <img
-                                src=${Images.userIcon}
-                                alt="User"
-                                class="w-12 h-12 rounded-full"
-                                />
-                                <div class="flex-1 overflow-hidden">
-                                    <div class="flex gap-2 flex-wrap items-center justify-between">
-                                        <h3 class="text-lg font-semibold">${report.userDetails.username}</h3>
-                                        <p class="text-xs text-gray-400">${new Date(report.createdAt).toLocaleString()}</p>
-                                        </div>
-                                         <p class="text-gray-600 font-medium">${report.title}</p>
-                                         <p class="text-gray-500 text-sm truncate overflow-hidden">${report.description}</p>
-                                        </div>
-                                        <a href=/dashboard/reports/report title="Reply">
-                                            <img
-                                            src="https://cdn-icons-png.flaticon.com/512/481/481675.png"
-                                            alt="Reply Icon"
-                                            class="w-6 h-6"
-                                            />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>`)
-                            : null;
-                    },
-                );
-            }
-        })();
-    </script>
 </DashLayout>

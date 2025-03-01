@@ -51,5 +51,14 @@ const logout = () => {
     window.localStorage.clear(APP_NAME);
 }
 
+const setComplains=(data)=>{
+    const store=getStoreData();
+    store.reports=data;
+    updateStore(store);
+}
+const getComplains=()=>{
+    const store=getStoreData();
+    return store.reports;
+}
 // Export getter function
-export { getStoreData, updateStore, setUserLogin, setUserInfo, logout };
+export {getComplains, getStoreData,setComplains, updateStore, setUserLogin, setUserInfo, logout };
