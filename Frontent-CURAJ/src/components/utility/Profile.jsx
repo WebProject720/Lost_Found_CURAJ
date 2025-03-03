@@ -27,6 +27,9 @@ export const Profile = () => {
                 </h1>
                 <p className="text-sm font-light">{user?.email || ""}</p>
             </div>
+            <div>
+                
+            </div>
         </div>
     )
 }
