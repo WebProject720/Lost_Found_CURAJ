@@ -1,4 +1,4 @@
-export const Button = (props) => {
+export const Button = ({ className, ...props }) => {
     return (
         <div>
             <button

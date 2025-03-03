@@ -63,13 +63,17 @@ const getComplains = () => {
 const getComplain = (id) => {
     const complain = getStoreData().reports;
     let i = 0;
-    while (i<complain.length) {
+    while (i < complain.length) {
         let element = complain[i];
         if (element._id.toString() == id.toString())
             break;
         i++;
     }
-    return complain[i]||false;
+    return complain[i] || false;
+}
+const getUser = () => {
+    const store = getStoreData();
+    return store.loggedUser;
 }
 // Export getter function
-export { getComplains, getComplain, getStoreData, setComplains, updateStore, setUserLogin, setUserInfo, logout };
+export { getComplains,getUser, getComplain, getStoreData, setComplains, updateStore, setUserLogin, setUserInfo, logout };

@@ -1,21 +1,8 @@
 ---
-import { Line } from "../../components/utility/Lline";
-import { Profile } from "../../components/utility/Profile";
+import { UserProfile } from "../../blocks/Profile";
 import DashLayout from "../../layouts/DashLayout.astro";
 ---
 
 <DashLayout>
-  <div class="flex justify-center items-center pt-10">
-    <div class="w-3/5">
-      <Profile client:load />
-    </div>
-  </div>
-  <div class="w-full flex gap-2 items-center justify-center flex-col">
-    <div class="w-1/3 py-4">
-      <Line />
-    </div>
-    <div class="text-center mt-6">
-      <h2 class="text-blue-600 font-bold text-2xl tracking-wide">My Reports</h2>
-    </div>
-  </div>
+  <UserProfile client:only />
 </DashLayout>

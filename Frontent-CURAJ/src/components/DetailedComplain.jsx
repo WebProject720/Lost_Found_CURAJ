@@ -62,8 +62,8 @@ export const DetailedComplain = ({ ...props }) => {
 
                     <div className="mt-6 flex justify-between items-center text-xl">
                         <a
-                            href="/dashboard/reports"
-                            className="text-black px-4 py-2 rounded-lg hover:underline"
+                            onClick={()=>window.history.back()}
+                            className="text-black  px-4 py-2 rounded-lg hover:cursor-pointer"
                         >
                             ← Back to complains
                         </a>
