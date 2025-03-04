@@ -18,7 +18,6 @@ export const UserProfile = ({ ...props }) => {
         })()
     }, [])
     return (
-
         <div className="tablet:p-2 mt-4 desktop:p-4 flex flex-col justify-center items-center">
             {user &&
                 <div className="flex bg-gray-200  w-full p-2  flex-col items-center justify-start gap-3">

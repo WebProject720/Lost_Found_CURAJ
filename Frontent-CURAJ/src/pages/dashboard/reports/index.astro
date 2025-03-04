@@ -1,30 +1,8 @@
 ---
 import DashLayout from "../../../layouts/DashLayout.astro";
-import { Button } from "../../../components/utility/Button";
-import { Input } from "../../../components/utility/Input";
 import { Complains } from "../../../blocks/Complains.jsx";
 ---
 
 <DashLayout>
-    <div class="bg-white-200 inset-0 w-full overflow-auto flex justify-center">
-        <div class="bg-white p-5 rounded-lg max-w-7xl w-full">
-            <div class="flex justify-between items-center mb-4">
-                <Input placeholder="Search" />
-                <select
-                    class="border p-2 rounded bg-gray-50 focus:ring-cyan-100"
-                >
-                    <option value="5">5 per page</option>
-                    <option value="10">10 per page</option>
-                    <option value="20">20 per page</option>
-                </select>
-            </div>
-            <div class="flex flex-col min-h-80 justify-center gap-2">
-                <Complains client:load />
-            </div>
-            <div class="flex justify-between items-center mt-4 pb-4">
-                <Button>Previous</Button>
-                <Button>Next</Button>
-            </div>
-        </div>
-    </div>
+    <Complains client:only></Complains>
 </DashLayout>

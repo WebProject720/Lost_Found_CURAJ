@@ -24,7 +24,7 @@ export const DetailedComplain = ({ ...props }) => {
                     >
                         <center> Complain Details </center>
                     </h1>
-                    <div className="flex items-center gap-4 border-b pb-4 mb-4">
+                    <div className="flex items-center justify-center gap-4 border-y py-2 my-4">
                         <div className="size-auto">
                             <img
                                 src={Images.userIcon}
@@ -62,8 +62,8 @@ export const DetailedComplain = ({ ...props }) => {
 
                     <div className="mt-6 flex justify-between items-center text-xl">
                         <a
-                            onClick={()=>window.history.back()}
-                            className="text-black  px-4 py-2 rounded-lg hover:cursor-pointer"
+                            onClick={() => window.history.back()}
+                            className="text-black  px-4 py-2 rounded-lg hover:underline hover:cursor-pointer"
                         >
                             ← Back to complains
                         </a>

@@ -17,13 +17,20 @@ export const Complain = ({ ...props }) => {
                 setOwner(true);
                 props.complain.userDetails = user;
             }
+            props.complain.isOpen = (props.complain.isOpen == "false");
+            console.log();
+
             setComplain(props.complain);
         })();
     }, [])
     const chnageStatus = async () => {
         setLoading(true);
-        const res = await ReportsAPIs('/changeStatus', { id: complain._id, changeTo: !complain.isOpen });
+        const res = await ReportsAPIs('/changeStatus', { id: complain._id });
         console.log(res);
+        if (res?.success) {
+            complain.isOpen = (!complain.isOpen);
+            setComplain(complain);
+        }
         setLoading(false);
     }
     return (

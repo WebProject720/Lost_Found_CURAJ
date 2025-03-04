@@ -6,7 +6,6 @@ export const ReportsAPIs = async (route, data) => {
         if (!data) {
             return { message: "something wrong", response: false, data }
         }
-        console.log(data);
         return data;
     }).catch(({ response }) => {
         if (!response) {
