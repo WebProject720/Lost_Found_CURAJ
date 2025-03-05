@@ -17,9 +17,6 @@ export const Complain = ({ ...props }) => {
                 setOwner(true);
                 props.complain.userDetails = user;
             }
-            props.complain.isOpen = (props.complain.isOpen == "false");
-            console.log();
-
             setComplain(props.complain);
         })();
     }, [])

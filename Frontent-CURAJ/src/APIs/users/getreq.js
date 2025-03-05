@@ -1,7 +1,6 @@
 import axios from "axios";
 
-export const GET = async ( path) => {
-    const route = "/users";
+export const GET = async ( path,route="/users") => {
     try {
         const PRODUCTION = import.meta.env.PUBLIC_PRODUCTION == "true";
         const serverURL = Boolean(PRODUCTION)

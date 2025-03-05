@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { GET } from "../../APIs/users/getreq";
 
 const StatsDashboard = () => {
-  const [stats] = useState({
-    totalUsers: 500,
-    openComplaints: 120,
-    closedComplaints: 380,
-    todayComplaints: 25
+  const [stats, setStats] = useState({
+    closedComplains: 0,
+    openedComplains: 0,
+    todaysComplains: 0,
+    totalComplains: 0,
+    usersCount: 0
   });
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await GET("/stats", "/reports");
+      if (data) {
+        setStats(data)
+      }
+    })();
+  }, [])
 
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
@@ -14,10 +25,10 @@ const StatsDashboard = () => {
         Dashboard Overview
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="Total Users" value={stats.totalUsers} color="bg-blue-600" />
-        <StatCard title="Open Complaints" value={stats.openComplaints} color="bg-red-600" />
-        <StatCard title="Closed Complaints" value={stats.closedComplaints} color="bg-green-600" />
-        <StatCard title="Today's Complaints" value={stats.todayComplaints} color="bg-yellow-500" />
+        <StatCard title="Total Users" value={stats.usersCount} color="bg-blue-600" />
+        <StatCard title="Open Complaints" value={stats.closedComplains} color="bg-red-600" />
+        <StatCard title="Closed Complaints" value={stats.closedComplains} color="bg-green-600" />
+        <StatCard title="Today's Complaints" value={stats.todaysComplains} color="bg-yellow-500" />
       </div>
     </div>
   );

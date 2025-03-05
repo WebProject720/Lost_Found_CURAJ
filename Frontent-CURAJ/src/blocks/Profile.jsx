@@ -18,7 +18,7 @@ export const UserProfile = ({ ...props }) => {
         })()
     }, [])
     return (
-        <div className="tablet:p-2 mt-4 desktop:p-4 flex flex-col justify-center items-center">
+        <div className="tablet:p-2  mt-4 desktop:p-4 flex flex-col justify-center items-center">
             {user &&
                 <div className="flex bg-gray-200  w-full p-2  flex-col items-center justify-start gap-3">
                     <div>
@@ -43,10 +43,10 @@ export const UserProfile = ({ ...props }) => {
                     </div>
                 </div>
             }
-            <div>
+            <div className="w-screen p-2 flex flex-col justify-center items-center">
                 <div className="flex flex-col items-center justify-center">
 
-                    <div className="w-1/3 my-5">
+                    <div className="w-1/2 my-5">
                         <Line></Line>
                     </div>
                     <h1 className="font-extrabold text-gray-700 text-4xl">
@@ -54,11 +54,11 @@ export const UserProfile = ({ ...props }) => {
                             You'r Complains
                         </center>
                     </h1>
-                    <div className="w-1/3 my-5">
+                    <div className="w-1/2 my-5">
                         <Line></Line>
                     </div>
                 </div>
-                <div className="w-screen p-2 min-h-48 flex flex-col gap-1">
+                <div className="desktop:w-2/3 tablet:w-full  p-2 min-h-48 flex flex-col gap-1">
                     {
                         complains ?
                             complains.map((c, key) => (

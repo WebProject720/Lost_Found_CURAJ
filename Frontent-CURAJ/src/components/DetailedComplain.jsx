@@ -3,15 +3,40 @@ import { useEffect, useState } from "react";
 import { Images } from "../constants.astro";
 import { getComplain } from "../store";
 import { Button } from "./utility/Button";
+import { ReportsAPIs } from "../APIs/reports/reportsAPI";
+import { Loader } from "./utility/Loader";
 
 export const DetailedComplain = ({ ...props }) => {
     const [complain, setCompain] = useState(null);
     const [reply, setReply] = useState(false);
+    const [sendingReply, setReplying] = useState(false);
+    const [id, setId] = useState(null);
+    const [replyText, setReplyText] = useState('');
+    const [statusText, setStatus] = useState('Send');
+
     useEffect(() => {
         const id = new URLSearchParams(window.location.search).get("id")
+        setId(id);
         const res = getComplain(id);
         setCompain(res);
     }, []);
+    const sendReply = async () => {
+        if (!replyText) return;
+        setReplying(true);
+        setStatus('Loading');
+        const response = await ReportsAPIs('/reply', { reply: replyText, cid: id })
+        if (response.success) {
+            console.log(response);
+            setStatus(response.message)
+        } else {
+            setStatus('Try Again')
+        }
+        setTimeout(() => {
+            setReplying(false);
+            setReply(false);
+            setStatus('Send');
+        }, 1000);
+    }
     return (
         complain &&
         <div className={`p-1 relative h-screen `}>
@@ -100,6 +125,7 @@ export const DetailedComplain = ({ ...props }) => {
                         placeholder="Write your response..."
                         className="w-full p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
                         rows="6"
+                        onChange={(e) => setReplyText(e.target.value)}
                     >
                     </textarea>
                     <div className="flex gap-2 w-full items-end justify-end">
@@ -108,7 +134,16 @@ export const DetailedComplain = ({ ...props }) => {
                             <Button onClick={() => setReply((pre) => !pre)} id="">Cancel</Button>
                         </div>
                         <div className="mt-3 flex justify-end">
-                            <Button id="SubmitBtn">Send Reply</Button>
+                            <Button disabled={sendingReply} onClick={sendReply} id="SubmitBtn">
+                                {
+                                    sendingReply ?
+                                        <Loader></Loader>
+                                        :
+                                        <span>
+                                            {statusText}
+                                        </span>
+                                }
+                            </Button>
                         </div>
                     </div>
                 </div>
