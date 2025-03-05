@@ -19,43 +19,34 @@ export const UserProfile = ({ ...props }) => {
     }, [])
     return (
         <div className="tablet:p-2  mt-4 desktop:p-4 flex flex-col justify-center items-center">
-            {user &&
-                <div className="flex bg-gray-200  w-full p-2  flex-col items-center justify-start gap-3">
-                    <div>
-                        <img className="size-16" sizes="50" src={Images.userIcon} alt="profile-image" />
-                    </div>
-                    <div className="flex flex-col justify-center items-center">
-                        <div className="w-fit">
-                            <h1 className="text-center">{user.username}</h1>
-                            <h1>{user.email}</h1>
-                        </div>
-                        <hr />
-                        <div>
-                            <p className="gap-2 ">
-                                <span>Total Complains </span>
-                                <span className="font-bold">
-                                    {
-                                        user.Reports.length
-                                    }
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            }
-            <div className="w-screen p-2 flex flex-col justify-center items-center">
-                <div className="flex flex-col items-center justify-center">
+            {user && (
+          <div className="flex flex-col items-center bg-white/80 rounded-lg p-6 w-full md:w-3/4">
+            <img
+              className="w-24 h-24 rounded-full border-4 border-blue-400 shadow-xl"
+              src={Images.userIcon}
+              alt="profile"
+            />
+            <h1 className="text-2xl font-bold text-gray-800 mt-4">
+              {user.username}
+            </h1>
+            <h2 className="text-base text-gray-600 mt-2">{user.email}</h2>
+            <div className="mt-4 flex items-center font-bold text-blue-700 text-base">
+              <span>Total Complains: </span>
+              <span className="font-bold text-green-800 text-lg ml-2">{user.Reports.length}</span>
+            </div>
+          </div>
+        )}
+            <div className="w-screen p-2 flex flex-col justify-center items-center ">
+                <div className="flex flex-col items-center justify-center w-full">
 
-                    <div className="w-1/2 my-5">
-                        <Line></Line>
-                    </div>
-                    <h1 className="font-extrabold text-gray-700 text-4xl">
+                   
+                    <h1 className="font-extrabold text-gray-700 text-3xl">
                         <center>
-                            You'r Complains
+                            My Complains
                         </center>
                     </h1>
                     <div className="w-1/2 my-5">
-                        <Line></Line>
+                        <hr className="border-0 h-1 bg-gradient-to-r from-green-500 via-purple-500 to-green-500 rounded-full" />
                     </div>
                 </div>
                 <div className="desktop:w-2/3 tablet:w-full  p-2 min-h-48 flex flex-col gap-1">
