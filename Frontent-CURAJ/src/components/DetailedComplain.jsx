@@ -42,7 +42,6 @@ export const DetailedComplain = ({ ...props }) => {
         setReplying(true);
         setStatus('Loading');
         const response = await ReportsAPIs('/reply', { reply: replyText, cid: id })
-        console.log(response);
         if (response.success) {
             setStatus(response.message)
         } else {
@@ -115,13 +114,18 @@ export const DetailedComplain = ({ ...props }) => {
                     <h3 className="text-xl font-semibold mb-2">{complain.title}</h3>
                     <p className="text-gray-700 indent-5">{complain.description}</p>
                     {
-                        complain.images.length > 0 ? <div className="mt-4 flex justify-center">
-                            <img
-                                src={complain.image}
-                                alt="complain Image"
-                                className="w-72 h-auto rounded-lg shadow-md"
-                            />
-                        </div> : null
+                        complain.images.length > 0 ?
+                            <div className="py-4 flex justify-center flex-wrap">
+                                {complain.images.map((value, key) => (
+                                    <img
+                                        key={key}
+                                        src={value}
+                                        alt="complain Image"
+                                        className="w-72 h-auto rounded-lg shadow-md"
+                                    />
+                                ))}
+                            </div>
+                            : null
                     }
 
                     <div className="mt-6 flex justify-between items-center text-xl">

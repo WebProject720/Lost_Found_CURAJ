@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { GET } from "../APIs/users/getreq"
 import { getUser } from "../store";
 import { Images } from "../constants.astro";
-import { Line } from "../components/utility/Lline";
 import { Complain } from "../components/Complain";
 import { Loader } from "../components/utility/Loader";
 
@@ -10,6 +9,7 @@ import { Loader } from "../components/utility/Loader";
 export const UserProfile = ({ ...props }) => {
     const [complains, setComplains] = useState(null);
     const [user, setUser] = useState(null);
+    const [userDetails, setUserDetails] = useState(null)
     useEffect(() => {
         (async function () {
             const { data } = await GET('/user');
@@ -17,29 +17,45 @@ export const UserProfile = ({ ...props }) => {
             setUser(getUser());
         })()
     }, [])
+    useEffect(() => {
+        if (user)
+            setUserDetails(
+                {
+                    username: user.username,
+                    email: user.email,
+                    Complaints: user.Reports.length,
+                }
+            )
+    }, [user]);
     return (
         <div className="tablet:p-2  mt-4 desktop:p-4 flex flex-col justify-center items-center">
-            {user && (
-          <div className="flex flex-col items-center bg-white/80 rounded-lg p-6 w-full md:w-3/4">
-            <img
-              className="w-24 h-24 rounded-full border-4 border-blue-400 shadow-xl"
-              src={Images.userIcon}
-              alt="profile"
-            />
-            <h1 className="text-2xl font-bold text-gray-800 mt-4">
-              {user.username}
-            </h1>
-            <h2 className="text-base text-gray-600 mt-2">{user.email}</h2>
-            <div className="mt-4 flex items-center font-bold text-blue-700 text-base">
-              <span>Total Complains: </span>
-              <span className="font-bold text-green-800 text-lg ml-2">{user.Reports.length}</span>
+            <div className="flex flex-col items-center bg-white/80 rounded-lg p-6 w-full md:w-3/4">
+                <img
+                    className="w-24 h-24 rounded-full border-4 border-blue-400 shadow-xl"
+                    src={Images.userIcon}
+                    alt="profile"
+                />
+                <div className="desktop:w-1/2 flex flex-col gap-2 w-full py-3">
+                    {
+                        userDetails && Object.entries(userDetails).map(([value, key], i) => (
+                            <div className="flex gap-0 w-full" key={i}>
+                                <div className=" border-[1px] p-2 w-1/4 rounded-md rounded-r-none border-black bg-gray-200">
+                                    <p>{value}</p>
+                                </div>
+                                <div className="  border-[1px] p-2 rounded-md rounded-l-none border-l-0 w-3/4 border-black bg-gray-100">
+                                    <h1>
+                                        {key}
+                                    </h1>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
-          </div>
-        )}
             <div className="w-screen p-2 flex flex-col justify-center items-center ">
                 <div className="flex flex-col items-center justify-center w-full">
 
-                   
+
                     <h1 className="font-extrabold text-gray-700 text-3xl">
                         <center>
                             My Complains
@@ -62,6 +78,6 @@ export const UserProfile = ({ ...props }) => {
                     }
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

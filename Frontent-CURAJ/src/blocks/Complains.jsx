@@ -31,7 +31,7 @@ export const Complains = ({ ...props }) => {
 
 
     useEffect(() => {
-        console.log(complains, search);
+        // console.log(complains, search);
         if (complains && search) {
             console.log(complains);
             const filterComplains = data.filter((complain) => {

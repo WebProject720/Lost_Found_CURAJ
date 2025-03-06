@@ -48,7 +48,7 @@ import DashLayout from "../../../layouts/DashLayout.astro";
           <input
             type="file"
             id="image"
-            name="image"
+            name="file"
             class="w-full p-3 border bg-gray-50 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-800 focus:outline-none"
             accept="image/*"
           />
@@ -77,14 +77,14 @@ import DashLayout from "../../../layouts/DashLayout.astro";
 
         const form = data.target as HTMLFormElement;
         const formData = new FormData(form);
-        const Report: { [key: string]: any } = {};
-        formData.forEach((value, key: any) => {
-          key !== "image" ? (Report[key] = value) : null;
-        });
-
+        // const Report: { [key: string]: any } = {};
+        // formData.forEach((value, key: any) => {
+        //   value ? (Report[key] = value) : null;
+        // });
+        // console.log(Report);
+        
         //calling api for submitting form
-        await ReportsAPIs("/add", Report).then((res) => {
-          console.log(res);
+        await ReportsAPIs("/add", formData).then((res) => {
           SubmitBtn ? (SubmitBtn.innerHTML = res.message || "Failed") : null;
           if (!res.success) {
             for (const element of form.elements) {
