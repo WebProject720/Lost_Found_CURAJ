@@ -76,4 +76,4 @@ const getUser = () => {
     return store.loggedUser;
 }
 // Export getter function
-export { getComplains,getUser, getComplain, getStoreData, setComplains, updateStore, setUserLogin, setUserInfo, logout };
+export { getComplains, getUser, getComplain, getStoreData, setComplains, updateStore, setUserLogin, setUserInfo, logout };

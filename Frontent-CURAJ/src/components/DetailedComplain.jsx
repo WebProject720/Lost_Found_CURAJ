@@ -6,39 +6,77 @@ import { Button } from "./utility/Button";
 import { ReportsAPIs } from "../APIs/reports/reportsAPI";
 import { Loader } from "./utility/Loader";
 
+
 export const DetailedComplain = ({ ...props }) => {
     const [complain, setCompain] = useState(null);
     const [reply, setReply] = useState(false);
     const [sendingReply, setReplying] = useState(false);
     const [id, setId] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [replyText, setReplyText] = useState('');
     const [statusText, setStatus] = useState('Send');
+    const [notFound, SetNotFound] = useState(false);
 
     useEffect(() => {
-        const id = new URLSearchParams(window.location.search).get("id")
+        const id = new URLSearchParams(window.location.search).get("id");
         setId(id);
         const res = getComplain(id);
-        setCompain(res);
+        (async () => {
+            if (!res) {
+                const complaint = await ReportsAPIs('/get', { id });
+                if (complaint.data && complaint.success) {
+                    setCompain(complaint.data)
+                } else {
+                    SetNotFound(true);
+                }
+            } else {
+                setCompain(res);
+            }
+            setLoading(false);
+        })();
     }, []);
+
+
     const sendReply = async () => {
         if (!replyText) return;
         setReplying(true);
         setStatus('Loading');
         const response = await ReportsAPIs('/reply', { reply: replyText, cid: id })
+        console.log(response);
         if (response.success) {
-            console.log(response);
             setStatus(response.message)
         } else {
-            setStatus('Try Again')
+            setStatus(response.message || 'Try Again')
+            setReplying(false);
         }
         setTimeout(() => {
-            setReplying(false);
             setReply(false);
             setStatus('Send');
-        }, 1000);
+        }, 4000);
+    }
+
+
+    if (loading) {
+        return (
+            <div className={`w-full  h-60 justify-center items-center flex`}>
+                <Loader></Loader>
+            </div>
+        )
+    }
+
+    if (notFound) {
+        return (
+            <div className={`w-full  h-80 justify-center items-center flex`}>
+                <h1 className="text-gray-400 font-extrabold text-5xl">
+                    <center>
+                        Complaint Not found
+                    </center>
+                </h1>
+            </div>
+        )
     }
     return (
-        complain &&
+        (complain && !loading) &&
         <div className={`p-1 relative h-screen `}>
             <div
                 className={`bg-white  z-10 w-full overflow-auto flex justify-center mt-10 ${reply ? 'opacity-45 ' : null}`}
@@ -49,12 +87,13 @@ export const DetailedComplain = ({ ...props }) => {
                     >
                         <center> Complain Details </center>
                     </h1>
+
                     <div className="flex items-center justify-center gap-4 border-y py-2 my-4">
                         <div className="size-auto">
                             <img
                                 src={Images.userIcon}
                                 alt="User"
-                                className={`w-12 rounded-full border-[1px] ${!complain?.isOpen ? 'border-red-500' : 'border-green-500'} `}
+                                className={`w-12 rounded-full border-[1px] border-blue-500 `}
                             />
                         </div>
                         <div className="flex flex-row justify-between w-full">
@@ -92,7 +131,7 @@ export const DetailedComplain = ({ ...props }) => {
                         >
                             ← Back to complains
                         </a>
-                        <button
+                        {complain.isOpen ? <button
                             id="replyBtn"
                             className="text-black px-4 py-2 rounded-lg flex items-center gap-2 hover:underline"
                             onClick={() => setReply(true)}
@@ -103,7 +142,7 @@ export const DetailedComplain = ({ ...props }) => {
                                 className="w-6 h-5"
                             />
                             Reply
-                        </button>
+                        </button> : ''}
                     </div>
                 </div>
             </div>

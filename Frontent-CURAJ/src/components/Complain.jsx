@@ -32,12 +32,13 @@ export const Complain = ({ ...props }) => {
     }
     return (
         complain &&
-        <div className="bg-white p-4 min-h-fit flex flex-col gap-2 shadow rounded-lg border border-gray-200">
-            <div key={complain._id} className=" flex items-center gap-4 ">
+        <div className="bg-white p-4 tablet:py-3 tablet:px-2 min-h-fit flex flex-col gap-2 shadow rounded-lg border border-gray-200">
+            <div key={complain._id} className=" flex items-center gap-2 ">
                 <img
                     src={Images.userIcon}
                     alt="User"
-                    className={`w-12 h-12 rounded-full border-[1px] ${!complain?.isOpen ? 'border-red-500' : 'border-green-500'} `}
+                    // className={`w-12 h-12 rounded-full border-[1px] ${!complain?.isOpen ? 'border-red-500' : 'border-green-500'} `}
+                    className={`w-12 h-12 rounded-full border-[1px] border-blue-500 `}
                 />
                 <a href={`/dashboard/reports/report/id?id=${complain._id}`} className="flex-1 overflow-hidden">
                     <div className="flex gap-2 tablet:gap-1 flex-wrap items-center justify-between">
@@ -45,7 +46,7 @@ export const Complain = ({ ...props }) => {
                         <p className="text-xs text-gray-400">{new Date(complain.createdAt).toLocaleString()}</p>
                     </div>
                     <div className="flex flex-row relative items-center gap-1">
-                        <div className="group cursor-pointer">
+                        {/* <div className="group cursor-pointer">
                             <div className={`red-dot  size-3 ${!complain?.isOpen ? 'bg-red-600' : 'bg-green-500'} rounded-full`}>
                             </div>
                             <div className="hidden top-0 left-5 absolute group-hover:flex bg-gray-700 text-white p-2 rounded-md">
@@ -53,7 +54,7 @@ export const Complain = ({ ...props }) => {
                                     <b>{complain?.isOpen ? 'Open' : 'Closed'}</b>
                                 </p>
                             </div>
-                        </div>
+                        </div> */}
                         <p className="text-gray-600 font-medium text-nowrap truncate overflow-hidden">{complain.title}</p>
                     </div>
                     <p className="text-gray-500 text-sm truncate overflow-hidden">{complain.description}</p>
@@ -66,7 +67,7 @@ export const Complain = ({ ...props }) => {
                     />
                 </a>
             </div >
-            {isOwner &&
+            {(isOwner && complain.isOpen) &&
                 <div className="w-full flex flex-col justify-end gap-1">
                     <hr className="w-full my-2" />
                     <div className="flex justify-end gap-1">
