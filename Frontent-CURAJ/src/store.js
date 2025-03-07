@@ -3,7 +3,8 @@ const APP_NAME = "AppStore";
 const defaultUser = {
     isUserLogged: false,
     loggedUser: null,
-    reports: []
+    reports: [],
+    stats: false
 };
 
 // Function to safely get stored data from localStorage (client-side only)
@@ -75,5 +76,16 @@ const getUser = () => {
     const store = getStoreData();
     return store.loggedUser;
 }
+
+export const setStats = (data) => {
+    if (!data) return;
+    const store = getStoreData();
+    store.stats = data;
+    updateStore(store);
+}
+export const getStats = () => {
+    return getStoreData().stats;
+}
+
 // Export getter function
 export { getComplains, getUser, getComplain, getStoreData, setComplains, updateStore, setUserLogin, setUserInfo, logout };

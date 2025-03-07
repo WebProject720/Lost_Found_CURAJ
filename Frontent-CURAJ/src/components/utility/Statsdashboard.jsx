@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { GET } from "../../APIs/users/getreq";
+import { setStats as setStatsDB, getStats } from "../../store";
 
 const StatsDashboard = () => {
   const [stats, setStats] = useState({
@@ -11,10 +12,18 @@ const StatsDashboard = () => {
   });
 
   useEffect(() => {
+    (()=>{
+      const stats=getStats();
+      setStats(stats);
+    })();
+  }, []);
+
+  useEffect(() => {
     (async () => {
       const { data } = await GET("/stats", "/reports");
       if (data) {
-        setStats(data)
+        setStats(data);
+        setStatsDB(data);
       }
     })();
   }, [])
