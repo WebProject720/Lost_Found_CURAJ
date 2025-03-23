@@ -1,6 +1,6 @@
 ---
-import { Images } from "../../../constants.astro";
-import DashLayout from "../../../layouts/DashLayout.astro";
+import { Images } from "../../constants.astro"
+import DashLayout from "../../layouts/DashLayout.astro"
 ---
 
 <DashLayout>
@@ -28,7 +28,7 @@ import DashLayout from "../../../layouts/DashLayout.astro";
 
             <!-- Supervisor - Dr. A. B. C. -->
             <div class="w-full max-w-xs bg-white p-6 rounded-lg shadow-md text-center">
-                <img src={Images.kk.src} alt="Dr. KK" class="w-32 h-32 mx-auto rounded-full shadow-md">
+                <img src={Images.kk.src} alt="Dr Krishna Kumar Mohebey" class="w-32 h-32 mx-auto rounded-full shadow-md object-cover">
                 <h3 class="text-xl font-semibold mt-4">Dr Krishna Kumar Mohebey</h3>
                 <p class="text-gray-600 font-medium">Project Supervisor</p>
                 <p class="text-gray-500 text-sm mt-2">Guided the project and provided valuable insights.</p>
@@ -36,8 +36,8 @@ import DashLayout from "../../../layouts/DashLayout.astro";
             </div>
 
             <!-- Ramesh Mali - Backend Developer -->
-            <div class="w-full max-w-xs bg-white p-6 rounded-lg shadow-md text-center">
-                <img src={Images.ramesh.src} alt="Ramesh Mali" class="w-32 h-32 mx-auto rounded-full shadow-md">
+            <div class="w-full max-w-xs bg-white p-6 rounded-lg shadow-md text-center ">
+                <img src={Images.ramesh.src} alt="Ramesh Mali" class="w-32 h-32 aspect-square object-cover mx-auto rounded-full shadow-md">
                 <h3 class="text-xl font-semibold mt-4">Ramesh Mali</h3>
                 <p class="text-gray-600 font-medium">Backend Developer</p>
                 <p class="text-gray-500 text-sm mt-2">Specialized in database management and server-side logic.</p>

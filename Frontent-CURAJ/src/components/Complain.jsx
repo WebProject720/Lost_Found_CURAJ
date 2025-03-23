@@ -46,15 +46,6 @@ export const Complain = ({ ...props }) => {
                         <p className="text-xs text-gray-400">{new Date(complain.createdAt).toLocaleString()}</p>
                     </div>
                     <div className="flex flex-row relative items-center gap-1">
-                        {/* <div className="group cursor-pointer">
-                            <div className={`red-dot  size-3 ${!complain?.isOpen ? 'bg-red-600' : 'bg-green-500'} rounded-full`}>
-                            </div>
-                            <div className="hidden top-0 left-5 absolute group-hover:flex bg-gray-700 text-white p-2 rounded-md">
-                                <p>
-                                    <b>{complain?.isOpen ? 'Open' : 'Closed'}</b>
-                                </p>
-                            </div>
-                        </div> */}
                         <p className="text-gray-600 font-medium text-nowrap truncate overflow-hidden">{complain.title}</p>
                     </div>
                     <p className="text-gray-500 text-sm truncate overflow-hidden">{complain.description}</p>
