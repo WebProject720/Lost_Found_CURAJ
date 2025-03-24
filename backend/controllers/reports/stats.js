@@ -23,14 +23,23 @@ export const stats = async (req, res) => {
                 }
             ]
         )
+
         const reponse = await stats[0];
         const data = {
-            totalComplains: reponse.total[0].count || 0,
-            openedComplains: reponse.counts[0].count || 0,
-            closedComplains: reponse.counts[1].count || 0,
-            todaysComplains: reponse.todays.length>0?reponse.todays[0].todays || 0:0,
+            totalComplains: reponse?.total[0]?.count || 0,
+            openedComplains: 0,
+            closedComplains: 0,
+            todaysComplains: reponse?.todays?.length > 0 ? reponse.todays[0].todays || 0 : 0,
             usersCount
         }
+        reponse.counts.forEach(element => {
+            if (element._id === true) {
+                data.openedComplains = element?.count || 0;
+            } else {
+                data.closedComplains = element?.count || 0;
+            }
+        });
+
         return res.status(200).json(
             new ApiResponse('All reports', data, true, 200)
         )

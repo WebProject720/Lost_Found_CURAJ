@@ -51,8 +51,8 @@ app.use('/users', UserRouter);
 app.use('/reports', ReportsRouter);
 
 
-app.use((req, res) => {
-    res.status(404).send(`
+app.get('/',(req, res) => {
+    res.send(`
       <!DOCTYPE html>
       <html lang="en">
       <head>

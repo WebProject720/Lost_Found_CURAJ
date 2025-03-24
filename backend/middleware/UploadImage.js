@@ -3,9 +3,15 @@ import 'dotenv/config'
 
 export const ImageUploadonDB = async (req, res, next) => {
     try {
+
         const file = req?.file;
         req.uploadedImage = { hasImage: false };
-        if (!file) next();
+        
+        if (!file) {
+            next();
+            return;
+        }
+
         const imagekit = new ImageKit({
             publicKey: process.env.ImageKit_Public_Key,
             privateKey: process.env.ImageKit_Private_Key,

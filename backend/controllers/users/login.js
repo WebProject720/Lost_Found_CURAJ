@@ -32,11 +32,20 @@ export const login = async (req, res) => {
                 )
         }
 
-        const { _doc } = await Users.findOne(
+        const DBuser= await Users.findOne(
             {
                 $or: [{ email: identifier.toLowerCase() }, { username: identifier }]
             }
         );
+        
+        if (!DBuser) {
+            return res
+                .status(404)
+                .json(
+                    new ApiError('User not found')
+                )
+        }
+        const _doc = DBuser._doc;
         let { password: SetPassword, ...user } = _doc;
         if (!user) {
             return res
