@@ -12,8 +12,8 @@ const StatsDashboard = () => {
   });
 
   useEffect(() => {
-    (()=>{
-      const stats=getStats();
+    (() => {
+      const stats = getStats();
       setStats(stats);
     })();
   }, []);
@@ -34,10 +34,10 @@ const StatsDashboard = () => {
         Dashboard Overview
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="Total Users" value={stats.usersCount} color="bg-blue-600" />
-        <StatCard title="Open Complaints" value={stats.closedComplains} color="bg-red-600" />
-        <StatCard title="Closed Complaints" value={stats.closedComplains} color="bg-green-600" />
-        <StatCard title="Today's Complaints" value={stats.todaysComplains} color="bg-yellow-500" />
+        <StatCard title="Total Users" value={stats.usersCount || 0} color="bg-blue-600" />
+        <StatCard title="Open Complaints" value={stats.closedComplains || 0} color="bg-red-600" />
+        <StatCard title="Closed Complaints" value={stats.closedComplains || 0} color="bg-green-600" />
+        <StatCard title="Today's Complaints" value={stats.todaysComplains || 0} color="bg-yellow-500" />
       </div>
     </div>
   );
