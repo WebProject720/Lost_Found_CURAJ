@@ -51,14 +51,14 @@ app.use('/users', UserRouter);
 app.use('/reports', ReportsRouter);
 
 
-app.get('/', (req, res) => {
-    res.send(`
+app.use((req, res) => {
+    res.status(404).send(`
       <!DOCTYPE html>
       <html lang="en">
       <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>OpecChats Server</title>
+          <title>CURAJ Lost & Found Server APIs</title>
           <style>
             body {
                 font-family: Arial, sans-serif;
@@ -74,6 +74,7 @@ app.get('/', (req, res) => {
       <body>
           <h1>Lost & Found CURAJ</h1>
           <p>!! This is a Landing page for Lost & Found Server !!</p>
+          <a href="https://curajlf.vercel.app/">Go to Lost & Found CURAJ</a>
       </body>
       </html>
     `);
