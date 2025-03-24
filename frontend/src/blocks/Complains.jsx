@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { ReportsGetRequests } from "../APIs/reports/reportsAPI";
 import { Loader } from "../components/utility/Loader";
 import { Complain } from "../components/Complain";
@@ -15,11 +15,13 @@ export const Complains = ({ ...props }) => {
     useEffect(() => {
         (async () => {
             try {
+                setStatus(2);
                 const response = await ReportsGetRequests("/getall");
                 if (response.data) {
                     setData(response.data);
                     setFilteredComplains(response.data);
-                    setStatus(response.data.length > 0 ? 1 : 3);
+                    console.log(response.data);
+                    setStatus(response.data?.length > 0 ? 1 : 2);
                 } else {
                     setStatus(0);
                 }
@@ -42,7 +44,6 @@ export const Complains = ({ ...props }) => {
                 setStatus(data.length > 0 ? 1 : 3);
             }
         }, 300); // 300ms debounce time
-
         return () => clearTimeout(timeoutId);
     }, [search, data]);
 
