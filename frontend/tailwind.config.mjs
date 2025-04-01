@@ -8,7 +8,7 @@ export default {
 			},
 			screens: {
 				phone: { 'max': '620px' },
-				tablet: { max: '1020px' },//w-3/4
+				tablet: { 'max': '1020px' },//w-3/4
 				desktop: "1021px"
 			},
 			textColor: {

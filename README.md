@@ -11,7 +11,8 @@ Lost & Found - CURAJ is a dedicated platform for students and faculty to report 
 
 ## Technologies Used
 - **Frontend:** HTML, Tailwind CSS, Astro, ReactJS
-- **Deployment:** Vercel (or any preferred hosting service)
+- **Backedn:** NodeJS, ExpressJS, REST APIs, MongoDB
+- **Deployment:** Vercel 
 
 ## Setup Instructions
 ```sh
@@ -19,7 +20,7 @@ Lost & Found - CURAJ is a dedicated platform for students and faculty to report 
 git clone https://github.com/zero1byte/Lost_Found_CURAJ.git
 
 # Navigate to the project directory
-cd lost-found-curaj
+cd Lost_Found_CURAJ/frontend
 
 # Install dependencies
 npm install
@@ -31,7 +32,7 @@ npm run dev
 ```
 
 ## Live Demo
-Check out the live version [here](https://lostfound720.netlify.app/).
+Check out the live version [here](https://curajlf.vercel.app/).
 
 ## Social Media Links
 Stay connected with us:
