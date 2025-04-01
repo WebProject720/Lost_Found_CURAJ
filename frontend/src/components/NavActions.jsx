@@ -51,7 +51,7 @@ export const NavActions = (props) => {
 
     {
       name: "About Us",
-      route: "/dashboard/about",
+      route: "/about",
       icon: Icons.AboutIcon || null
     },
     {

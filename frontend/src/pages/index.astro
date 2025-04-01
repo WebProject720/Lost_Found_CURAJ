@@ -1,7 +1,126 @@
 ---
-import Login from "./auth/index.astro";
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { Images } from "../constants.astro";
 ---
 
-<Login />
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lost & Found - CURAJ</title>
+        <link
+            rel="shortcut icon"
+            href={Images.curaj_logo.src}
+            type="image/x-icon"
+        />
+    </head>
+    <body class="bg-gray-100 text-gray-900">
+        <header
+            class="z-50 bg-gray-100 top-0 border-b-2 border-gray-400/20 px-5 py-2 w-screen flex items-center flex-row justify-start shadow-xl shadow-gray-300"
+        >
+            <a href="/">
+                <img
+                    src={Images.curaj_full_logo.src}
+                    alt="CURAJ Logo"
+                    class="h-16 w-auto phone:h-auto phone:w-40"
+                />
+            </a>
+        </header>
+        <div
+            class="max-w-3xl mx-auto mb-4 mt-10 bg-white shadow-gray-600 tablet:mx-2 phone:bg-transparent px-8 py-12 rounded-lg shadow-2xl text-center"
+        >
+            <h2 class="text-3xl font-bold mb-4 text-blue-900">
+                Lost & Found Portal - CURAJ
+            </h2>
+            <div class="py-3">
+                <hr />
+            </div>
+            <p class="text-lg text-gray-700 mb-6">
+                A dedicated platform for students and faculty to report lost or
+                found items within the campus. Help us reunite items with their
+                rightful owners quickly and easily.
+            </p>
+            <div class="flex justify-center space-x-4 mb-6">
+                <button
+                    onclick="location.href='/auth'"
+                    class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-6 rounded-lg text-lg"
+                    >Login</button
+                >
+                <button
+                    onclick="location.href='/auth/register'"
+                    class="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-lg text-lg"
+                    >Register</button
+                >
+            </div>
+            <div class="mt-8 text-left">
+                <h3 class="text-2xl font-semibold mb-2 text-black">
+                    How It Works
+                </h3>
+                <ul class="list-disc pl-6 text-gray-700">
+                    <li>Report an item you lost or found with details.</li>
+                    <li>Browse the latest reports to find matches.</li>
+                    <li>Contact the finder or owner securely via Mail ID.</li>
+                    <li>Retrieve or return the item safely.</li>
+                </ul>
+            </div>
+            <div class="mt-8 text-left">
+                <h3 class="text-2xl font-semibold mb-2 text-black">
+                    Why Use This Platform?
+                </h3>
+                <ul class="list-disc pl-6 text-gray-700">
+                    <li>Easy and quick reporting.</li>
+                    <li>Secure communication between users.</li>
+                    <li>Increases chances of finding lost items.</li>
+                    <li>Accessible to all CURAJ students and faculty.</li>
+                    <li>
+                        Don't spam. Once a report is submitted, it cannot be
+                        completely removed.
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-8 text-center">
+                <h3 class="text-2xl font-semibold mb-2 text-black">
+                    Recent Reports
+                </h3>
+                <p class="text-gray-600">
+                    Stay updated with the latest lost and found items reported
+                    on campus.
+                </p>
+                <button
+                    onclick="location.href='/about'"
+                    class="mt-4 bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg"
+                    >About Us</button
+                >
+            </div>
+            <div class="w-full pt-10 flex items-center justify-center">
+                <div class="flex gap-4">
+                    <a
+                        href="https://github.com/zero1byte/Lost_Found_CURAJ"
+                        target="_blank"
+                        class="list-none"
+                    >
+                        <img
+                            class="size-6 phone:size-5"
+                            src={Images.github_icon.src}
+                            alt="GitHub"
+                        />
+                    </a>
+                    <a href="#" target="_blank" class="list-none">
+                        <img
+                            class="size-6 phone:size-5"
+                            src={Images.instagram_icon.src}
+                            alt="Instagram"
+                        />
+                    </a>
+                    <a href="#" target="_blank" class="list-none">
+                        <img
+                            class="size-6 phone:size-5"
+                            src={Images.x_icon.src}
+                            alt="X"
+                        />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
