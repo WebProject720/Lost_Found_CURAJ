@@ -35,9 +35,9 @@ import { Images } from "../constants.astro";
             class="max-w-3xl mx-auto mb-4 mt-10 bg-white shadow-gray-600 tablet:mx-2 phone:bg-transparent px-8 py-12 rounded-lg shadow-2xl text-center"
         >
             <h2
-                class="text-3xl phone:text-xl font-bold text-blue-900 text-center justify-center items-center  phone:flex"
+                class="text-3xl phone:text-xl font-bold text-blue-900 text-center justify-center items-center phone:flex"
             >
-                Welcome !! Everyone
+                Welcome
             </h2>
             <h4 class="text-2xl font-bold phone:text-xs mb-4 text-blue-900">
                 Lost & Found Portal - CURAJ
@@ -50,7 +50,7 @@ import { Images } from "../constants.astro";
                 found items within the campus. Help us reunite items with their
                 rightful owners quickly and easily.
             </p>
-            <div class="flex justify-center space-x-4 mb-6">
+            <div id="auth-buttons" class="flex justify-center space-x-4 mb-6">
                 <button
                     onclick="location.href='/auth'"
                     class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-6 rounded-lg text-lg"
@@ -133,4 +133,12 @@ import { Images } from "../constants.astro";
             </div>
         </main>
     </body>
+    <script>
+        import { getUser } from "../store";
+
+        let AuthButtons = document.getElementById("auth-buttons");
+        if (getUser()) {
+            AuthButtons?.classList.add("hidden");
+        }
+    </script>
 </html>

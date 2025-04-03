@@ -69,8 +69,3 @@ import { NavActions } from "./NavActions";
         toggleBtn ? toggleBtn?.addEventListener("click", ToggleSideBar) : null;
     });
 </script>
-<script>
-    window.location.href.includes("auth") || window.location.pathname == "/"
-        ? document.getElementById("actions")?.classList.add("hidden")
-        : null;
-</script>
