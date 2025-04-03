@@ -39,7 +39,7 @@ export const NavActions = (props) => {
       icon: Icons.dashboardIcon || null
     },
     {
-      name: "Complains",
+      name: "Complaints",
       route: "/dashboard/reports",
       icon: Icons.AddReportIcon || null
     },
@@ -67,7 +67,6 @@ export const NavActions = (props) => {
         !store?.isUserLogged || !store?.loggedUser ? (
           ""
         ) : (
-
           <div className="flex items-center tablet:flex-col tablet:items-start align-middle justify-center gap-2">
             <div className="flex gap-1 tablet:w-full tablet:items-start tablet:flex-col items-center justify-center">
               {

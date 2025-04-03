@@ -44,6 +44,7 @@ export const DetailedComplain = ({ ...props }) => {
         const response = await ReportsAPIs('/reply', { reply: replyText, cid: id })
         if (response.success) {
             setStatus(response.message)
+
         } else {
             setStatus(response.message || 'Try Again')
             setReplying(false);
@@ -84,7 +85,7 @@ export const DetailedComplain = ({ ...props }) => {
                     <h1
                         className="text-2xl flex items-center justify-center text-center p-2 w-full font-bold mb-4"
                     >
-                        <center> Complain Details </center>
+                        <center> Complaint Details </center>
                     </h1>
 
                     <div className="flex items-center justify-center gap-4 border-y py-2 my-4">

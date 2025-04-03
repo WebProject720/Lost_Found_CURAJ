@@ -1,7 +1,7 @@
 ---
 import Nav from "../components/Nav.astro";
+import Sidebar from "../components/Sidebar.astro";
 import { Images } from "../constants.astro";
-
 ---
 
 <!doctype html>
@@ -17,10 +17,22 @@ import { Images } from "../constants.astro";
         />
     </head>
     <body class="bg-gray-100 text-gray-900">
-        <div>
-            <Nav/>
+        <div id="container" class="flex flex-col">
+            <div class="w-screen" id="header-container">
+                <Nav />
+            </div>
+            <div class="flex flex-row relative">
+                <div
+                    class="hidden desktop:!hidden flex-row absolute transition-all duration-700 ease-linear phone:z-50 h-full pt-20"
+                    id="sidebarBox"
+                >
+                    <Sidebar class="" />
+                </div>
+            </div>
         </div>
-        <div class="bg-white-100 mt-14 py-7 px-4 sm:px-6 lg:px-8">
+        <main
+            class="bg-white-100 z-10 mt-14 desktop:mt-20 py-7 px-4 sm:px-6 lg:px-8"
+        >
             <div
                 class="max-w-7xl mx-auto bg-white phone:bg-transparent shadow-lg rounded-xl p-8"
             >
@@ -128,6 +140,6 @@ import { Images } from "../constants.astro";
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </body>
 </html>
