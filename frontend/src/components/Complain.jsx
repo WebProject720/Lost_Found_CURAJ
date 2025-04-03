@@ -21,9 +21,10 @@ export const Complain = ({ ...props }) => {
         })();
     }, [])
     const chnageStatus = async () => {
+        let p=confirm("Sure want to Close complaint ?");
+        if(!p) return;
         setLoading(true);
         const res = await ReportsAPIs('/changeStatus', { id: complain._id });
-        console.log(res);
         if (res?.success) {
             complain.isOpen = (!complain.isOpen);
             setComplain(complain);
@@ -68,7 +69,7 @@ export const Complain = ({ ...props }) => {
                                     isLoading ?
                                         <Loader></Loader>
                                         :
-                                        complain.isOpen ? 'Set Closed' : 'Set Open'
+                                        complain.isOpen ? 'Close Complaint' : 'Set Open'
                                 }
                             </Button>
                         </div>

@@ -44,7 +44,7 @@ export const NavActions = (props) => {
       icon: Icons.AddReportIcon || null
     },
     {
-      name: "New Complain",
+      name: "New Complaint",
       route: "/dashboard/reports/add",
       icon: Icons.AddReportIcon || null
     },

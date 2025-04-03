@@ -1,5 +1,7 @@
 ---
+import Nav from "../components/Nav.astro";
 import { Images } from "../constants.astro";
+
 ---
 
 <!doctype html>
@@ -15,18 +17,10 @@ import { Images } from "../constants.astro";
         />
     </head>
     <body class="bg-gray-100 text-gray-900">
-        <header
-            class="z-50 bg-gray-100 top-0 border-b-2 border-gray-400/20 px-5 py-2 w-full flex items-center flex-row justify-start shadow-xl shadow-gray-300"
-        >
-            <a href="/">
-                <img
-                    src={Images.curaj_full_logo.src}
-                    alt="CURAJ Logo"
-                    class="h-16 w-auto phone:h-auto phone:w-40"
-                />
-            </a>
-        </header>
-        <div class="bg-white-100 py-7 px-4 sm:px-6 lg:px-8">
+        <div>
+            <Nav/>
+        </div>
+        <div class="bg-white-100 mt-14 py-7 px-4 sm:px-6 lg:px-8">
             <div
                 class="max-w-7xl mx-auto bg-white phone:bg-transparent shadow-lg rounded-xl p-8"
             >
