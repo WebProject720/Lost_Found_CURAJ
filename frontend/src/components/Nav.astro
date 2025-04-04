@@ -35,6 +35,11 @@ import { NavActions } from "./NavActions";
     </div>
 </header>
 <script>
+    import { getUser } from "../store";
+
+    if (!getUser()) {
+        document.getElementById("actions")?.classList.add("hidden");
+    }
     //Set bottom margin to parent So next sibling get upper margin
     const header = document.getElementsByTagName("header");
 

@@ -15,7 +15,7 @@ import Nav from "../components/Nav.astro";
     <meta name="generator" content={Astro.generator} />
     <title>Lost & Found - CURAJ</title>
   </head>
-  <body>
+  <body class="phone:text-xs">
     <div
       class="w-screen h-screen flex justify-center items-center"
       id="loader-container"
@@ -28,7 +28,7 @@ import Nav from "../components/Nav.astro";
     >
       <Nav />
       <main
-        class="pt-2 desktop:pt-10 phone:px-2 min-h-screen flex justify-center items-center"
+        class="pt-2 desktop:pt-10 phone:px-2 phone:mt-12 min-h-screen flex justify-center items-center"
       >
         <div
           class="w-full h-full flex-col phone:px-4 flex flex-wrap justify-between items-center content-center"
@@ -85,5 +85,6 @@ import Nav from "../components/Nav.astro";
     width: 100%;
     height: 100%;
     font-family: "Cabin", "Poppins", "monospace";
+
   }
 </style>
