@@ -60,7 +60,7 @@ export const UserProfile = ({ ...props }) => {
                 <div className="flex desktop:my-10 phone:my-4 flex-col items-center justify-center w-full">
                     <h1 className="font-extrabold font-serif text-gray-700 text-3xl">
                         <center>
-                            Your Complains
+                            My Complaints
                         </center>
                     </h1>
                 </div>
