@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer'
 import 'dotenv/config'
 import { otp } from '../Models/otp.model.js';
 
-const genOTP = () => {
+let genOTP = () => {
     return Math.floor(1000 + Math.random() * 9000);
 };
 
@@ -71,7 +71,7 @@ export const sendReply = async (data) => {
 }
 
 export const sendMail = async (tagertEmail) => {
-    const OneTimePassword = genOTP();
+    let OneTimePassword = genOTP();
 
 
     try {
@@ -103,11 +103,14 @@ export const sendMail = async (tagertEmail) => {
             return { status: false, error: email, msg: 'Invalid Email ID' };
         }
         const del = await otp.deleteOne({ email: tagertEmail });
+
         const OTPdoc = new otp({
+            OTP:Number(OneTimePassword),
             email: tagertEmail,
-            OTP: OneTimePassword,
         });
-        await OTPdoc.save();
+
+       const res= await OTPdoc.save();
+       console.log(res);
 
         return { status: true, error: null, msg: "OPT Sended!!" }
     } catch (error) {

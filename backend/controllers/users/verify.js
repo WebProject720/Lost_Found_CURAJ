@@ -33,9 +33,11 @@ export const verify = async (req, res) => {
             email = email.toLowerCase() + "@curaj.ac.in";
         }
 
+        console.log(email,username);
         const doc = await otp.findOne({
             $or: [{ email }, { username }]
         });
+        console.log(doc,email,username);
 
 
         if (!doc) {
@@ -45,9 +47,8 @@ export const verify = async (req, res) => {
                     new ApiError('OTP expired', null, false)
                 )
         }
-        console.log(doc);
 
-        if (OTP == doc.OTP) {
+        if (OTP == doc?.OTP) {
             const user = await User.findOneAndUpdate(
                 {
                     $or: [{ email }, { username }]
