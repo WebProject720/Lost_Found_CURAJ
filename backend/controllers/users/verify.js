@@ -32,10 +32,15 @@ export const verify = async (req, res) => {
         if (!email?.includes("@curaj.ac.in")) {
             email = email.toLowerCase() + "@curaj.ac.in";
         }
+        const query = [];
+
+        if (email) query.push({ email });
+        if (username) query.push({ username });
 
         const doc = await otp.findOne({
-            $or: [{ email }, { username }]
+            $or: query
         });
+
 
 
         if (!doc) {
