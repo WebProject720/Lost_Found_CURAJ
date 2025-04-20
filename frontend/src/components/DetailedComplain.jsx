@@ -44,6 +44,7 @@ export const DetailedComplain = ({ ...props }) => {
         const response = await ReportsAPIs('/reply', { reply: replyText, cid: id })
         if (response.success) {
             setStatus("Reply Send")
+
         } else {
             setStatus(response.message || 'Try Again')
             setReplying(false);
