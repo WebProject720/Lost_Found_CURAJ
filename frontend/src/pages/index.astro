@@ -24,7 +24,7 @@ import { Images } from "../constants.astro";
         background-position: center;
       }
     </style>
-    </head>
+  </head>
 
   <body class="bg-gray-100 text-gray-900 max-w-fit">
     <AlertBox />
@@ -85,16 +85,18 @@ import { Images } from "../constants.astro";
             <div class="my-5">
               <!-- Login & Register Buttons -->
               <div class="flex space-x-4 justify-center align-middle">
-                <button
-                  onclick="location.href='/auth'"
-                  class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-6 rounded-lg text-lg"
-                  >Login</button
-                >
-                <button
-                  onclick="location.href='/auth/register'"
-                  class="bg-green-700 hover:bg-green-800 text-nowrap text-white font-bold py-2 px-6 rounded-lg text-lg"
-                  >Register Now</button
-                >
+                <div id="auth-buttons">
+                  <button
+                    onclick="location.href='/auth'"
+                    class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-6 rounded-lg text-lg"
+                    >Login</button
+                  >
+                  <button
+                    onclick="location.href='/auth/register'"
+                    class="bg-green-700 hover:bg-green-800 text-nowrap text-white font-bold py-2 px-6 rounded-lg text-lg"
+                    >Register Now</button
+                  >
+                </div>
                 <!-- Know More Button (Visible on both mobile & desktop) -->
                 <button
                   onclick="location.href='/about'"
@@ -159,7 +161,12 @@ import { Images } from "../constants.astro";
       </main>
     </div>
   </body>
-
+  <script>
+    import { isUserLogged } from "../store";
+    !isUserLogged()
+      ? document.getElementById("auth-buttons")?.classList.add("hidden")
+      : null;
+  </script>
   <style is:global>
     @import url("https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=Poppins:wght@100;900&display=swap");
     html,

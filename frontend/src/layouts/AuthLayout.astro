@@ -11,7 +11,11 @@ import AlertBox from "../components/utility/AlertBox.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="shortcut icon" href={Images.curaj_logo.src} type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href={Images.curaj_logo.src}
+      type="image/x-icon"
+    />
 
     <meta name="generator" content={Astro.generator} />
     <title>Lost & Found - CURAJ</title>
@@ -63,7 +67,10 @@ import AlertBox from "../components/utility/AlertBox.astro";
 <script>
   import { navigate } from "astro:transitions/client";
   import { UserAPI } from "../APIs/users/usersAPI";
-
+  import { isUserLogged } from "../store";
+  if (isUserLogged()) {
+    navigate("/dashboard");
+  }
   let loaderDiv = document.getElementById("loader-container");
   let container = document.getElementById("container");
   loaderDiv?.classList.add("hidden");
@@ -87,6 +94,5 @@ import AlertBox from "../components/utility/AlertBox.astro";
     width: 100%;
     height: 100%;
     font-family: "Cabin", "Poppins", "monospace";
-
   }
 </style>
