@@ -7,6 +7,7 @@ import { Input } from "../components/utility/Input";
 
 export const Complains = ({ ...props }) => {
   const [search, setSearch] = useState("");
+  const [filterOption, setFilterOption] = useState("all"); // Default filter option
   const [data, setData] = useState([]);
   const [filteredComplains, setFilteredComplains] = useState([]);
   const [status, setStatus] = useState(2); // 1: success, 0: error, 2: loading, 3: no data
@@ -20,7 +21,6 @@ export const Complains = ({ ...props }) => {
         if (response.data) {
           setData(response.data);
           setFilteredComplains(response.data);
-          // console.log(response.data);
           setStatus(response.data?.length > 0 ? 1 : 3);
         } else {
           setStatus(0);
@@ -32,26 +32,34 @@ export const Complains = ({ ...props }) => {
     })();
   }, []);
 
-  // Debounced search mechanism
+  // Debounced search mechanism with filter logic
   useEffect(() => {
     (() => {
-       if(!search)return;
-       console.log("go");
+      if (!search) {
+        setFilteredComplains(data);
+        return;
+      }
       const timeoutId = setTimeout(() => {
-        if (search.trim()) {
-          setFilteredComplains(
-            data.filter((complain) =>
-              complain.title.toLowerCase().includes(search.toLowerCase())
-            )
-          );
-        } else {
-          setFilteredComplains(data);
-        }
+        const filtered = data.filter((complain) => {
+          const searchLower = search.toLowerCase();
+          if (filterOption === "all") {
+            return (
+              complain.title.toLowerCase().includes(searchLower) ||
+              complain.description.toLowerCase().includes(searchLower)
+            );
+          } else if (filterOption === "title") {
+            return complain.title.toLowerCase().includes(searchLower);
+          } else if (filterOption === "description") {
+            return complain.description.toLowerCase().includes(searchLower);
+          }
+          return false;
+        });
+        setFilteredComplains(filtered);
       }, 300); // 300ms debounce time
       setStatus(data.length > 0 ? 1 : 3);
       return () => clearTimeout(timeoutId);
     })();
-  }, [search, data]);
+  }, [search, filterOption, data]);
 
   // Render loading state
   if (status === 2) {
@@ -82,26 +90,30 @@ export const Complains = ({ ...props }) => {
   return (
     <div className="bg-white-200 inset-0 w-full overflow-auto flex justify-center">
       <div className="bg-white p-5 rounded-lg max-w-7xl w-full">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-start gap-2 items-center my-4 tablet:my-2">
           <Input
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search"
             value={search}
+            className="!w-full bg-transparent"
           />
-          <select className="border p-2 rounded bg-gray-50 focus:ring-cyan-100">
-            <option value="5">5 per page</option>
-            <option value="10">10 per page</option>
-            <option value="20">20 per page</option>
+          <select
+            id="search-filter"
+            className="bg-gray-100 border-gray-400 outline-none border-[1px] 
+                    rounded-md p-2 
+                    focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
+                    transition-all duration-500 phone:p-1 bg-transparent"
+            onChange={(e) => setFilterOption(e.target.value)} // Update filter option
+          >
+            <option value="all">All</option>
+            <option value="title">Subject</option>
+            <option value="description">Description</option>
           </select>
         </div>
         <div className="flex flex-col min-h-80 justify-start gap-2">
           {filteredComplains.map((complain) => (
             <Complain complain={complain} key={complain._id} />
           ))}
-        </div>
-        <div className="flex justify-between items-center mt-4 pb-4">
-          <Button>Previous</Button>
-          <Button>Next</Button>
         </div>
       </div>
     </div>

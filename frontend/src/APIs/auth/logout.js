@@ -7,7 +7,7 @@ const store = getStoreData();
 const user = store.loggedUser;
 
 export const logoutUser = async () => {
-    await UserAPI({ _id: user?._id }, '/logout').then((res) => {
+    await UserAPI({ _id: user?._id }, '/users/logout').then((res) => {
         logout();
         navigate('/auth');
     }).catch((err) => {

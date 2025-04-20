@@ -63,6 +63,7 @@ import DashLayout from "../../../layouts/DashLayout.astro";
   <script>
     import { navigate } from "astro:transitions/client";
     import { ReportsAPIs } from "../../../APIs/reports/reportsAPI";
+    import { ShowAlert } from "../../../components/alertLogic";
 
     const form = document.getElementById("addForm");
     const SubmitBtn = document.getElementById("SubmitBtn");
@@ -77,26 +78,30 @@ import DashLayout from "../../../layouts/DashLayout.astro";
 
         const form = data.target as HTMLFormElement;
         const formData = new FormData(form);
-        // const Report: { [key: string]: any } = {};
-        // formData.forEach((value, key: any) => {
-        //   value ? (Report[key] = value) : null;
-        // });
-        // console.log(Report);
-        
+
         //calling api for submitting form
-        await ReportsAPIs("/add", formData).then((res) => {
-          SubmitBtn ? (SubmitBtn.innerHTML = res.message || "Failed") : null;
-          if (!res.success) {
-            for (const element of form.elements) {
-              const e = element as HTMLInputElement;
-              e.disabled = true;
+        try {
+          await ReportsAPIs("/add", formData).then((res) => {
+            SubmitBtn ? (SubmitBtn.innerHTML = res.message || "Failed") : null;
+            ShowAlert(res.message || "Failed", true);
+            if (!res.success) {
+              for (const element of form.elements) {
+                const e = element as HTMLInputElement;
+                e.disabled = true;
+              }
+            } else {
+              setTimeout(() => {
+                navigate("/dashboard/reports");
+              }, 1000);
             }
-          } else {
-            setTimeout(() => {
-              navigate("/dashboard/reports");
-            }, 1000);
-          }
-        });
+          });
+        } catch (error) {
+          const response =
+            error instanceof Object && "response" in error
+              ? (error as any).response
+              : null;
+          ShowAlert(response?.message || "Something went wrong", false);
+        }
 
         //Disable Elements
         for (const element of form.elements) {

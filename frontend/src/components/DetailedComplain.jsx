@@ -5,7 +5,7 @@ import { getComplain } from "../store";
 import { Button } from "./utility/Button";
 import { ReportsAPIs } from "../APIs/reports/reportsAPI";
 import { Loader } from "./utility/Loader";
-
+import { ShowAlert } from "./alertLogic";
 
 export const DetailedComplain = ({ ...props }) => {
     const [complain, setCompain] = useState(null);
@@ -44,9 +44,10 @@ export const DetailedComplain = ({ ...props }) => {
         const response = await ReportsAPIs('/reply', { reply: replyText, cid: id })
         if (response.success) {
             setStatus("Reply Send")
-
+            ShowAlert("Reply Send !!", true);
         } else {
-            setStatus(response.message || 'Try Again')
+            setStatus(response.message || 'Try Again');
+            ShowAlert(response.message || 'Try Again', false);
             setReplying(false);
         }
         setTimeout(() => {
@@ -65,6 +66,7 @@ export const DetailedComplain = ({ ...props }) => {
     }
 
     if (notFound) {
+        ShowAlert("Complaint not found", false);
         return (
             <div className={`w-full  h-80 justify-center items-center flex`}>
                 <h1 className="text-gray-400 font-extrabold text-5xl">

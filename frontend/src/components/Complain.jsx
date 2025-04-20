@@ -4,6 +4,7 @@ import { getUser } from "../store";
 import { Button } from "./utility/Button";
 import { ReportsAPIs } from "../APIs/reports/reportsAPI";
 import { Loader } from "./utility/Loader";
+import { confirmBox, ShowAlert } from "./alertLogic";
 
 
 export const Complain = ({ ...props }) => {
@@ -21,12 +22,13 @@ export const Complain = ({ ...props }) => {
         })();
     }, [])
     const chnageStatus = async () => {
-        let p=confirm("Sure want to Close complaint ?");
-        if(!p) return;
+        let p = await confirmBox("Sure want to Close complaint ?");
+        if (!p) return;
         setLoading(true);
         const res = await ReportsAPIs('/changeStatus', { id: complain._id });
         if (res?.success) {
             complain.isOpen = (!complain.isOpen);
+            ShowAlert('Compaint Closed', true);
             setComplain(complain);
         }
         setLoading(false);

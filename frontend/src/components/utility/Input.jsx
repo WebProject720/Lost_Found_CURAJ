@@ -18,10 +18,9 @@ export const Input = ({ className = "", ...props }) => {
 
     return (
         <div className="flex flex-col gap-1">
-            <label htmlFor={props.id} className="font-extralight">
+            <label htmlFor={props.id} className={`font-extralight ${props.label ? '' : 'hidden'}`}>
                 {props.label}
             </label>
-
 
             <div className="flex flex-row group items-stretch w-full gap-0 flex-nowrap h-10 phone:h-9 ">
                 <input

@@ -35,7 +35,8 @@ export const getall = async (req, res) => {
                     userID: 0,
                 }
             },
-            { $sort: { createdAt: -1 } }
+            { $sort: { createdAt: -1 } },
+            { $limit: 30 }
         ]);
 
 
