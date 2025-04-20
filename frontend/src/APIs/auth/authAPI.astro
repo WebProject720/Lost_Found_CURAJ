@@ -1,16 +1,16 @@
 ---
 import axios from "axios";
+import { SERVER_URL } from "../../constants.astro";
+import { logoutUser } from "./logout";
+
 type data = {
     username: String;
     enroll: String;
     password: String;
 };
 export const authAPI = async (data: data, path: String) => {
-    const PRODUCTION = import.meta.env.PUBLIC_PRODUCTION=="true";
-    
-    const serverURL = Boolean(PRODUCTION)
-        ? import.meta.env.PUBLIC_PRODUCTION_SERVER || null
-        : "http://localhost:5000";
+
+    const serverURL = SERVER_URL();
     try {
         const response = await axios.post(serverURL + path, data, {
             withCredentials: true,
@@ -22,6 +22,7 @@ export const authAPI = async (data: data, path: String) => {
         };
     } catch (error: any) {
         const errorData = error?.response?.data; // Safely handle error data
+        if (errorData?.status == 401) logoutUser();
         return {
             status: false,
             error: errorData || error,

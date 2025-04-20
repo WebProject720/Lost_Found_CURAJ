@@ -15,11 +15,20 @@ import { Images } from "../constants.astro";
       href={Images.curaj_logo.src}
       type="image/x-icon"
     />
-  </head>
+    <style>
+      body {
+        background-image: url("https://images.shiksha.com/mediadata/images/1531476753php2ZzHlq.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+    </style></head
+  >
+
   <body class="bg-gray-100 text-gray-900 overflow-x-auto max-w-fit">
-    <div id="container" class="flex flex-col">
+    <div id="container" class="flex bg-black/40 flex-col">
       <div class="w-screen" id="header-container">
-        <Nav />
+        <Nav className="bg-slate-100/60 backdrop-blur-md" />
       </div>
       <div class="flex flex-row relative">
         <div
@@ -32,11 +41,10 @@ import { Images } from "../constants.astro";
 
       <!-- Main Content Section -->
       <main
-        class="relative flex items-start justify-center min-h-screen p-8 bg-cover bg-center"
-        style="background-image: url('https://images.shiksha.com/mediadata/images/1531476753php2ZzHlq.jpeg');"
+        class="relative flex items-start justify-center min-h-screen p-8 bg-center"
       >
         <!-- Overlay for Blur Effect -->
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-md"></div>
+        <div class="absolute inset-0 backdrop-blur-none"></div>
 
         <div
           class="relative flex flex-wrap items-start justify-between w-full max-w-6xl mt-12 p-6 text-white"
@@ -73,9 +81,9 @@ import { Images } from "../constants.astro";
               found items within the campus. Help us reunite items with their
               rightful owners quickly and easily.
             </p>
-            <div class="mt-6 flex flex-col md:flex-row md:space-x-4">
+            <div class="my-5">
               <!-- Login & Register Buttons -->
-              <div class="flex space-x-4">
+              <div class="flex space-x-4 justify-center align-middle">
                 <button
                   onclick="location.href='/auth'"
                   class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-6 rounded-lg text-lg"
@@ -106,9 +114,11 @@ import { Images } from "../constants.astro";
 
             <!-- How It Works and How to Use Sections -->
             <div
-              class="mt-10 flex flex-col md:flex-row justify-between text-white"
+              class="mt-10 flex flex-col gap-3 tablet:justify-center phone:justify-center phone:items-center tablet:items-center md:flex-row justify-between text-white"
             >
-              <div class="p-4 rounded-lg shadow-md w-full md:w-1/2 mr-2">
+              <div
+                class="p-4 rounded-lg shadow-xl bg-black/50 w-fit md:w-1/2 mr-2"
+              >
                 <h3 class="text-xl font-bold">How It Works?</h3>
                 <ul class="list-disc pl-5 mt-2">
                   <li>Submit details of your lost item</li>
@@ -116,7 +126,9 @@ import { Images } from "../constants.astro";
                   <li>Claim your item securely</li>
                 </ul>
               </div>
-              <div class="p-4 rounded-lg shadow-md w-full md:w-1/2 ml-2">
+              <div
+                class="p-4 rounded-lg shadow-md w-fit bg-black/50 md:w-1/2 ml-2"
+              >
                 <h3 class="text-xl font-bold">How to Use?</h3>
                 <ul class="list-disc pl-5 mt-2">
                   <li>Sign up and create an account</li>
@@ -131,7 +143,7 @@ import { Images } from "../constants.astro";
         <!-- Profile Image -->
         <!-- Profile Image (Hidden in Mobile) -->
         <div
-          class="absolute top-6 right-6 hidden sm:flex items-center space-x-2  p-2 rounded-full shadow-md"
+          class="absolute top-6 right-6 hidden sm:flex items-center space-x-2 p-2 rounded-full shadow-md"
         >
           <img
             src="https://www.curaj.ac.in/sites/all/themes/cmf/images/naac1.png"

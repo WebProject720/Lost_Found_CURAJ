@@ -6,10 +6,10 @@ import ToggleButton from "./assets/togglebtn-1.png";
 import kk from "./assets/kk.jpeg";
 import ramesh from "./assets/ramesh.jpg";
 import shivkant from "./assets/shivkant.jpeg";
-import InstaIcon from "./assets/instagram_2111463.png"
-import githubIcon from "./assets/github-mark.png"
-import x from "./assets/x-icon.svg"
-import g_icon from "./assets/gmail-icon.png"
+import InstaIcon from "./assets/instagram_2111463.png";
+import githubIcon from "./assets/github-mark.png";
+import x from "./assets/x-icon.svg";
+import g_icon from "./assets/gmail-icon.png";
 
 export const Images = {
     logo,
@@ -26,18 +26,17 @@ export const Images = {
     dashboardIcon: "https://getdrawings.com/free-icon-bw/adwords-icon-10.png",
     AddReportIcon: "https://cdn-icons-png.flaticon.com/512/2798/2798102.png",
     AboutIcon: "https://cdn-icons-png.flaticon.com/512/4906/4906311.png",
-    github_icon:githubIcon,
-    instagram_icon:InstaIcon,
-    x_icon:x,
-    gmail_Icon:g_icon
+    github_icon: githubIcon,
+    instagram_icon: InstaIcon,
+    x_icon: x,
+    gmail_Icon: g_icon,
 };
 
-export const SERVER_Production =
-    "https://curajlf-backend.vercel.app";
-export const SERVER = "http://localhost:5000";
+export const SERVER_Production = "https://curajlf-backend.vercel.app";
+export const SERVER = "http://localhost:5001";
 
 export const SERVER_URL = () => {
-    return import.meta.env.PUBLIC_PRODUCTION=="true"
+    return import.meta.env.PUBLIC_PRODUCTION == "true"
         ? SERVER_Production
         : SERVER;
 };
