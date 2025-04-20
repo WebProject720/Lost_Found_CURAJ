@@ -162,8 +162,8 @@ import { Images } from "../constants.astro";
     </div>
   </body>
   <script>
-    import { isUserLogged } from "../store";
-    !isUserLogged()
+    import { isUserLogin } from "../store";
+    isUserLogin()
       ? document.getElementById("auth-buttons")?.classList.add("hidden")
       : null;
   </script>

@@ -87,9 +87,9 @@ export const getStats = () => {
     return getStoreData().stats;
 }
 
-export const isUserLogged=()=>{
+const isUserLogin = () => {
     return getStoreData().isUserLogged;
 }
 
 // Export getter function
-export { getComplains,isUserLogged, getUser, getComplain, getStoreData, setComplains, updateStore, setUserLogin, setUserInfo, logout };
+export { getComplains, isUserLogin, getUser, getComplain, getStoreData, setComplains, updateStore, setUserLogin, setUserInfo, logout };

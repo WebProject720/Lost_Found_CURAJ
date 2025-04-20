@@ -67,10 +67,9 @@ import AlertBox from "../components/utility/AlertBox.astro";
 <script>
   import { navigate } from "astro:transitions/client";
   import { UserAPI } from "../APIs/users/usersAPI";
-  import { isUserLogged } from "../store";
-  if (isUserLogged()) {
-    navigate("/dashboard");
-  }
+  import { isUserLogin } from "../store";
+  if (isUserLogin()) navigate("/dashboard");
+
   let loaderDiv = document.getElementById("loader-container");
   let container = document.getElementById("container");
   loaderDiv?.classList.add("hidden");
