@@ -1,12 +1,11 @@
 ---
 import { Images } from "../constants.astro";
-import { AdminAction } from "./AdminAction";
+import { AdmActions } from "./AdmActions";
 ---
-
 <header
     class="z-50 fixed bg-gray-100 top-0 border-b-2 border-gray-400/20 px-5 py-2 w-screen flex items-center flex-row justify-between shadow-xl shadow-gray-300"
 >
-    <a href="/dashboard" class="w-fit h-full">
+    <a href="" class="w-fit h-full">
         <img
             src={Images.curaj_full_logo.src}
             alt="Logo"
@@ -18,7 +17,7 @@ import { AdminAction } from "./AdminAction";
     </div>
     <div class="flex flex-row gap-2 items-center" id="actions">
         <div class="font-bold tablet:hidden">
-            <AdminAction/>
+            <AdmActions class="" client:load />
         </div>
         <div id="">
             <div class="hidden tablet:flex">
@@ -35,6 +34,11 @@ import { AdminAction } from "./AdminAction";
     </div>
 </header>
 <script>
+    import { getUser } from "../store";
+
+    if (!getUser()) {
+        document.getElementById("actions")?.classList.add("hidden");
+    }
     //Set bottom margin to parent So next sibling get upper margin
     const header = document.getElementsByTagName("header");
 
@@ -68,9 +72,4 @@ import { AdminAction } from "./AdminAction";
         let toggleBtn = document.getElementById("toggle-btn");
         toggleBtn ? toggleBtn?.addEventListener("click", ToggleSideBar) : null;
     });
-</script>
-<script>
-    window.location.href.includes("auth") || window.location.pathname == "/"
-        ? document.getElementById("actions")?.classList.add("hidden")
-        : null;
 </script>
