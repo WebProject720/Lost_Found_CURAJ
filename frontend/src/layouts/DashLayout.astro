@@ -1,8 +1,10 @@
 ---
 import Nav from "../components/Nav.astro";
 import Sidebar from "../components/Sidebar.astro";
+import AlertBox from "../components/utility/AlertBox.astro";
 import { Loader } from "../components/utility/Loader";
 import { Images } from "../constants.astro";
+
 ---
 
 <!doctype html>
@@ -25,78 +27,8 @@ import { Images } from "../constants.astro";
     >
       <Loader />
     </div>
-    <!-- Alert && Prompt Boxes -->
-    <div
-      id="alert-box"
-      class="z-50 hidden fixed border-2 border-blue-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg p-6 w-11/12 max-w-md text-gray-800"
-    >
-      <!-- Alert Content -->
-      <div class="flex flex-col items-center">
-        <h2 class="text-lg font-bold mb-2">Alert</h2>
-        <div id="alert-content" class="w-full">
-          <!-- Error Alert -->
-          <div
-            id="error-alert"
-            class="hidden flex-col items-center border border-red-500 bg-red-100 text-red-700 p-4 rounded-md"
-          >
-            <img
-              src={Images.error_icon.src}
-              alt="Error Icon"
-              class="w-12 h-12 mb-2"
-            />
-            <p class="text-sm text-center" id="error-msg">An error occurred.</p>
-          </div>
-          <!-- Success Alert -->
-          <div
-            id="success-alert"
-            class="hidden flex-col items-center border border-green-500 bg-green-100 text-green-700 p-4 rounded-md"
-          >
-            <img
-              src={Images.success_icon.src}
-              alt="Success Icon"
-              class="w-12 h-12 mb-2"
-            />
-            <p class="text-sm text-center" id="success-msg">
-              Operation successful!
-            </p>
-          </div>
-        </div>
-        <button
-          id="alert-close-btn"
-          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 mt-4"
-        >
-          Close
-        </button>
-      </div>
-    </div>
 
-    <!-- Confirm Box -->
-    <div
-      id="confirm-box"
-      class="z-50 hidden fixed border-2 border-blue-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg p-6 w-11/12 max-w-md text-gray-800 flex-col"
-    >
-      <!-- Confirm Content -->
-      <div class="flex flex-col items-center justify-center" id="">
-        <h2 class="text-lg font-bold mb-2">Confirm</h2>
-        <p id="confirm-msg" class="text-sm text-center mb-4">
-          Are you sure you want to proceed?
-        </p>
-        <div class="flex gap-4">
-          <button
-            id="confirm-yes-btn"
-            class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md transition duration-300"
-          >
-            Yes
-          </button>
-          <button
-            id="confirm-no-btn"
-            class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300"
-          >
-            No
-          </button>
-        </div>
-      </div>
-    </div>
+    <AlertBox/>
 
     <div id="container" class="flex flex-col">
       <div class="w-screen" id="header-container">
@@ -121,14 +53,7 @@ import { Images } from "../constants.astro";
 </html>
 
 <script>
-  import { hideAlert } from "../components/alertLogic";
-
-  document
-    .getElementById("alert-close-btn")
-    ?.addEventListener("click", hideAlert);
-</script>
-
-<script>
+    
   import { navigate } from "astro:transitions/client";
   import { setUserLogin, setUserInfo, logout, getStoreData } from "../store";
   import { UserAPI } from "../APIs/users/usersAPI";
@@ -160,28 +85,7 @@ import { Images } from "../constants.astro";
       });
   }
 
-  // CSS when alert box appear
-  document.addEventListener("DOMContentLoaded", () => {
-    const alertBox = document.getElementById("alert-box");
-    const bodyElements = document.getElementById("container");
-
-    if (alertBox && bodyElements) {
-      const observer = new MutationObserver(() => {
-        if (!alertBox.classList.contains("hidden")) {
-          bodyElements.style.opacity = "0.8";
-          bodyElements.style.filter = "blur(2px)";
-        } else {
-          bodyElements.style.opacity = "1";
-          bodyElements.style.filter = "none";
-        }
-      });
-
-      observer.observe(alertBox, {
-        attributes: true,
-        attributeFilter: ["class"],
-      });
-    }
-  });
+  
 </script>
 <style is:global>
   @import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");

@@ -4,6 +4,7 @@ import { Loader } from "../components/utility/Loader";
 import { Complain } from "../components/Complain";
 import { Button } from "../components/utility/Button";
 import { Input } from "../components/utility/Input";
+import { ShowAlert } from "../components/alertLogic";
 
 export const Complains = ({ ...props }) => {
   const [search, setSearch] = useState("");
@@ -56,7 +57,7 @@ export const Complains = ({ ...props }) => {
         });
         setFilteredComplains(filtered);
       }, 300); // 300ms debounce time
-      setStatus(data.length > 0 ? 1 : 3);
+      setStatus(filteredComplains.length > 0 ? 1 : 3);
       return () => clearTimeout(timeoutId);
     })();
   }, [search, filterOption, data]);
@@ -69,14 +70,16 @@ export const Complains = ({ ...props }) => {
       </div>
     );
   } else if (status === 3) {
+    ShowAlert("No Compaints found", false);
     return (
       <div className="min-h-screen flex items-center justify-center w-screen">
         <h1 className="text-4xl text-gray-400 font-extrabold">
-          <center>No Reports Found !!</center>
+          <center>No Complaint Found !!</center>
         </h1>
       </div>
     );
   } else if (status === 0) {
+    ShowAlert("Something went wrong", false);
     return (
       <div>
         <h1>
@@ -90,7 +93,7 @@ export const Complains = ({ ...props }) => {
   return (
     <div className="bg-white-200 inset-0 w-full overflow-auto flex justify-center">
       <div className="bg-white p-5 rounded-lg max-w-7xl w-full">
-        <div className="flex justify-start gap-2 items-center my-4 tablet:my-2">
+        <div className="flex  justify-start phone:items-stretch gap-2 items-center my-4  tablet:my-2">
           <Input
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search"
@@ -100,7 +103,7 @@ export const Complains = ({ ...props }) => {
           <select
             id="search-filter"
             className="bg-gray-100 border-gray-400 outline-none border-[1px] 
-                    rounded-md p-2 
+                    rounded-md p-2  
                     focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
                     transition-all duration-500 phone:p-1 bg-transparent"
             onChange={(e) => setFilterOption(e.target.value)} // Update filter option
@@ -110,11 +113,17 @@ export const Complains = ({ ...props }) => {
             <option value="description">Description</option>
           </select>
         </div>
-        <div className="flex flex-col min-h-80 justify-start gap-2">
+        <div className="flex flex-col min-h-80 justify-start py-3 gap-2">
           {filteredComplains.map((complain) => (
             <Complain complain={complain} key={complain._id} />
           ))}
         </div>
+
+        <hr className="mt-5" />
+        <p className="text-center text-gray-400  text-xs p-2">
+          Recent 30 Complaints
+        </p>
+
       </div>
     </div>
   );

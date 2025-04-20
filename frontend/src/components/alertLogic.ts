@@ -8,9 +8,6 @@ export const hideAlert = () => {
 export const ShowAlert = (msg: string, status: Boolean) => {
     if (!msg && !status) return;
 
-    console.log(msg, status);
-
-
     const alertBox = document.getElementById("alert-box");
     const errorBox = document.getElementById("error-alert");
     const successBox = document.getElementById("success-alert");
@@ -36,18 +33,23 @@ export const ShowAlert = (msg: string, status: Boolean) => {
         alertBox?.classList.add("hidden");
 };
 
-export const confirmBox =async (msg: string) => {
+export const confirmBox = async (msg: string): Promise<boolean> => {
     const confirmBox = document.getElementById('confirm-box');
     const accept = document.getElementById('confirm-yes-btn');
     const cancel = document.getElementById('confirm-no-btn');
 
-    if (!confirmBox && !accept && !cancel)
-        return;
+    if (!confirmBox || !accept || !cancel) {
+        console.error("Confirm box or buttons not found in the DOM.");
+        return false;
+    }
 
+    // Set the message
     const para = document.getElementById("confirm-msg");
     if (para) para.innerText = msg;
 
-    confirmBox?.classList.add('!flex');
+    // Show the confirm box
+    confirmBox.classList.remove('hidden'); // Remove the hidden class
+    confirmBox.classList.add('flex'); // Add the flex class to make it visible
 
     return new Promise<boolean>((resolve) => {
         const handleAccept = () => {
@@ -61,13 +63,13 @@ export const confirmBox =async (msg: string) => {
         };
 
         const cleanup = () => {
-            accept?.removeEventListener('click', handleAccept);
-            cancel?.removeEventListener('click', handleCancel);
-            confirmBox?.classList.remove('!flex');
+            accept.removeEventListener('click', handleAccept);
+            cancel.removeEventListener('click', handleCancel);
+            confirmBox.classList.add('hidden'); // Hide the confirm box
+            confirmBox.classList.remove('flex'); // Remove the flex class
         };
 
-        accept?.addEventListener('click', handleAccept);
-        cancel?.addEventListener('click', handleCancel);
+        accept.addEventListener('click', handleAccept);
+        cancel.addEventListener('click', handleCancel);
     });
-
-}
+};

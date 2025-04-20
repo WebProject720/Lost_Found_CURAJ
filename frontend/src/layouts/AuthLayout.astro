@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import { Images } from "../constants.astro";
 import { Loader } from "../components/utility/Loader";
 import Nav from "../components/Nav.astro";
+import AlertBox from "../components/utility/AlertBox.astro";
 ---
 
 <!doctype html>
@@ -22,6 +23,7 @@ import Nav from "../components/Nav.astro";
     >
       <Loader />
     </div>
+    <AlertBox />
     <div
       class="bg-gray-200 bg-red_color flex flex-col min-h-[90vh]"
       id="container"

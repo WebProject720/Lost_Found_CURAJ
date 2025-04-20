@@ -1,10 +1,11 @@
 import { Button } from "./utility/Button";
 import { logoutUser } from "../APIs/auth/logout";
 import { useEffect, useState } from "react";
-import {  Loader } from "./utility/Loader";
+import { Loader } from "./utility/Loader";
 import { Link } from "./utility/Link";
 import { Images } from "../constants.astro";
 import { getStoreData } from "../store";
+import { confirmBox } from "./alertLogic.ts";
 
 export const NavActions = (props) => {
   const [Icons, setIcons] = useState(Images)
@@ -27,7 +28,9 @@ export const NavActions = (props) => {
     setUser(storeData.loggedUser);
   }, [])
 
-  const logout = () => {
+  const logout = async () => {
+    const islogout = await confirmBox('Sure want to Logout');
+    if (!islogout) return;
     logoutUser();
     SetLoading(true);
   }

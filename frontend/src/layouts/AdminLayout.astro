@@ -1,5 +1,6 @@
 ---
 import Sidebar from "../components/Sidebar.astro";
+import AlertBox from "../components/utility/AlertBox.astro";
 import { Loader } from "../components/utility/Loader";
 import { Images } from "../constants.astro";
 ---
@@ -9,7 +10,11 @@ import { Images } from "../constants.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="shortcut icon" href={Images.curaj_logo.src} type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href={Images.curaj_logo.src}
+      type="image/x-icon"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>Lost & Found - CURAJ</title>
   </head>
@@ -20,6 +25,7 @@ import { Images } from "../constants.astro";
     >
       <Loader />
     </div>
+    <AlertBox />
     <div id="container" class="flex flex-col">
       <div class="w-screen" id="header-container">
         <!-- <AdminNav /> -->
