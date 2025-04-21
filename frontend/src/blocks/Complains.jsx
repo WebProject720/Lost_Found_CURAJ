@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { ReportsGetRequests } from "../APIs/reports/reportsAPI";
 import { Loader } from "../components/utility/Loader";
 import { Complain } from "../components/Complain";
-import { Button } from "../components/utility/Button";
 import { Input } from "../components/utility/Input";
 import { ShowAlert } from "../components/alertLogic";
 

@@ -18,7 +18,7 @@ const ReportsRouter = Router();
 ReportsRouter.route('/add').post(authenticateUser,upload.single('file'),ImageUploadonDB, Add);
 ReportsRouter.route('/getall').get(authenticateUser, getall);
 ReportsRouter.route('/changeStatus').post(authenticateUser, ChgStatus);
-ReportsRouter.route('/stats').get(authenticateUser, stats);
+ReportsRouter.route('/stats').get(stats);
 ReportsRouter.route('/reply').post(authenticateUser, reply);
 ReportsRouter.route('/get').post(authenticateUser, getOne);
 ReportsRouter.route('/imgupload').post(authenticateUser,upload.single('file'),ImageUploadonDB, ImageUpload);

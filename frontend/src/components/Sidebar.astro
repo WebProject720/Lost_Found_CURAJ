@@ -1,6 +1,7 @@
 ---
 import { NavActions } from "./NavActions";
 import { Profile } from "./utility/Profile";
+const { routes } = Astro.props;
 ---
 
 <!-- Sidebar -->
@@ -12,6 +13,6 @@ import { Profile } from "./utility/Profile";
         <Profile client:load />
     </div>
     <div class="font-bold">
-        <NavActions class="" client:load/>
+        <NavActions routes={routes} class="" client:load />
     </div>
 </div>

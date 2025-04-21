@@ -3,13 +3,16 @@ import { logoutUser } from "../APIs/auth/logout";
 import { useEffect, useState } from "react";
 import { Loader } from "./utility/Loader";
 import { Link } from "./utility/Link";
-import { Images } from "../constants.astro";
 import { getStoreData } from "../store";
 import { confirmBox } from "./alertLogic.ts";
 
 export const NavActions = (props) => {
-  const [Icons, setIcons] = useState(Images)
+  const [actions, setactions] = useState([]);
 
+  useEffect(() => {
+    const NavigationRoutes = props.routes;
+    setactions(NavigationRoutes);
+  }, [])
 
 
   const [store, setStore] = useState(null);
@@ -34,35 +37,6 @@ export const NavActions = (props) => {
     logoutUser();
     SetLoading(true);
   }
-
-  const actions = [
-    {
-      name: "Dashboard",
-      route: "/dashboard",
-      icon: Icons.dashboardIcon || null
-    },
-    {
-      name: "Complaints",
-      route: "/dashboard/reports",
-      icon: Icons.AddReportIcon || null
-    },
-    {
-      name: "New Complaint",
-      route: "/dashboard/reports/add",
-      icon: Icons.AddReportIcon || null
-    },
-
-    {
-      name: "About Us",
-      route: "/about",
-      icon: Icons.AboutIcon || null
-    },
-    {
-      name: "My Profile",
-      route: "/dashboard/userprofile",
-      icon: Icons.userIcon || null
-    }
-  ]
 
   return (
     <div className="font-bold">

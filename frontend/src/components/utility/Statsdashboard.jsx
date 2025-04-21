@@ -21,7 +21,6 @@ const StatsDashboard = () => {
   useEffect(() => {
     (async () => {
       const { data } = await GET("/stats", "/reports");
-      console.log(data);
       
       if (data) {
         setStats(data);

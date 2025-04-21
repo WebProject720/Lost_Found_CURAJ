@@ -10,7 +10,17 @@ import { navigate } from "astro:transitions/client";
 import { setUserLogin, setUserInfo } from "../store";
 
 
+
 export default function LoginBlock(props) {
+
+
+    const [mode, setmode] = useState(false);//0-user & 1- admin
+
+    useEffect(() => {
+        const q = new URLSearchParams(window.location.search).get("mode");
+        if (q == 0)
+            setmode(true);
+    }, [])
 
     const { register, handleSubmit, watch } = useForm({
         defaultValues: {
@@ -44,20 +54,20 @@ export default function LoginBlock(props) {
             setAlertFun(false, 'All field required');
             return
         }
-        if(data.username.includes(' ')){
+        if (data.username.includes(' ')) {
             setAlertFun(false, 'Space not allowed in username');
             return
         }
         const formData = { identifier: data.username?.trim(), password: data.password?.trim() }
         setLoading(true);
-        await authAPI(formData, "/users/login").then((res) => {
+        await authAPI(formData, mode ? "/admin/login" : "/users/login").then((res) => {
             setLoading(false);
             if (res?.status) {
                 setAlertFun(true, 'Login Successfull');
                 const { data } = (res.data) || {};
                 setUserInfo(data.user);
                 setUserLogin(true);
-                navigate('/dashboard');
+                mode ? navigate('/admin') : navigate('/dashboard');
             } else {
                 setAlertFun(false, res.error.message || 'Try Again !!');
             }

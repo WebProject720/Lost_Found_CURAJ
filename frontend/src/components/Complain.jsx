@@ -11,6 +11,7 @@ export const Complain = ({ ...props }) => {
     const [complain, setComplain] = useState(null);
     const [isOwner, setOwner] = useState(false);
     const [isLoading, setLoading] = useState(false);
+
     useEffect(() => {
         (function () {
             const user = getUser();
@@ -21,6 +22,8 @@ export const Complain = ({ ...props }) => {
             setComplain(props.complain);
         })();
     }, [])
+
+
     const chnageStatus = async () => {
         let p = await confirmBox("Sure want to Close complaint ?");
         if (!p) return;
@@ -33,6 +36,7 @@ export const Complain = ({ ...props }) => {
         }
         setLoading(false);
     }
+
     return (
         complain &&
         <div className="bg-white p-4 tablet:py-3 tablet:px-2 min-h-fit flex flex-col gap-2 shadow rounded-lg border border-gray-200">

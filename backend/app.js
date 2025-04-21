@@ -47,8 +47,10 @@ app.use(limiter);
 
 import UserRouter from './Routes/users/users.js';
 import ReportsRouter from './Routes/reports/reports.js';
+import AdminsRouter from './Routes/admin/admin.js';
 app.use('/users', UserRouter);
 app.use('/reports', ReportsRouter);
+app.use('/admin', AdminsRouter);
 
 
 app.get('/', (req, res) => {

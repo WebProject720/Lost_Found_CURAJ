@@ -10,8 +10,8 @@ import InstaIcon from "./assets/instagram_2111463.png";
 import githubIcon from "./assets/github-mark.png";
 import x from "./assets/x-icon.svg";
 import g_icon from "./assets/gmail-icon.png";
-import erroricon from './assets/erroricon.png';
-import successIcon from './assets/successicon.svg'
+import erroricon from "./assets/erroricon.png";
+import successIcon from "./assets/successicon.svg";
 
 export const Images = {
     logo,
@@ -32,8 +32,8 @@ export const Images = {
     instagram_icon: InstaIcon,
     x_icon: x,
     gmail_Icon: g_icon,
-    error_icon:erroricon,
-    success_icon:successIcon,
+    error_icon: erroricon,
+    success_icon: successIcon,
 };
 
 export const SERVER_Production = "https://curajlf-backend.vercel.app";
@@ -44,4 +44,61 @@ export const SERVER_URL = () => {
         ? SERVER_Production
         : SERVER;
 };
+
+export const UserNavigationRoutes = [
+    {
+        name: "Dashboard",
+        route: "/dashboard",
+        icon: Images.dashboardIcon || null,
+    },
+    {
+        name: "Complaints",
+        route: "/dashboard/reports",
+        icon: Images.AddReportIcon || null,
+    },
+    {
+        name: "New Complaint",
+        route: "/dashboard/reports/add",
+        icon: Images.AddReportIcon || null,
+    },
+
+    {
+        name: "About Us",
+        route: "/about",
+        icon: Images.AboutIcon || null,
+    },
+    {
+        name: "My Profile",
+        route: "/dashboard/userprofile",
+        icon: Images.userIcon || null,
+    },
+];
+
+export const AdminNavigationRoutes = [
+    {
+        name: "Admin Panel",
+        route: "/admin",
+        icon: Images.dashboardIcon || null,
+    },
+    {
+        name: "Complaints",
+        route: "/admin/complaints",
+        icon: Images.AddReportIcon || null,
+    },
+    {
+        name: "Users",
+        route: "/admin/users",
+        icon: Images.AddReportIcon || null,
+    },
+    {
+        name: "About Us",
+        route: "/about",
+        icon: Images.AboutIcon || null,
+    },
+    {
+        name: "Profile",
+        route: "/admin/profile",
+        icon: Images.userIcon || null,
+    },
+];
 ---

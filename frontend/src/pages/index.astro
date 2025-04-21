@@ -82,10 +82,12 @@ import { Images } from "../constants.astro";
               found items within the campus. Help us reunite items with their
               rightful owners quickly and easily.
             </p>
-            <div class="my-5">
+            <div class="my-5 flex tablet:items-center tablet:flex-col">
               <!-- Login & Register Buttons -->
-              <div class="flex space-x-4 justify-center align-middle">
-                <div id="auth-buttons">
+              <div
+                class="flex space-x-4 justify-center align-middle tablet:justify-start"
+              >
+                <div id="auth-buttons" class="flex flex-nowrap gap-2 flex-row">
                   <button
                     onclick="location.href='/auth'"
                     class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-6 rounded-lg text-lg"
@@ -93,8 +95,12 @@ import { Images } from "../constants.astro";
                   >
                   <button
                     onclick="location.href='/auth/register'"
-                    class="bg-green-700 hover:bg-green-800 text-nowrap text-white font-bold py-2 px-6 rounded-lg text-lg"
+                    class="bg-blue-800 hover:bg-blue-900 text-nowrap text-white font-bold py-2 px-6 rounded-lg text-lg"
                     >Register Now</button
+                  ><button
+                    onclick="location.href='/auth?mode=0'"
+                    class="bg-blue-800 hover:bg-blue-900 text-nowrap text-white font-bold py-2 px-6 rounded-lg text-lg"
+                    >Admin Login</button
                   >
                 </div>
                 <!-- Know More Button (Visible on both mobile & desktop) -->

@@ -3,7 +3,7 @@ import Nav from "../components/Nav.astro";
 import Sidebar from "../components/Sidebar.astro";
 import AlertBox from "../components/utility/AlertBox.astro";
 import { Loader } from "../components/utility/Loader";
-import { Images } from "../constants.astro";
+import { Images, UserNavigationRoutes } from "../constants.astro";
 
 ---
 
@@ -32,14 +32,14 @@ import { Images } from "../constants.astro";
 
     <div id="container" class="flex flex-col">
       <div class="w-screen" id="header-container">
-        <Nav />
+        <Nav routes={UserNavigationRoutes}/>
       </div>
       <div class="flex flex-row relative">
         <div
           class="hidden desktop:!hidden flex-row absolute transition-all duration-700 ease-linear phone:z-50 h-full pt-20"
           id="sidebarBox"
         >
-          <Sidebar class="" />
+          <Sidebar routes={UserNavigationRoutes} class="" />
         </div>
         <main
           class="phone:w-screen desktop:!opacity-100 w-full phone:!ml-0 phone:z-20"

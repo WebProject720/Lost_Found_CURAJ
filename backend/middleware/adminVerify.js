@@ -1,13 +1,13 @@
-import { User } from "../Models/model.js";
+import { Admins } from "../Models/model.js";
 import { ApiError } from "../utils/apiError.js";
 import 'dotenv/config'
 import jsonwebtoken from 'jsonwebtoken'
 
 
-export const authenticateUser = async (req, res, next) => {
+export const VerifyAdminMiddleware = async (req, res, next) => {
     try {
-        const TokenName = process.env.TokenName || 'Token';
-        const cookie = req?.cookies[TokenName];
+        const AdminTokenName = process.env.AdminTokenName || 'Token';
+        const cookie = req?.cookies[AdminTokenName];
 
         if (!cookie) {
             return res.status(401).json(
@@ -21,11 +21,11 @@ export const authenticateUser = async (req, res, next) => {
 
         if (!userDetails)
             return res.status(401).json(
-                new ApiError('Incorrect User Token'))
-        const user = await User.findOne({ _id: userDetails._id || null });
+                new ApiError('Incorrect Admin Token'))
+        const user = await Admins.findOne({ _id: userDetails._id || null });
         if (!user) {
             return res.status(400).json(
-                new ApiError('User not found', null, false, 400)
+                new ApiError('Admin not found', null, false, 400)
             )
         }
         req.user = user;
@@ -35,7 +35,7 @@ export const authenticateUser = async (req, res, next) => {
         console.log(error);
 
         return res.status(500).json(
-            new ApiError('Internal Server Error: The server encountered an unexpected condition.', error, false, 401)
+            new ApiError('Internal Server Error: The server encountered an unexpected condition.', error, false, 500)
         )
     }
 }
