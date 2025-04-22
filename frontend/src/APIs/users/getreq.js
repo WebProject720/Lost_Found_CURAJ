@@ -16,7 +16,7 @@ export const GET = async (path, route = "/users") => {
     } catch ({ response }) {
         console.log(response);
         ShowAlert(response?.message||"Something went wrong",false)
-        if (response.status == 401)
+        if (!response.success)
             logoutUser();
         return {
             status: false,
