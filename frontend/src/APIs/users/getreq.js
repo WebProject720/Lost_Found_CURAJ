@@ -1,6 +1,7 @@
 import axios from "axios";
 import { SERVER_URL } from "../../constants.astro";
 import { logoutUser } from "../auth/logout";
+import { ShowAlert } from "../../components/alertLogic";
 
 export const GET = async (path, route = "/users") => {
     try {
@@ -13,6 +14,8 @@ export const GET = async (path, route = "/users") => {
             msg: 'Request Succesfull'
         }
     } catch ({ response }) {
+        console.log(response);
+        ShowAlert(response?.message||"Something went wrong",false)
         if (response.status == 401)
             logoutUser();
         return {

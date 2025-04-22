@@ -10,15 +10,17 @@ export const UserProfile = ({ ...props }) => {
     const [complains, setComplains] = useState(null);
     const [user, setUser] = useState(null);
     const [userDetails, setUserDetails] = useState(null)
+
     useEffect(() => {
         (async function () {
             const { data } = await GET('/user');
             if (data) setComplains(data.complains);
+            else setComplains([]);
             setUser(getUser());
             console.log(getUser());
-
         })()
     }, [])
+
     useEffect(() => {
         if (user)
             setUserDetails(

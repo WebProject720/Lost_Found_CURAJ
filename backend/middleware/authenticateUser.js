@@ -17,12 +17,10 @@ export const authenticateUser = async (req, res, next) => {
 
         const userDetails = jsonwebtoken.verify(cookie, process.env.JWT_SECRET_KEY)
 
-
-
         if (!userDetails)
             return res.status(401).json(
                 new ApiError('Incorrect User Token'))
-        const user = await User.findOne({ _id: userDetails._id || null });
+        const user = await User.findOne({ _id: userDetails?._id || null });
         if (!user) {
             return res.status(400).json(
                 new ApiError('User not found', null, false, 400)
