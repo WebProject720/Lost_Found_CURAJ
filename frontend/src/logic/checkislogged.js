@@ -76,5 +76,5 @@ export const isAdminCookieExist = async () => {
 
 export const isAdminExists = async () => {
     const store = getStoreData();
-    if (!store.isAdmin && !loggedUser) adminLogout();
+    if (!store.isAdmin && !store.loggedUser) adminLogout();
 }
