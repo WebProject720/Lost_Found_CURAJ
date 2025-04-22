@@ -15,7 +15,8 @@ export const AdminLogin = async (req, res) => {
         let { identifier, password } = req.body;
         identifier = identifier?.trim();
         password = password?.trim();
-        const AdminTokenName = process.env.AdminTokenName || 'Token';
+
+        const AdminTokenName = process.env.AdminTokenName || 'AdminToken';
         const cookie = req?.cookies[AdminTokenName];
 
         if (cookie) {
