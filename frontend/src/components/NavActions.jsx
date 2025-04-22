@@ -35,13 +35,13 @@ export const NavActions = () => {
   }, [])
 
   const logout = async () => {
+    SetLoading(true);
     const islogout = await confirmBox('Sure want to Logout');
     if (!islogout) return;
-    SetLoading(true);
     (async () => {
       store.isAdmin ? adminLogout() : logoutUser();
+      SetLoading(false);
     })();
-    SetLoading(false);
   }
 
   return (
