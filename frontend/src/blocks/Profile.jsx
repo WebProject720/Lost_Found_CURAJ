@@ -25,7 +25,7 @@ export const UserProfile = ({ ...props }) => {
                 {
                     Username: user.username,
                     Email: user.email,
-                    Complaints: user.Reports.length,
+                    Complaints: user?.Reports?.length||0,
                     'Account Created': new Date(user.createdAt).toDateString(),
                 }
             )
