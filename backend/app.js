@@ -35,12 +35,14 @@ var corsOptions = isProduction ? {
 app.use(cors(corsOptions))
 
 
+// Fix the error by trusting the proxy
+app.set('trust proxy', true);
+
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    limit: 200, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-    standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
-    legacyHeaders: false
-})
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+});
+
 app.use(limiter);
 
 
