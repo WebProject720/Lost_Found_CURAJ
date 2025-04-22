@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { AdminPostAPIs } from "../../../APIs/admin/adminAPIs";
-import { Loader } from "../../../components/utility/Loader";
-import { Button } from "../../../components/utility/Button";
-import { Input } from "../../../components/utility/Input";
+import { AdminPostAPIs } from "../APIs/admin/adminAPIs";
+import { Loader } from "../components/utility/Loader";
+import { Button } from "../components/utility/Button";
+import { Input } from "../components/utility/Input";
 
 const ComplaintsList = () => {
     const [complaints, setComplaints] = useState([]);
