@@ -3,6 +3,7 @@ import { setUserLogin, setUserInfo, logout, getStoreData } from "../store";
 import { AdminGetAPIs, checkAdminExist } from "../APIs/admin/adminAPIs";
 import { UserAPI } from "../APIs/users/usersAPI";
 import { ShowAlert } from "../components/alertLogic";
+
 // logout user if cookie  not exist
 export const isUserCookieExist = async () => {
     const user = getStoreData();
@@ -23,13 +24,13 @@ export const isUserCookieExist = async () => {
                     loaderDiv?.classList.add("hidden");
                 } else {
                     logout();
-                    navigate("/auth");
+                    navigate("/");
                 }
             })
             .catch((error) => {
                 console.log(error);
                 logout();
-                navigate("/auth");
+                navigate("/");
             });
     }
 
@@ -37,11 +38,11 @@ export const isUserCookieExist = async () => {
 // logout admin if cookie not exist
 export const isAdminCookieExist = async () => {
     console.log('checking for admin cookie...');
-
     const user = getStoreData();
 
     let loaderDiv = document.getElementById("loader-container");
     let container = document.getElementById("container");
+
 
     if (!user.isUserLogged || !user.loggedUser) {
         // navigate("/auth?mode=0");
@@ -51,13 +52,14 @@ export const isAdminCookieExist = async () => {
             .then((res) => {
                 if (res?.success) {
                     setUserLogin(true);
-                    setUserInfo(res.data,true);
+                    setUserInfo(res.data, true);
                     container?.classList.remove("hidden");
                     loaderDiv?.classList.add("hidden");
                     navigate('/admin');
                 } else {
                     container?.classList.remove("hidden");
                     loaderDiv?.classList.add("hidden");
+                    logout();
                 }
             })
             .catch((error) => {

@@ -8,16 +8,15 @@ import { confirmBox } from "./alertLogic.ts";
 import { AdminNavigationRoutes, UserNavigationRoutes } from "../constants.astro";
 import { adminLogout } from "../APIs/admin/adminAPIs.js";
 
-export const NavActions = (props) => {
+export const NavActions = () => {
   const [actions, setactions] = useState([]);
-
 
   const [store, setStore] = useState(null);
   const [user, setUser] = useState(null);
 
   //set by default navigation routes with store 'isAdmin' 
   useEffect(() => {
-    const NavigationRoutes = store?.isAdmin ? AdminNavigationRoutes : UserNavigationRoutes || props.route;
+    const NavigationRoutes = store?.isAdmin ? AdminNavigationRoutes : UserNavigationRoutes ;
     setactions(NavigationRoutes);
   }, [store, user])
 
