@@ -4,7 +4,7 @@ import { Reports } from "../../Models/model.js"
 //get All complaint which are open
 export const ComplaintList = async (req, res) => {
     try {
-        const {from,to}=req.body;
+        // const {from,to}=req.body;
 
         const reports = await Reports.aggregate([
             {
@@ -43,9 +43,8 @@ export const ComplaintList = async (req, res) => {
         )
     } catch (error) {
         console.log(error);
-
         return res.status(500).json(
-            new ApiError("Server failed ", error, false, 500)
+            new ApiError("Internal Server Error: The server encountered an unexpected condition.", error, false, 500)
         )
     }
 }
