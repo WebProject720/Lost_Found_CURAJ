@@ -36,14 +36,14 @@ app.use(cors(corsOptions))
 
 
 // Fix the error by trusting the proxy
-app.set('trust proxy', true);
+// app.set('trust proxy', true);
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 200,
-});
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 200,
+// });
 
-app.use(limiter);
+// app.use(limiter);
 
 
 
