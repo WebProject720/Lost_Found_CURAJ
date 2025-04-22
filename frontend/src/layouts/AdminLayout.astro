@@ -50,8 +50,9 @@ import { AdminNavigationRoutes, Images } from "../constants.astro";
 </html>
 
 <script>
-  import { isAdminCookieExist } from "../logic/checkislogged";
+  import { isAdminCookieExist, isAdminExists } from "../logic/checkislogged";
   (async () => {
+    isAdminExists();
     isAdminCookieExist();
   })();
 </script>

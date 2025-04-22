@@ -1,6 +1,6 @@
 import { navigate } from "astro:transitions/client";
 import { setUserLogin, setUserInfo, logout, getStoreData } from "../store";
-import { AdminGetAPIs, checkAdminExist } from "../APIs/admin/adminAPIs";
+import { adminLogout, checkAdminExist } from "../APIs/admin/adminAPIs";
 import { UserAPI } from "../APIs/users/usersAPI";
 import { ShowAlert } from "../components/alertLogic";
 
@@ -36,6 +36,7 @@ export const isUserCookieExist = async () => {
 
 }
 // logout admin if cookie not exist
+// check is DB request
 export const isAdminCookieExist = async () => {
     console.log('checking for admin cookie...');
     const user = getStoreData();
@@ -59,7 +60,7 @@ export const isAdminCookieExist = async () => {
                 } else {
                     container?.classList.remove("hidden");
                     loaderDiv?.classList.add("hidden");
-                    logout();
+                    // logout();
                 }
             })
             .catch((error) => {
@@ -71,4 +72,9 @@ export const isAdminCookieExist = async () => {
 
             });
     }
+}
+
+export const isAdminExists = async () => {
+    const store = getStoreData();
+    if (!store.isAdmin && !loggedUser) adminLogout();
 }
