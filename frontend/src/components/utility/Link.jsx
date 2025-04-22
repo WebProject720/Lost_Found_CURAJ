@@ -1,4 +1,5 @@
 export const Link = ({ ...props }) => {
+    if (typeof props.icon == "object") props.icon = props.icon.src;
 
     return (
         <div className="p-2 tablet:w-full">

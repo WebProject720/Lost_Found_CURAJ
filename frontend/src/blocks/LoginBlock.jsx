@@ -65,7 +65,7 @@ export default function LoginBlock(props) {
             if (res?.status) {
                 setAlertFun(true, 'Login Successfull');
                 const { data } = (res.data) || {};
-                setUserInfo(data.user);
+                setUserInfo(data.user, mode ? true : false);
                 setUserLogin(true);
                 mode ? navigate('/admin') : navigate('/dashboard');
             } else {

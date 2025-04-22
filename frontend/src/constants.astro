@@ -12,6 +12,7 @@ import x from "./assets/x-icon.svg";
 import g_icon from "./assets/gmail-icon.png";
 import erroricon from "./assets/erroricon.png";
 import successIcon from "./assets/successicon.svg";
+import usersicon from "./assets/usersicon.png";
 
 export const Images = {
     logo,
@@ -34,6 +35,7 @@ export const Images = {
     gmail_Icon: g_icon,
     error_icon: erroricon,
     success_icon: successIcon,
+    usersIcon:usersicon,
 };
 
 export const SERVER_Production = "https://curajlf-backend.vercel.app";
@@ -88,7 +90,7 @@ export const AdminNavigationRoutes = [
     {
         name: "Users",
         route: "/admin/users",
-        icon: Images.AddReportIcon || null,
+        icon: Images.usersIcon || null,
     },
     {
         name: "About Us",

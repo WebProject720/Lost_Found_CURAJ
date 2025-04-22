@@ -4,7 +4,6 @@ import Sidebar from "../components/Sidebar.astro";
 import AlertBox from "../components/utility/AlertBox.astro";
 import { Loader } from "../components/utility/Loader";
 import { AdminNavigationRoutes, Images } from "../constants.astro";
-
 ---
 
 <!doctype html>
@@ -30,7 +29,7 @@ import { AdminNavigationRoutes, Images } from "../constants.astro";
     <AlertBox />
     <div id="container" class="flex flex-col">
       <div class="w-screen" id="header-container">
-        <Nav routes={AdminNavigationRoutes}/>
+        <Nav routes={AdminNavigationRoutes} />
       </div>
       <div class="flex flex-row relative">
         <div
@@ -40,7 +39,7 @@ import { AdminNavigationRoutes, Images } from "../constants.astro";
           <Sidebar routes={AdminNavigationRoutes} class="" />
         </div>
         <main
-          class="phone:w-screen desktop:!opacity-100 w-full phone:!ml-0 phone:z-20"
+          class="phone:w-screen flex flex-col justify-center items-center desktop:!opacity-100 w-full phone:!ml-0 phone:z-20"
           id="main-container"
         >
           <slot />
@@ -51,37 +50,12 @@ import { AdminNavigationRoutes, Images } from "../constants.astro";
 </html>
 
 <script>
-  // import { navigate } from "astro:transitions/client";
-  // import { setUserLogin, setUserInfo, logout, getStoreData } from "../store";
-  // import { UserAPI } from "../APIs/users/usersAPI";
-  // const user = getStoreData();
-
-  // let loaderDiv = document.getElementById("loader-container");
-  // let container = document.getElementById("container");
-
-  // if (!user.isUserLogged || !user.loggedUser) {
-  //   navigate("/auth");
-  //   container?.classList.add("hidden");
-  //   loaderDiv?.classList.add("flex");
-  //   UserAPI(null, "/getuser")
-  //     .then((res) => {
-  //       if (res.status) {
-  //         setUserLogin(true);
-  //         setUserInfo(res.data);
-  //         container?.classList.remove("hidden");
-  //         loaderDiv?.classList.add("hidden");
-  //       } else {
-  //         logout();
-  //         navigate("/auth");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       logout();
-  //       navigate("/auth");
-  //     });
-  // }
+  import { isAdminCookieExist } from "../logic/checkislogged";
+  (async () => {
+    isAdminCookieExist();
+  })();
 </script>
+
 <style is:global>
   @import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
   @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");

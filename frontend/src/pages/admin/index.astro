@@ -1,5 +1,6 @@
 ---
 import StatsDashboard from "../../components/utility/Statsdashboard";
+import { Images } from "../../constants.astro";
 import AdminLayout from "../../layouts/AdminLayout.astro";
 ---
 
@@ -9,13 +10,42 @@ import AdminLayout from "../../layouts/AdminLayout.astro";
   >
     <div class="w-full mt-8">
       <StatsDashboard client:only />
-       <!-- <h1>Welcome Admin Portal</h1> -->
+      <!-- <h1>Welcome Admin Portal</h1> -->
     </div>
-    <div>
-      <div>
-        <a href="/admin/users" >Users List</a>
-        <a href="/admin/complaints" >Complaints List</a>
-      </div>
+    <div class="flex flex-row py-8 gap-3">
+      <a href="/admin/users" class="bg-blue-200 rounded-lg p-6">
+        <div>
+          <img
+            class="size-36 p-4"
+            src={Images.usersIcon.src}
+            alt="Users Icon"
+          />
+        </div>
+        <hr />
+        <div class="p-4">
+          <h1 class="text-center text-white font-extrabold text-2xl">
+            Users List
+          </h1>
+        </div>
+      </a>
+      <a
+        href="/admin/complaints"
+        class="bg-blue-200 flex justify-center items-center flex-col rounded-lg p-6"
+      >
+        <div>
+          <img
+            class="size-36 p-4"
+            src={Images.AddReportIcon}
+            alt="Users Icon"
+          />
+        </div>
+        <hr class="w-full" />
+        <div class="p-4">
+          <h1 class="text-center text-white font-extrabold text-2xl">
+            Complaints List
+          </h1>
+        </div>
+      </a>
     </div>
   </div>
 </AdminLayout>

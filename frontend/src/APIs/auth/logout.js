@@ -9,7 +9,7 @@ const user = store.loggedUser;
 export const logoutUser = async () => {
     await UserAPI({ _id: user?._id }, '/users/logout').then((res) => {
         logout();
-        navigate('/auth');
+        navigate('/');
     }).catch((err) => {
         console.log(err);
     })

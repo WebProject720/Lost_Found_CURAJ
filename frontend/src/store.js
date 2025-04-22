@@ -1,10 +1,13 @@
+import { navigate } from "astro:transitions/client";
+
 const APP_NAME = "AppStore";
 
 const defaultUser = {
     isUserLogged: false,
     loggedUser: null,
     reports: [],
-    stats: false
+    stats: false,
+    isAdmin: false,
 };
 
 // Function to safely get stored data from localStorage (client-side only)
@@ -40,16 +43,18 @@ const setUserLogin = (bool) => {
 };
 
 // Set user info
-const setUserInfo = (data) => {
+const setUserInfo = (data, isAdmin = false) => {
     const store = getStoreData();
     store.loggedUser = data;
     store.isUserLogged = true;
+    store.isAdmin = isAdmin;
     updateStore(store);
 };
 
 const logout = () => {
     updateStore(defaultUser);
     window.localStorage.clear(APP_NAME);
+    navigate('/');
 }
 
 const setComplains = (data) => {

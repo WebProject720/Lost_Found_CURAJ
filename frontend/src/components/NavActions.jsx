@@ -5,18 +5,22 @@ import { Loader } from "./utility/Loader";
 import { Link } from "./utility/Link";
 import { getStoreData } from "../store";
 import { confirmBox } from "./alertLogic.ts";
+import { AdminNavigationRoutes, UserNavigationRoutes } from "../constants.astro";
+import { adminLogout } from "../APIs/admin/adminAPIs.js";
 
 export const NavActions = (props) => {
   const [actions, setactions] = useState([]);
 
-  useEffect(() => {
-    const NavigationRoutes = props.routes;
-    setactions(NavigationRoutes);
-  }, [])
-
 
   const [store, setStore] = useState(null);
   const [user, setUser] = useState(null);
+
+  //set by default navigation routes with store 'isAdmin' 
+  useEffect(() => {
+    const NavigationRoutes = store?.isAdmin ? AdminNavigationRoutes : UserNavigationRoutes || props.route;
+    setactions(NavigationRoutes);
+  }, [store, user])
+
 
   useEffect(() => {
     const storeData = getStoreData();
@@ -34,8 +38,11 @@ export const NavActions = (props) => {
   const logout = async () => {
     const islogout = await confirmBox('Sure want to Logout');
     if (!islogout) return;
-    logoutUser();
     SetLoading(true);
+    (async () => {
+      store.isAdmin ? adminLogout() : logoutUser();
+    })();
+    SetLoading(false);
   }
 
   return (
@@ -47,7 +54,7 @@ export const NavActions = (props) => {
           <div className="flex items-center tablet:flex-col tablet:items-start align-middle justify-center gap-2">
             <div className="flex gap-1 tablet:w-full tablet:items-start tablet:flex-col items-center justify-center">
               {
-                actions.map((action, index) => (
+                actions && actions.map((action, index) => (
                   <Link key={index} icon={action.icon || null} name={action.name} href={action.route} >
                     {action.name}
                   </Link>

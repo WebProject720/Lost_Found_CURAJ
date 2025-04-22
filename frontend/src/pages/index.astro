@@ -90,16 +90,16 @@ import { Images } from "../constants.astro";
                 <div id="auth-buttons" class="flex flex-nowrap gap-2 flex-row">
                   <button
                     onclick="location.href='/auth'"
-                    class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-6 rounded-lg text-lg"
+                    class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-6 phone:p-2 rounded-lg text-lg"
                     >Login</button
                   >
                   <button
                     onclick="location.href='/auth/register'"
-                    class="bg-blue-800 hover:bg-blue-900 text-nowrap text-white font-bold py-2 px-6 rounded-lg text-lg"
+                    class="bg-blue-800 hover:bg-blue-900 text-nowrap text-white font-bold py-2 px-6 phone:p-2 rounded-lg text-lg"
                     >Register Now</button
                   ><button
                     onclick="location.href='/auth?mode=0'"
-                    class="bg-blue-800 hover:bg-blue-900 text-nowrap text-white font-bold py-2 px-6 rounded-lg text-lg"
+                    class="bg-blue-800 hover:bg-blue-900 text-nowrap text-white font-bold py-2 px-6 phone:p-2 rounded-lg text-lg"
                     >Admin Login</button
                   >
                 </div>
@@ -167,12 +167,16 @@ import { Images } from "../constants.astro";
       </main>
     </div>
   </body>
+
   <script>
+
     import { isUserLogin } from "../store";
     isUserLogin()
       ? document.getElementById("auth-buttons")?.classList.add("hidden")
       : null;
+
   </script>
+
   <style is:global>
     @import url("https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=Poppins:wght@100;900&display=swap");
     html,

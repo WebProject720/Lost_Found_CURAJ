@@ -14,7 +14,6 @@ export const VerifyAdminMiddleware = async (req, res, next) => {
                 new ApiError('Unauthorized: Authentication is required or has failed.', null, false, 401)
             )
         }
-
         const userDetails = jsonwebtoken.verify(cookie, process.env.JWT_SECRET_KEY)
 
 
@@ -22,6 +21,7 @@ export const VerifyAdminMiddleware = async (req, res, next) => {
         if (!userDetails)
             return res.status(401).json(
                 new ApiError('Incorrect Admin Token'))
+                
         const user = await Admins.findOne({ _id: userDetails._id || null });
         if (!user) {
             return res.status(400).json(

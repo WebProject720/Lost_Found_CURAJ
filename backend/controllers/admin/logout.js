@@ -4,13 +4,12 @@ import 'dotenv/config'
 import { CookieOption } from "../../utils/cookieOptions.js";
 import jsonwebtoken from "jsonwebtoken";
 
-
-export const logout = async (req, res) => {
+export const logoutAdmin = async (req, res) => {
     try {
-        const { _id } = req.body || {};
+        const { _id } = req.user || {};
         const production = process.env.PRODUCTION == "true";
         const CookieOptions = CookieOption(production, true);
-        const TokenName = process.env.TokenName || 'Token';
+        const TokenName = process.env.AdminTokenName || 'AdminToken';
         const cookie = req?.cookies[TokenName];
 
 
@@ -19,7 +18,7 @@ export const logout = async (req, res) => {
                 new ApiError('Session not found')
             )
         }
-        
+
         const user = jsonwebtoken.verify(cookie, process.env.JWT_SECRET_KEY);
         if (user._id != _id) {
             return res.status(400).json(
@@ -29,9 +28,9 @@ export const logout = async (req, res) => {
 
         return res
             .status(200)
-            .clearCookie(process.env.TokenName, CookieOptions)
+            .clearCookie(TokenName, CookieOptions)
             .json(
-                new ApiResponse('user logout')
+                new ApiResponse('Admin logout')
             )
 
     } catch (error) {

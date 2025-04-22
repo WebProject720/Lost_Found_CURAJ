@@ -4,6 +4,8 @@ import { Images } from "../constants.astro";
 import { Loader } from "../components/utility/Loader";
 import Nav from "../components/Nav.astro";
 import AlertBox from "../components/utility/AlertBox.astro";
+const url = new URL(Astro.request.url);
+const query = url.searchParams.get("mode");
 ---
 
 <!doctype html>
@@ -68,22 +70,35 @@ import AlertBox from "../components/utility/AlertBox.astro";
   import { navigate } from "astro:transitions/client";
   import { UserAPI } from "../APIs/users/usersAPI";
   import { isUserLogin } from "../store";
+  import { isAdminCookieExist } from "../logic/checkislogged";
+  //if in store user exist
   if (isUserLogin()) navigate("/dashboard");
+
+  //get mode for admin
+  const urlParams = new URLSearchParams(window.location.search);
+  const mode = urlParams.get("mode");
 
   let loaderDiv = document.getElementById("loader-container");
   let container = document.getElementById("container");
   loaderDiv?.classList.add("hidden");
 
-  await UserAPI(null, "/isuserlogged")
-    .then((res) => {
-      if (res.status) {
-        navigate("/dashboard");
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  if (mode != "0") {
+    await UserAPI(null, "/isuserlogged")
+      .then((res) => {
+        if (res.status) {
+          navigate("/dashboard");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    (async () => {
+      isAdminCookieExist();
+    })();
+  }
 </script>
+
 <style is:global>
   @import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
   @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
