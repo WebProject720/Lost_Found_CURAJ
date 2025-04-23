@@ -3,10 +3,13 @@ import { AdminPostAPIs } from "../APIs/admin/adminAPIs";
 import { Loader } from "../components/utility/Loader";
 import { Button } from "../components/utility/Button";
 import { Input } from "../components/utility/Input";
+import { confirmBox, ShowAlert } from "../components/alertLogic";
+
 
 const ComplaintsList = () => {
     const [complaints, setComplaints] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [deleting, setDeleting] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -15,6 +18,22 @@ const ComplaintsList = () => {
             setLoading(false);
         })();
     }, []);
+
+    const deleteComplaint = async (id) => {
+        console.log('deleting ', id, '  ...');
+        const confirm =await confirmBox("Delete this Complaint ?");
+        if (!confirm) return;
+        setDeleting(true);
+        //Post Request
+        const res = await AdminPostAPIs('/complaints/delete', { id });
+        if (res.success)
+            ShowAlert("Complaint Deleted", true)
+
+        if (res?.status)
+            ShowAlert("Complaint Deleted ", true);
+
+        setDeleting(false);
+    }
 
     return (
         <div className="container p-4">
@@ -63,7 +82,7 @@ const ComplaintsList = () => {
                                         : "bg-white"
                                         } hover:bg-orange-100 transition-all`}
                                 >
-                                    <td className="px-6 py-4 text-sm text-gray-700">
+                                    <td className="px-6 py-4 text-sm text-gray-700 truncate">
                                         {complaint.title || "N/A"}
                                     </td>
                                     <td className="px-6 py-4 text-sm text-gray-700">
@@ -83,8 +102,8 @@ const ComplaintsList = () => {
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-sm text-gray-700">
-                                        <Button className='!bg-red-600'>
-                                            <p>Delete</p>
+                                        <Button disabled={deleting} onClick={() => deleteComplaint(complaint._id)} className='!bg-red-600 disabled:!bg-gray-400'>
+                                            {deleting ? <Loader></Loader> : <p>Delete</p>}
                                         </Button>
                                     </td>
                                 </tr>

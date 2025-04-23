@@ -11,6 +11,7 @@ export const Complain = ({ ...props }) => {
     const [complain, setComplain] = useState(null);
     const [isOwner, setOwner] = useState(false);
     const [isLoading, setLoading] = useState(false);
+    const [loadingComplaintId, setLoadingComplaintId] = useState(null); // Track the complaint being updated
 
     useEffect(() => {
         (function () {
@@ -24,18 +25,30 @@ export const Complain = ({ ...props }) => {
     }, [])
 
 
-    const chnageStatus = async () => {
-        let p = await confirmBox("Sure want to Close complaint ?");
-        if (!p) return;
-        setLoading(true);
-        const res = await ReportsAPIs('/changeStatus', { id: complain._id });
-        if (res?.success) {
-            complain.isOpen = (!complain.isOpen);
-            ShowAlert('Compaint Closed', true);
-            setComplain(complain);
+    const chnageStatus = async (id) => {
+        let confirmed = await confirmBox("Sure want to Close complaint?");
+        if (!confirmed) return;
+
+        setLoadingComplaintId(id); // Set the ID of the complaint being updated
+
+        try {
+            const res = await ReportsAPIs('/changeStatus', { id });
+            if (res?.success) {
+                setComplain((prevComplain) => ({
+                    ...prevComplain,
+                    isOpen: !prevComplain.isOpen, // Toggle the status
+                }));
+                ShowAlert('Complaint Closed', true);
+            } else {
+                ShowAlert('Failed to update complaint status', false);
+            }
+        } catch (error) {
+            console.error("Error updating complaint status:", error);
+            ShowAlert('An error occurred while updating the complaint status', false);
+        } finally {
+            setLoadingComplaintId(null); // Reset the loading state
         }
-        setLoading(false);
-    }
+    };
 
     return (
         complain &&
@@ -70,13 +83,16 @@ export const Complain = ({ ...props }) => {
                     <hr className="w-full my-2" />
                     <div className="flex justify-end gap-1">
                         <div>
-                            <Button onClick={() => { chnageStatus() }} type="submit" disabled={isLoading}>
-                                {
-                                    isLoading ?
-                                        <Loader></Loader>
-                                        :
-                                        complain.isOpen ? 'Close Complaint' : 'Set Open'
-                                }
+                            <Button
+                                onClick={() => chnageStatus(complain._id)}
+                                type="submit"
+                                disabled={loadingComplaintId === complain._id} // Disable only the button for the complaint being updated
+                            >
+                                {loadingComplaintId === complain._id ? (
+                                    <Loader />
+                                ) : (
+                                    complain.isOpen ? 'Close Complaint' : 'Set Open'
+                                )}
                             </Button>
                         </div>
                     </div>

@@ -23,6 +23,7 @@ export const VerifyAdminMiddleware = async (req, res, next) => {
                 new ApiError('Incorrect Admin Token'))
                 
         const user = await Admins.findOne({ _id: userDetails._id || null });
+        
         if (!user) {
             return res.status(400).json(
                 new ApiError('Admin not found', null, false, 400)

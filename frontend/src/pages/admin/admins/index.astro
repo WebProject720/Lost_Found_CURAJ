@@ -1,0 +1,16 @@
+---
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import {AdminTable} from "../../../blocks/AdminTable.jsx"
+---
+
+<AdminLayout>
+    <div class="w-screen my-10 p-2">
+        <div>
+            <h1 class="font-extrabold text-2xl text-center">Admin Table</h1>
+        </div>
+        <hr class="my-6" />
+        <div>
+            <AdminTable client:load></AdminTable>
+        </div>
+    </div>
+</AdminLayout>

@@ -1,0 +1,30 @@
+---
+import { Button } from "../../../components/utility/Button";
+import { Input } from "../../../components/utility/Input";
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+---
+
+<AdminLayout>
+    <div class="mt-14 w-screen flex justify-center items-center p-2">
+        <div class="bg-slate-100 rounded-md p-6 desktop:w-1/3 tablet:w-full">
+            <div>
+                <h1 class="text-black font-extrabold text-xl py-8">
+                    Add admin
+                </h1>
+            </div>
+            <hr class="my-3">
+            <div>
+                <form action="" class="flex flex-col gap-4">
+                    <Input class=""  label="Username" />
+                    <Input class=""  label="Mail ID" />
+                    <Input class=""  type="password" label="Password" />
+                    <Input class=""  type="password" label="Confirm Password" />
+                    <hr class="my-2">
+                    <Button className="">
+                        <p>Add Admin</p>
+                    </Button>
+                </form>
+            </div>
+        </div>
+    </div>
+</AdminLayout>

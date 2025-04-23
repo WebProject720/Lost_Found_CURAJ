@@ -42,7 +42,7 @@ export const adminLogout = async () => {
         return response.data;
     } catch ({ response }) {
         ShowAlert(response?.data?.message || "Something went wrong", false);
-        adminLogout();
+        logout();
         return response.data;
     }
 }

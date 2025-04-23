@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { AdminGetAPIs } from '../APIs/admin/adminAPIs';
-import { confirmBox } from './alertLogic';
+import { AdminGetAPIs, AdminPostAPIs } from '../APIs/admin/adminAPIs';
+import { confirmBox, ShowAlert } from './alertLogic';
 import { Loader } from './utility/Loader';
 import { Button } from './utility/Button';
 import { Input } from './utility/Input';
 
 const User = () => {
 
-
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deletingUserId, setDeletingUserId] = useState(null); // Track the user being deleted
 
   useEffect(() => {
     (async () => {
@@ -17,17 +17,31 @@ const User = () => {
       setUsers(data.data);
       setLoading(false);
     })();
-  }, [])
-
+  }, []);
 
   //delete user on click
-  const deleteUser = (id) => {
-    const confirmed = confirmBox('Are you sure you want to delete this user?');
-    // if (confirmed) {
-    //   setUsers(users.filter(user => user.id !== id));
-    // }
-  };
+  const deleteUser = async (id) => {
+    const confirmed = await confirmBox('Are you sure you want to delete this user?');
+    if (!confirmed) return;
 
+    console.log('Deleting user with ID:', id);
+    setDeletingUserId(id); // Set the ID of the user being deleted
+
+    try {
+      const res = await AdminPostAPIs('/users/delete', { identifier: id });
+      if (res.success) {
+        ShowAlert("User deleted successfully", true);
+        setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id)); // Remove the deleted user from the list
+      } else {
+        ShowAlert("Failed to delete user", false);
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      ShowAlert("An error occurred while deleting the user", false);
+    } finally {
+      setDeletingUserId(null); // Reset the deleting state
+    }
+  };
 
   return (
     <div className="container w-screen mx-auto p-4">
@@ -44,30 +58,40 @@ const User = () => {
           <table className="w-full table-auto bg-white border border-gray-300 shadow-md">
             <thead className="bg-gray-100">
               <tr>
-                <th className="px-6 py-3 text-left text-gray-700">User Name</th>
-                <th className="px-6 py-3 text-left text-gray-700">Email</th>
-                <th className="px-6 py-3 text-left text-gray-700">Account Created Date</th>
-                <th className="px-6 py-3 text-left text-gray-700">No. of Complaints</th>
-                <th className="px-6 py-3 text-left text-gray-700">Actions</th>
+                <th className="px-6 py-3 text-center text-gray-700">User Name</th>
+                <th className="px-6 py-3 text-center text-gray-700">Email</th>
+                <th className="px-6 py-3 text-center text-gray-700">Account Created Date</th>
+                <th className="px-6 py-3 text-center text-gray-700">Verified</th>
+                <th className="px-6 py-3 text-center text-gray-700 ">Complaints</th>
+                <th className="px-6 py-3 text-center text-gray-700">Actions</th>
               </tr>
             </thead>
             <tbody >
               {users.length > 0 ? (
                 users.map(user => (
-                  <tr key={user._id} className="border-t hover:bg-gray-50">
-                    <td className="px-4 py-3">{user.username}</td>
-                    <td className="px-4 py-3">{user.email}</td>
-                    <td className="px-4 py-3">{new Date(user.createdAt).toLocaleString()}</td>
-                    <td className="px-4 py-3 text-center">{user.Reports.length || 0}</td>
-                    <td className="px-4 py-3">
-                      <Button className='!bg-red-600'>
-                        <p>Delete</p>
+                  <tr key={user._id} className="border-t text-center hover:bg-orange-100 ">
+                    <td className="px-4 py-3 text-center">{user.username}</td>
+                    <td className="px-4 py-3 text-center">{user.email}</td>
+                    <td className="px-4 py-3 text-center">{new Date(user.createdAt).toLocaleString()}</td>
+                    <td className={`px-4 py-3 text-center`}>
+                      <span className={`p-2 rounded-full text-xs ${user.isVerified ? 'bg-green-300' : 'bg-red-300'}`}>
+                        {user.isVerified ? 'Verified' : 'Not Verify'}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3  text-center">{user.Reports.length || 0}</td>
+                    <td className="px-4 py-3 text-center">
+                      <Button
+                        disabled={deletingUserId === user._id} // Disable only the button for the user being deleted
+                        onClick={() => deleteUser(user._id)}
+                        className={`!bg-red-600 ${deletingUserId === user._id ? 'disabled:!bg-gray-400' : ''}`}
+                      >
+                        {deletingUserId === user._id ? <Loader /> : <p>Delete</p>}
                       </Button>
                     </td>
                   </tr>
                 ))
               ) : (
-                <tr>
+                <tr className='text-center'>
                   <td className="px-6 py-3 text-center text-gray-500" colSpan="4">
                     No users found.
                   </td>
