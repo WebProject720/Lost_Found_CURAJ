@@ -67,7 +67,7 @@ const User = () => {
               </tr>
             </thead>
             <tbody >
-              {users.length > 0 ? (
+              {users?.length > 0 ? (
                 users.map(user => (
                   <tr key={user._id} className="border-t text-center hover:bg-orange-100 ">
                     <td className="px-4 py-3 text-center">{user.username}</td>

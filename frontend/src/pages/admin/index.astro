@@ -11,52 +11,47 @@ import AdminLayout from "../../layouts/AdminLayout.astro";
     <div class="w-full mt-8">
       <StatsDashboard client:only />
       <!-- <h1>Welcome Admin Portal</h1> -->
+      <hr />
     </div>
-    <div class="flex flex-row py-8 gap-3">
-      <a href="/admin/users" class="bg-blue-200 rounded-lg p-6">
-        <div>
-          <img
-            class="size-36 p-4"
-            src={Images.usersIcon.src}
-            alt="Users Icon"
-          />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-8">
+      <a
+        href="/admin/users"
+        class="bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg p-6 shadow-lg transform transition-transform hover:scale-105"
+      >
+        <div class="flex justify-center">
+          <img class="w-16 h-16" src={Images.usersIcon.src} alt="Users Icon" />
         </div>
-        <hr />
-        <div class="p-4">
-          <h1 class="text-center text-white font-extrabold text-2xl">
-            Users List
-          </h1>
+        <hr class="my-4 border-gray-300" />
+        <div class="text-center">
+          <h1 class="text-white font-extrabold text-xl">Users List</h1>
         </div>
       </a>
       <a
         href="/admin/complaints"
-        class="bg-blue-200 flex justify-center items-center flex-col rounded-lg p-6"
+        class="bg-gradient-to-r from-green-500 to-green-700 rounded-lg p-6 shadow-lg transform transition-transform hover:scale-105"
       >
-        <div>
+        <div class="flex justify-center">
           <img
-            class="size-36 p-4"
-            src={Images.AddReportIcon}
-            alt="Users Icon"
+            class="w-16 h-16"
+            src={Images.feedbackform.src}
+            alt="Complaints Icon"
           />
         </div>
-        <hr class="w-full" />
-        <div class="p-4">
-          <h1 class="text-center text-white font-extrabold text-2xl">
-            Complaints List
-          </h1>
+        <hr class="my-4 border-gray-300" />
+        <div class="text-center">
+          <h1 class="text-white font-extrabold text-xl">Complaints List</h1>
         </div>
-      </a><a
+      </a>
+      <a
         href="/admin/admins"
-        class="bg-blue-200 flex justify-center items-center flex-col rounded-lg p-6"
+        class="bg-gradient-to-r from-purple-500 to-purple-700 rounded-lg p-6 shadow-lg transform transition-transform hover:scale-105"
       >
-        <div>
-          <img class="size-36 p-4" src={Images.userIcon} alt="Users Icon" />
+        <div class="flex justify-center">
+          <img class="w-16 h-16" src={Images.admin.src} alt="Admin Icon" />
         </div>
-        <hr class="w-full" />
-        <div class="p-4">
-          <h1 class="text-center text-white font-extrabold text-2xl">
-            Admin List
-          </h1>
+        <hr class="my-4 border-gray-300" />
+        <div class="text-center">
+          <h1 class="text-white font-extrabold text-xl">Admin List</h1>
         </div>
       </a>
     </div>

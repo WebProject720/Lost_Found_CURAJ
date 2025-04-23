@@ -20,14 +20,16 @@ const ComplaintsList = () => {
     }, []);
 
     const deleteComplaint = async (id) => {
-        console.log('deleting ', id, '  ...');
         const confirm =await confirmBox("Delete this Complaint ?");
         if (!confirm) return;
-        setDeleting(true);
+        setDeleting(id);
         //Post Request
         const res = await AdminPostAPIs('/complaints/delete', { id });
         if (res.success)
             ShowAlert("Complaint Deleted", true)
+        setComplaints((pre)=>{
+            return pre.filter((c)=>c._id!=id)
+        })
 
         if (res?.status)
             ShowAlert("Complaint Deleted ", true);
@@ -102,8 +104,8 @@ const ComplaintsList = () => {
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-sm text-gray-700">
-                                        <Button disabled={deleting} onClick={() => deleteComplaint(complaint._id)} className='!bg-red-600 disabled:!bg-gray-400'>
-                                            {deleting ? <Loader></Loader> : <p>Delete</p>}
+                                        <Button disabled={deleting==complaint._id&&deleting} onClick={() => deleteComplaint(complaint._id)} className='!bg-red-600 disabled:!bg-gray-400'>
+                                            {deleting==complaint._id && deleting ? <Loader></Loader> : <p>Delete</p>}
                                         </Button>
                                     </td>
                                 </tr>

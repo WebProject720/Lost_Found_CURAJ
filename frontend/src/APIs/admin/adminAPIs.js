@@ -13,6 +13,8 @@ export const AdminPostAPIs = async (route, data) => {
 
     } catch ({ response }) {
         ShowAlert(response?.data?.message||"Something went wrong", false);
+        if(response?.status==401)
+            logout();
         return response.data
     }
 }
@@ -20,9 +22,12 @@ export const AdminPostAPIs = async (route, data) => {
 export const AdminGetAPIs = async (route) => {
     try {
         const response = await axios.get(server + '/admin' + route, { withCredentials: true });
+
         return response.data;
     } catch ({ response }) {
         ShowAlert(response?.data?.message || "Something went wrong", false);
+        if(response?.status==401)
+            logout();
         return response.data
     }
 }
@@ -31,6 +36,8 @@ export const checkAdminExist = async () => {
         const response = await axios.post(server + '/admin/islogged',null, { withCredentials: true });
         return response.data;
     } catch ({ response }) {
+        if(response?.status==401)
+            logout();
         return response.data
     }
 }
