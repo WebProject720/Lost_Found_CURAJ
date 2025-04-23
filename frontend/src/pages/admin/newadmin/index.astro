@@ -12,15 +12,25 @@ import AdminLayout from "../../../layouts/AdminLayout.astro";
                     Add admin
                 </h1>
             </div>
-            <hr class="my-3">
+            <hr class="my-3" />
             <div>
-                <form action="" class="flex flex-col gap-4">
-                    <Input class=""  label="Username" />
-                    <Input class=""  label="Mail ID" />
-                    <Input class=""  type="password" label="Password" />
-                    <Input class=""  type="password" label="Confirm Password" />
-                    <hr class="my-2">
-                    <Button className="">
+                <form id="add-admin-form" class="flex flex-col gap-4">
+                    <Input id="username" class="" label="Username" />
+                    <Input id="enrollment" class="" label="Mail ID" />
+                    <Input
+                        id="password"
+                        class=""
+                        type="password"
+                        label="Password"
+                    />
+                    <Input
+                        id="confirmPassword"
+                        class=""
+                        type="password"
+                        label="Confirm Password"
+                    />
+                    <hr class="my-2" />
+                    <Button id="submit-button" className="">
                         <p>Add Admin</p>
                     </Button>
                 </form>
@@ -28,3 +38,62 @@ import AdminLayout from "../../../layouts/AdminLayout.astro";
         </div>
     </div>
 </AdminLayout>
+
+<script>
+    import { navigate } from "astro:transitions/client";
+    import { AdminPostAPIs } from "../../../APIs/admin/adminAPIs";
+    import { ShowAlert } from "../../../components/alertLogic";
+
+    /**
+     * Function to get form data and return it as an object
+     * @returns {Object} Form data
+     */
+    function getFormData() {
+        const form = document.getElementById("add-admin-form");
+        if (!form) return;
+
+        const formData = {
+            username:
+                (
+                    form.querySelector("#username") as HTMLInputElement
+                )?.value.trim() || "",
+            enrollment:
+                (
+                    form.querySelector("#enrollment") as HTMLInputElement
+                )?.value.trim() || "",
+            password:
+                (
+                    form.querySelector("#password") as HTMLInputElement
+                )?.value.trim() || "",
+            confirmPassword:
+                (
+                    form.querySelector("#confirmPassword") as HTMLInputElement
+                )?.value.trim() || "",
+        };
+        return formData;
+    }
+
+    // Example usage
+    const submitButton = document.getElementById("submit-button");
+    submitButton &&
+        submitButton.addEventListener("click", async (event) => {
+            event.preventDefault(); // Prevent form submission
+            const data = getFormData();
+
+            if (data?.password != data?.confirmPassword) {
+                ShowAlert("Password not matched", false);
+                return;
+            }
+
+            const res = await AdminPostAPIs("/register", data);
+            console.log(res);
+            if (res?.success) {
+                ShowAlert("New Admin Added !", true);
+                navigate("/admin/admins");
+            } else {
+                return;
+            }
+
+            console.log("Form Data:", data);
+        });
+</script>

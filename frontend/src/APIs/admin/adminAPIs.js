@@ -12,8 +12,8 @@ export const AdminPostAPIs = async (route, data) => {
         return response.data;
 
     } catch ({ response }) {
-        console.log(response);
-        ShowAlert("Something went wrong", false);
+        ShowAlert(response?.data?.message||"Something went wrong", false);
+        return response.data
     }
 }
 

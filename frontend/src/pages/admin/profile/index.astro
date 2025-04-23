@@ -1,9 +1,78 @@
 ---
 import AdminLayout from "../../../layouts/AdminLayout.astro";
+import { getUser } from "../../../store";
+
+const user = getUser();
 ---
 
-<AdminLayout >
-    <div>
-        
+<AdminLayout>
+    <div class="mt-10 w-screen flex justify-center items-center p-4">
+        <div
+            class="bg-white shadow-md rounded-lg p-6 w-full max-w-lg"
+            id="profile-container"
+        >
+            <!-- Profile content will be dynamically rendered here -->
+        </div>
     </div>
 </AdminLayout>
+
+<script>
+    import { getUser } from "../../../store";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const user = getUser(); // Simulate fetching user data
+        const profileContainer = document.getElementById("profile-container");
+        if (!profileContainer) return;
+        if (!user || Object.keys(user).length === 0) {
+            profileContainer.innerHTML = `
+                <div class="text-center text-gray-500">
+                    <p>No user data available.</p>
+                </div>
+            `;
+            return;
+        }
+
+        profileContainer.innerHTML = `
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                    ${
+                        user.profileImage
+                            ? `<img src="${user.profileImage}" alt="Profile Image" class="w-full h-full object-cover" />`
+                            : `<span class="text-gray-500 text-2xl">👤</span>`
+                    }
+                </div>
+                <h2 class="text-xl font-bold mt-4">${user.username || "N/A"}</h2>
+                <p class="text-gray-500">${user.email || "N/A"}</p>
+            </div>
+            <hr class="my-6" />
+            <div class="space-y-4">
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-600">User ID:</span>
+                    <span class="text-gray-800">${user._id || "N/A"}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-600">Created At:</span>
+                    <span class="text-gray-800">${new Date(user.createdAt).toLocaleString() || "N/A"}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-600">Updated At:</span>
+                    <span class="text-gray-800">${new Date(user.updatedAt).toLocaleString() || "N/A"}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-600">Verified:</span>
+                    <span class="text-sm font-medium px-2 py-1 rounded-full ${
+                        user.isVerified
+                            ? "bg-green-100 text-green-600"
+                            : "bg-red-100 text-red-600"
+                    }">
+                        ${user.isVerified ? "Yes" : "No"}
+                    </span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium text-gray-600">Session Key:</span>
+                    <span class="text-gray-800">${user.sessionKey || "N/A"}</span>
+                </div>
+            </div>
+        `;
+    });
+</script>
