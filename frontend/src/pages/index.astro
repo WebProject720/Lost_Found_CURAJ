@@ -3,6 +3,7 @@ import Nav from "../components/Nav.astro";
 import Sidebar from "../components/Sidebar.astro";
 import AlertBox from "../components/utility/AlertBox.astro";
 import { Images } from "../constants.astro";
+import bkdImage from "../assets/bkd.jpg";
 ---
 
 <!doctype html>
@@ -18,10 +19,7 @@ import { Images } from "../constants.astro";
     />
     <style>
       body {
-        background-image: url("https://images.shiksha.com/mediadata/images/1531476753php2ZzHlq.jpeg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+        
       }
     </style>
   </head>
@@ -30,7 +28,7 @@ import { Images } from "../constants.astro";
     <AlertBox />
     <div id="container" class="flex bg-black/40 flex-col">
       <div class="w-screen" id="header-container">
-        <Nav className="bg-slate-100/60 shadow-none backdrop-blur-md" />
+        <Nav/>
       </div>
       <div class="flex flex-row relative">
         <div
@@ -38,134 +36,92 @@ import { Images } from "../constants.astro";
           id="sidebarBox"
         >
           <Sidebar class="" />
+        </div></div>
+        <div 
+        class="flex flex-col md:flex-row items-center justify-center min-h-[90vh] px-6 py-10 gap-10 bg-cover bg-center"
+        style={`background-image: url('${bkdImage.src}');`}
+      >
+        <!-- Left Div (Image) -->
+        <div class="flex-1 flex justify-center">
+          <img 
+            src={Images.DskImage.src} 
+            alt="CURAJ Lost & Found" 
+            class="max-w-[220px] md:max-w-[490px] w-full rounded-2xl" 
+          />
+        </div>
+      
+        <!-- Right Div (Text + Buttons) -->
+        <div class="flex-1 flex flex-col text-center md:text-left mt-0 md:mt-[-110px]">
+          <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">Welcome</h2>
+          <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6">Lost & Found Portal CURAJ</h1>
+          <p class="text-gray-600 text-base md:text-lg mb-8">
+            A dedicated platform for students and faculty to report lost or found items within the campus.
+            Help us reunite items with their rightful owners quickly and easily.
+          </p>
+      
+          <div class="flex flex-wrap justify-center md:justify-start gap-4">
+            <button onclick="location.href='/auth'" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg">Login</button>
+            <button onclick="location.href='/auth/register'" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg">Register Now</button>
+            <button onclick="location.href='/auth?mode=0'" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg">Admin Login</button>
+            <button onclick="location.href='/about'" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-6 rounded-lg">About Us</button>
+          </div>
         </div>
       </div>
-      <!-- Main Content Section -->
-      <main
-        class="relative flex items-start justify-center min-h-screen p-8 bg-center"
-      >
-        <!-- Overlay for Blur Effect -->
-        <div class="absolute inset-0 backdrop-blur-none"></div>
+      
+     <!-- Profile Box - Fixed -->
+<!-- Profile Box - Relative to page -->
+<div class="absolute top-36 right-14 hidden sm:flex items-center space-x-2 p-2 rounded-full">
+  <img
+    src="https://www.curaj.ac.in/sites/all/themes/cmf/images/naac1.png"
+    alt="Profile"
+    class="w-20 h-12 rounded-full"
+  />
+  <div class="text-gray-800">
+    <p class="font-bold">A++ Grade by NAAC</p>
+    <p class="text-sm">Category 1st University</p>
+  </div>
+</div>
 
-        <div
-          class="relative flex flex-wrap items-start justify-between w-full max-w-6xl mt-12 p-6 text-white"
-        >
-          <!-- Left Image Collage -->
-          <div
-            class="w-full md:w-1/2 p-4 grid-cols-3 gap-2 transform md:-translate-x-16 hidden md:grid"
-          >
-            <div class="col-span-2 row-span-2">
-              <img
-                src="https://images.bhaskarassets.com/web2images/521/2023/07/26/14E08AC4-DA06-4D26-BEFE-8BE683DEBC31_1690369921869.jpg"
-                alt="Image 1"
-                class="w-full rounded-lg shadow-md rotate-6"
-              />
-            </div>
-            <img
-              src="https://www.curaj.ac.in/sites/default/files/theuniversity.jpg"
-              alt="Image 2"
-              class="w-full rounded-lg shadow-md -rotate-6"
-            />
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKLhVzwUbQeG8G4KfBlezb5d_8nDKXt65QSA&s"
-              alt="Image 3"
-              class="w-full rounded-lg shadow-md rotate-3"
-            />
+
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-10 py-10 bg-slate-100">
+          <!-- Left Div (Image) -->
+          <div class="flex-1 flex justify-center">
+            <img src={Images.device.src} alt="Instruction Image" class="max-w-[760px] w-full rounded-2xl" />
           </div>
-
-          <!-- Right Text Section -->
-          <div class="w-full md:w-1/2 p-4 text-center md:text-left">
-            <h1 class="text-4xl font-bold">Welcome<br />Lost & Found Portal</h1>
-            <h2 class="text-3xl font-bold text-blue-400">CURAJ</h2>
-            <p class="mt-4 text-lg">
-              A dedicated platform for students and faculty to report lost or
-              found items within the campus. Help us reunite items with their
-              rightful owners quickly and easily.
+        
+          <!-- Right Div (How It Works Text) -->
+          <div class="flex-1 flex flex-col text-center md:text-left">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">How It Works?</h2>
+            <p class="text-gray-600 text-base md:text-lg mb-6">
+              <strong>Register on the Portal:</strong><br />
+              To get started, register using your Enrollment Number or Curaj Official Email ID.<br />
+              This ensures only authorized students can access the portal.
             </p>
-            <div class="my-5 flex tablet:items-center tablet:flex-col">
-              <!-- Login & Register Buttons -->
-              <div
-                class="flex space-x-4 justify-center align-middle tablet:justify-start"
-              >
-                <div id="auth-buttons" class="flex flex-nowrap gap-2 flex-row">
-                  <button
-                    onclick="location.href='/auth'"
-                    class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-6 phone:p-2 rounded-lg text-lg"
-                    >Login</button
-                  >
-                  <button
-                    onclick="location.href='/auth/register'"
-                    class="bg-blue-800 hover:bg-blue-900 text-nowrap text-white font-bold py-2 px-6 phone:p-2 rounded-lg text-lg"
-                    >Register Now</button
-                  ><button
-                    onclick="location.href='/auth?mode=0'"
-                    class="bg-blue-800 hover:bg-blue-900 text-nowrap text-white font-bold py-2 px-6 phone:p-2 rounded-lg text-lg"
-                    >Admin Login</button
-                  >
-                </div>
-                <!-- Know More Button (Visible on both mobile & desktop) -->
-                <button
-                  onclick="location.href='/about'"
-                  class="bg-gray-300 hover:bg-gray-400 text-nowrap text-gray-900 font-bold py-2 px-6 rounded-lg text-lg hidden md:block"
-                  >About Us</button
-                >
-              </div>
-
-              <div class="mt-4 flex justify-center md:hidden">
-                <button
-                  onclick="location.href='/about'"
-                  class="bg-gray-300 hover:bg-gray-400 text-gray-900 font-bold py-2 px-4 rounded-lg text-lg w-32"
-                >
-                  About Us
-                </button>
-              </div>
-            </div>
-
-            <!-- How It Works and How to Use Sections -->
-            <div
-              class="mt-10 flex flex-col gap-3 tablet:justify-center phone:justify-center phone:items-center tablet:items-center md:flex-row justify-between text-white"
-            >
-              <div
-                class="p-4 phone:p-2 rounded-lg shadow-xl bg-black/50 w-fit phone:w-full md:w-1/2 mr-2"
-              >
-                <h3 class="text-xl font-bold">How It Works?</h3>
-                <ul class="list-disc pl-5 mt-2">
-                  <li>Submit details of your lost item</li>
-                  <li>We match lost and found items</li>
-                  <li>Claim your item securely</li>
-                </ul>
-              </div>
-              <div
-                class="p-4 phone:p-2 rounded-lg shadow-md w-fit bg-black/50 phone:w-full md:w-1/2 ml-2"
-              >
-                <h3 class="text-xl font-bold">How to Use?</h3>
-                <ul class="list-disc pl-5 mt-2">
-                  <li>Sign up and create an account</li>
-                  <li>Submit a lost or found report</li>
-                  <li>Connect with the rightful owner</li>
-                </ul>
-              </div>
-            </div>
+            <p class="text-gray-600 text-base md:text-lg mb-6">
+              <strong>Login to Your Account:</strong><br />
+              Once registered, log in using your credentials to access the portal's features.
+            </p>
+            <p class="text-gray-600 text-base md:text-lg mb-6">
+              <strong>Submit a Complaint:</strong><br />
+              After logging in, submit a Lost or Found item complaint. Include the Subject (e.g., “Lost Wallet”), a Description with detailed information about the item, and upload a clear Image for easy identification.
+            </p>
+            <p class="text-gray-600 text-base md:text-lg mb-6">
+              <strong>View and Track Complaints:</strong><br />
+              Once submitted, you can view and track your complaints to stay updated on the status of your lost or found items.
+            </p>
+            <p class="text-gray-600 text-base md:text-lg mb-6">
+              <strong>Respond to Complaints:</strong><br />
+              If you find a lost item, log in and browse the Found Items section. If you find an item, you can respond to the relevant complaint.
+            </p>
+            <p class="text-gray-600 text-base md:text-lg mb-6">
+              <strong>Get Notifications:</strong><br />
+              Once a response is made about your lost item, you will receive an automatic email notification about the found item.
+            </p>
           </div>
         </div>
-
-        <!-- Profile Image -->
-        <!-- Profile Image (Hidden in Mobile) -->
-        <div
-          class="absolute top-6 right-6 hidden sm:flex items-center space-x-2 p-2 rounded-full shadow-md"
-        >
-          <img
-            src="https://www.curaj.ac.in/sites/all/themes/cmf/images/naac1.png"
-            alt="Profile"
-            class="w-20 h-12 rounded-full"
-          />
-          <div class="text-white">
-            <p class="font-bold">A++ Grade by NAAC</p>
-            <p class="text-sm">Category 1st University</p>
-          </div>
-        </div>
-      </main>
-    </div>
+      </div>
+    
   </body>
 
   <script>
