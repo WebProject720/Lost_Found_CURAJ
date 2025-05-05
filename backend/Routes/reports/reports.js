@@ -9,6 +9,8 @@ import { getOne } from '../../controllers/reports/get.js';
 import { ImageUpload } from '../../controllers/reports/uploadImage.js';
 import { upload } from '../../middleware/multer.js';
 import { ImageUploadonDB } from '../../middleware/UploadImage.js';
+import { feedback } from '../../controllers/reports/feedback.js';
+import { getFeedbacks } from '../../controllers/reports/getfeedback.js';
 
 
 const ReportsRouter = Router();
@@ -22,6 +24,8 @@ ReportsRouter.route('/stats').get(stats);
 ReportsRouter.route('/reply').post(authenticateUser, reply);
 ReportsRouter.route('/get').post(authenticateUser, getOne);
 ReportsRouter.route('/imgupload').post(authenticateUser,upload.single('file'),ImageUploadonDB, ImageUpload);
+ReportsRouter.route('/feedback/add').post(feedback);
+ReportsRouter.route('/feedback/get').get(getFeedbacks);
 
 
 

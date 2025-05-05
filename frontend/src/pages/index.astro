@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar.astro";
 import AlertBox from "../components/utility/AlertBox.astro";
 import { Images } from "../constants.astro";
 import bkdImage from "../assets/bkd.jpg";
+import { FeedbackForm } from "../blocks/FeedbackForm";
 ---
 
 <!doctype html>
@@ -19,7 +20,6 @@ import bkdImage from "../assets/bkd.jpg";
     />
     <style>
       body {
-        
       }
     </style>
   </head>
@@ -28,7 +28,7 @@ import bkdImage from "../assets/bkd.jpg";
     <AlertBox />
     <div id="container" class="flex bg-black/40 flex-col">
       <div class="w-screen" id="header-container">
-        <Nav/>
+        <Nav />
       </div>
       <div class="flex flex-row relative">
         <div
@@ -36,177 +36,229 @@ import bkdImage from "../assets/bkd.jpg";
           id="sidebarBox"
         >
           <Sidebar class="" />
-        </div></div>
-        <div 
+        </div>
+      </div>
+      <div
         class="flex flex-col md:flex-row items-center justify-center min-h-[90vh] px-6 py-10 gap-10 bg-cover bg-center"
         style={`background-image: url('${bkdImage.src}');`}
       >
         <!-- Left Div (Image) -->
         <div class="flex-1 flex justify-center">
-          <img 
-            src={Images.DskImage.src} 
-            alt="CURAJ Lost & Found" 
-            class="max-w-[220px] md:max-w-[490px] w-full rounded-2xl" 
+          <img
+            src={Images.DskImage.src}
+            alt="CURAJ Lost & Found"
+            class="max-w-[220px] md:max-w-[490px] w-full rounded-2xl"
           />
         </div>
-      
+
         <!-- Right Div (Text + Buttons) -->
-        <div class="flex-1 flex flex-col text-center md:text-left mt-0 md:mt-[-110px]">
-          <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">Welcome</h2>
-          <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6">Lost & Found Portal CURAJ</h1>
+        <div
+          class="flex-1 flex flex-col text-center md:text-left mt-0 md:mt-[-110px]"
+        >
+          <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">
+            Welcome
+          </h2>
+          <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6">
+            Lost & Found Portal CURAJ
+          </h1>
           <p class="text-gray-600 text-base md:text-lg mb-8">
-            A dedicated platform for students and faculty to report lost or found items within the campus.
-            Help us reunite items with their rightful owners quickly and easily.
+            A dedicated platform for students and faculty to report lost or
+            found items within the campus. Help us reunite items with their
+            rightful owners quickly and easily.
           </p>
-      
-          <div class="flex flex-wrap justify-center md:justify-start gap-4">
-            <button onclick="location.href='/auth'" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg">Login</button>
-            <button onclick="location.href='/auth/register'" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg">Register Now</button>
-            <button onclick="location.href='/auth?mode=0'" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg">Admin Login</button>
-            <button onclick="location.href='/about'" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-6 rounded-lg">About Us</button>
+
+          <div
+            id="auth-buttons"
+            class="flex flex-wrap justify-center md:justify-start gap-4"
+          >
+            <button
+              onclick="location.href='/auth'"
+              class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg"
+              >Login</button
+            >
+            <button
+              onclick="location.href='/auth/register'"
+              class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg"
+              >Register Now</button
+            >
+            <button
+              onclick="location.href='/auth?mode=0'"
+              class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg"
+              >Admin Login</button
+            >
+          </div>
+          <div class="py-2">
+            <button
+              onclick="location.href='/about'"
+              class="bg-yellow-600 w-fit hover:bg-yellow-700 text-white font-bold py-2 px-6 rounded-lg"
+              >About Us</button
+            >
           </div>
         </div>
       </div>
 
-
-<div class="absolute top-36 right-14 hidden sm:flex items-center space-x-2 p-2 rounded-full">
-  <img
-    src="https://www.curaj.ac.in/sites/all/themes/cmf/images/naac1.png"
-    alt="Profile"
-    class="w-20 h-12 rounded-full"
-  />
-  <div class="text-gray-800">
-    <p class="font-bold">A++ Grade by NAAC</p>
-    <p class="text-sm">Category 1st University</p>
-  </div>
-</div>
-
-
-
-<!-- How It Works Section - Modern 2-in-1 Layout -->
-<div class="flex flex-col md:flex-row items-center justify-between gap-12 px-6 py-16 bg-gradient-to-br bg-slate-100">
-  <!-- Left Image -->
-  <div class="flex-1 flex justify-center">
-    <img 
-  src={Images.C.src} 
-  alt="CURAJ Lost & Found" 
-  class="max-w-[250px] md:max-w-[540px] w-full rounded-2xl transition-transform duration-500 ease-in-out transform hover:scale-105" 
-/>
-
-  </div>
-
-  <!-- Right Steps -->
-  <div class="flex-1 space-y-6">
-    <h2 class="text-4xl font-extrabold text-blue-800 text-center md:text-left">How It Works?</h2>
-    
-    <div class="space-y-4">
-      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-blue-500">
-        <h3 class="text-blue-700 font-semibold text-lg">🔹 Register on the Portal</h3>
-        <p class="text-gray-600 text-sm">Use your Enrollment Number or CURAJ Official Email ID to register. Only CURAJ students/faculty can access the portal.</p>
+      <div
+        class="absolute top-36 z-20 backdrop-brightness-75 backdrop-blur-sm right-10 hidden sm:flex items-center space-x-2 p-2 rounded-full"
+      >
+        <img
+          src="https://www.curaj.ac.in/sites/all/themes/cmf/images/naac1.png"
+          alt="Profile"
+          class="w-20 h-12 rounded-full"
+        />
+        <div class="text-gray-800">
+          <p class="font-bold">A++ Grade by NAAC</p>
+          <p class="text-sm">Category 1st University</p>
+        </div>
       </div>
 
-      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-green-500">
-        <h3 class="text-green-700 font-semibold text-lg">🔹 Login to Your Account</h3>
-        <p class="text-gray-600 text-sm">Access the portal features after logging in with your registered credentials.</p>
-      </div>
+      <!-- How It Works Section - Modern 2-in-1 Layout -->
+      <div
+        class="flex flex-col md:flex-row items-center justify-between gap-12 px-6 py-16 bg-gradient-to-br bg-slate-100"
+      >
+        <!-- Left Image -->
+        <div class="flex-1 flex justify-center">
+          <img
+            src={Images.C.src}
+            alt="CURAJ Lost & Found"
+            class="max-w-[250px] md:max-w-[540px] w-full rounded-2xl transition-transform duration-500 ease-in-out transform hover:scale-105"
+          />
+        </div>
 
-      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-yellow-500">
-        <h3 class="text-yellow-700 font-semibold text-lg">🔹 Submit a Complaint</h3>
-        <p class="text-gray-600 text-sm">Submit a Lost/Found report with Subject, Description, and Image for identification.</p>
-      </div>
+        <!-- Right Steps -->
+        <div class="flex-1 space-y-6">
+          <h2
+            class="text-4xl font-extrabold text-blue-800 text-center md:text-left"
+          >
+            How It Works?
+          </h2>
 
-      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-indigo-500">
-        <h3 class="text-indigo-700 font-semibold text-lg">🔹 Track Your Complaint</h3>
-        <p class="text-gray-600 text-sm">Track your submitted complaints and stay updated on their status.</p>
-      </div>
+          <div class="space-y-4">
+            <div
+              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-blue-500"
+            >
+              <h3 class="text-blue-700 font-semibold text-lg">
+                🔹 Register on the Portal
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Use your Enrollment Number or CURAJ Official Email ID to
+                register. Only CURAJ students/faculty can access the portal.
+              </p>
+            </div>
 
-      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-pink-500">
-        <h3 class="text-pink-700 font-semibold text-lg">🔹 Respond to Others</h3>
-        <p class="text-gray-600 text-sm">Found something? Browse and respond to lost item complaints easily.</p>
-      </div>
+            <div
+              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-green-500"
+            >
+              <h3 class="text-green-700 font-semibold text-lg">
+                🔹 Login to Your Account
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Access the portal features after logging in with your registered
+                credentials.
+              </p>
+            </div>
 
-      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-red-500">
-        <h3 class="text-red-700 font-semibold text-lg">🔹 Get Instant Notifications</h3>
-        <p class="text-gray-600 text-sm">Receive instant email alerts when there’s a match or response on your complaint.</p>
-      </div>
+            <div
+              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-yellow-500"
+            >
+              <h3 class="text-yellow-700 font-semibold text-lg">
+                🔹 Submit a Complaint
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Submit a Lost/Found report with Subject, Description, and Image
+                for identification.
+              </p>
+            </div>
 
-      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-indigo-500">
-        <h3 class="text-indigo-700 font-semibold text-lg">🔹 Inappropriate Messages Will Be Deleted</h3>
-        <p class="text-gray-600 text-sm">Any complaint or feedback with offensive or unnecessary content will be reviewed and may be deleted by the admin.</p>
-      </div>
+            <div
+              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-indigo-500"
+            >
+              <h3 class="text-indigo-700 font-semibold text-lg">
+                🔹 Track Your Complaint
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Track your submitted complaints and stay updated on their
+                status.
+              </p>
+            </div>
 
-      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-red-500">
-        <h3 class="text-red-700 font-semibold text-lg">🔹 User May Be Blocked</h3>
-        <p class="text-gray-600 text-sm">Users posting repeated irrelevant or abusive messages can be blocked from using the portal by the admin.</p>
-      </div>
+            <div
+              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-pink-500"
+            >
+              <h3 class="text-pink-700 font-semibold text-lg">
+                🔹 Respond to Others
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Found something? Browse and respond to lost item complaints
+                easily.
+              </p>
+            </div>
 
+            <div
+              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-red-500"
+            >
+              <h3 class="text-red-700 font-semibold text-lg">
+                🔹 Get Instant Notifications
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Receive instant email alerts when there’s a match or response on
+                your complaint.
+              </p>
+            </div>
+
+            <div
+              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-indigo-500"
+            >
+              <h3 class="text-indigo-700 font-semibold text-lg">
+                🔹 Inappropriate Messages Will Be Deleted
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Any complaint or feedback with offensive or unnecessary content
+                will be reviewed and may be deleted by the admin.
+              </p>
+            </div>
+
+            <div
+              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-red-500"
+            >
+              <h3 class="text-red-700 font-semibold text-lg">
+                🔹 User May Be Blocked
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Users posting repeated irrelevant or abusive messages can be
+                blocked from using the portal by the admin.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <FeedbackForm client:only />
     </div>
-  </div>
-</div>
-
-<!-- Feedback Form Section -->
-<div class="bg-slate-100 py-12 px-6 sm:px-12 md:px-24">
-  <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-8">We Value Your Feedback</h2>
-  
-  <form class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-md space-y-6">
-    <!-- Name -->
-    <div>
-      <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        required
-        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        placeholder="Enter your full name"
-      />
-    </div>
-
-    <!-- Email -->
-    <div>
-      <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        required
-        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        placeholder="enrollment@curaj.ac.in"
-      />
-    </div>
-
-    <!-- Feedback Message -->
-    <div>
-      <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Feedback</label>
-      <textarea
-        id="message"
-        name="message"
-        rows="5"
-        required
-        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        placeholder="Share your thoughts or suggestions here..."
-      ></textarea>
-    </div>
-
-    <!-- Submit Button -->
-    <div class="text-center">
-      <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg">Submit Your Feebback</button>
-    </div>
-  </form>
-</div>
-
-
+    <div class="bg-gray-200 desktop:p-8">
+      <div class="flex justify-center flex-row gap-4 flex-nowrap items-center">
+        <a href="#">
+          <img
+            class="size-6"
+            src={Images.instagram_icon.src}
+            alt="Instagram icon"
+          />
+        </a><a href="#">
+          <img class="size-6" src={Images.x_icon.src} alt="Instagram icon" />
+        </a><a href="#">
+          <img
+            class="size-6"
+            src={Images.github_icon.src}
+            alt="Instagram icon"
+          />
+        </a>
       </div>
-    
+    </div>
   </body>
 
   <script>
-
     import { isUserLogin } from "../store";
     isUserLogin()
       ? document.getElementById("auth-buttons")?.classList.add("hidden")
       : null;
-
   </script>
 
   <style is:global>

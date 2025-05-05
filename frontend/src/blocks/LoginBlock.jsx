@@ -13,7 +13,6 @@ import { setUserLogin, setUserInfo } from "../store";
 
 export default function LoginBlock(props) {
 
-
     const [mode, setmode] = useState(false);//0-user & 1- admin
 
     useEffect(() => {
