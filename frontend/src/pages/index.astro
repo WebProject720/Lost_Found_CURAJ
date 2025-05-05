@@ -83,41 +83,64 @@ import bkdImage from "../assets/bkd.jpg";
 
 
 
-<div class="flex flex-col md:flex-row items-center justify-center gap-10 py-10 bg-slate-100 px-6">
-  <!-- Left Div (Image) -->
+<!-- How It Works Section - Modern 2-in-1 Layout -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-12 px-6 py-16 bg-gradient-to-br from-slate-100 to-slate-200">
+  <!-- Left Image -->
   <div class="flex-1 flex justify-center">
-    <img src={Images.device.src} alt="Instruction Image" class="max-w-[900px] w-full rounded-2xl" />
+    <img 
+  src={Images.device.src} 
+  alt="CURAJ Lost & Found" 
+  class="max-w-[220px] md:max-w-[490px] w-full rounded-2xl transition-transform duration-500 ease-in-out transform hover:scale-105" 
+/>
+
   </div>
 
-  <!-- Right Div (How It Works Text with steps) -->
-  <div class="flex-1 flex flex-col text-center md:text-left">
-    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">How It Works?</h2>
-    <ol class="space-y-6">
-      <li class="bg-white rounded-xl p-4 shadow hover:shadow-lg transition">
-        <h3 class="text-blue-700 font-semibold text-lg mb-1">🔹 Register on the Portal</h3>
-        <p class="text-gray-600">Use your Enrollment Number or CURAJ Official Email ID to register. Only CURAJ students/faculty can access the portal.</p>
-      </li>
-      <li class="bg-white rounded-xl p-4 shadow hover:shadow-lg transition">
-        <h3 class="text-green-700 font-semibold text-lg mb-1">🔹 Login to Your Account</h3>
-        <p class="text-gray-600">Access the portal features after logging in with your registered credentials.</p>
-      </li>
-      <li class="bg-white rounded-xl p-4 shadow hover:shadow-lg transition">
-        <h3 class="text-yellow-700 font-semibold text-lg mb-1">🔹 Submit a Complaint</h3>
-        <p class="text-gray-600">Submit a Lost/Found report with Subject, Description, and Image for identification.</p>
-      </li>
-      <li class="bg-white rounded-xl p-4 shadow hover:shadow-lg transition">
-        <h3 class="text-indigo-700 font-semibold text-lg mb-1">🔹 View and Track Complaints</h3>
-        <p class="text-gray-600">Track your submitted complaints and stay updated on their status.</p>
-      </li>
-      <li class="bg-white rounded-xl p-4 shadow hover:shadow-lg transition">
-        <h3 class="text-pink-700 font-semibold text-lg mb-1">🔹 Respond to Complaints</h3>
-        <p class="text-gray-600">Found something? Browse and respond to lost item complaints easily.</p>
-      </li>
-      <li class="bg-white rounded-xl p-4 shadow hover:shadow-lg transition">
-        <h3 class="text-red-700 font-semibold text-lg mb-1">🔹 Get Notifications</h3>
-        <p class="text-gray-600">Receive instant email alerts when there’s a match or response on your complaint.</p>
-      </li>
-    </ol>
+  <!-- Right Steps -->
+  <div class="flex-1 space-y-6">
+    <h2 class="text-4xl font-extrabold text-blue-800 text-center md:text-left">How It Works?</h2>
+    
+    <div class="space-y-4">
+      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-blue-500">
+        <h3 class="text-blue-700 font-semibold text-lg">🔹 Register on the Portal</h3>
+        <p class="text-gray-600 text-sm">Use your Enrollment Number or CURAJ Official Email ID to register. Only CURAJ students/faculty can access the portal.</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-green-500">
+        <h3 class="text-green-700 font-semibold text-lg">🔹 Login to Your Account</h3>
+        <p class="text-gray-600 text-sm">Access the portal features after logging in with your registered credentials.</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-yellow-500">
+        <h3 class="text-yellow-700 font-semibold text-lg">🔹 Submit a Complaint</h3>
+        <p class="text-gray-600 text-sm">Submit a Lost/Found report with Subject, Description, and Image for identification.</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-indigo-500">
+        <h3 class="text-indigo-700 font-semibold text-lg">🔹 Track Your Complaint</h3>
+        <p class="text-gray-600 text-sm">Track your submitted complaints and stay updated on their status.</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-pink-500">
+        <h3 class="text-pink-700 font-semibold text-lg">🔹 Respond to Others</h3>
+        <p class="text-gray-600 text-sm">Found something? Browse and respond to lost item complaints easily.</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-red-500">
+        <h3 class="text-red-700 font-semibold text-lg">🔹 Get Instant Notifications</h3>
+        <p class="text-gray-600 text-sm">Receive instant email alerts when there’s a match or response on your complaint.</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-indigo-500">
+        <h3 class="text-indigo-700 font-semibold text-lg">🔹 Inappropriate Messages Will Be Deleted</h3>
+        <p class="text-gray-600 text-sm">Any complaint or feedback with offensive or unnecessary content will be reviewed and may be deleted by the admin.</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-red-500">
+        <h3 class="text-red-700 font-semibold text-lg">🔹 User May Be Blocked</h3>
+        <p class="text-gray-600 text-sm">Users posting repeated irrelevant or abusive messages can be blocked from using the portal by the admin.</p>
+      </div>
+
+    </div>
   </div>
 </div>
 
