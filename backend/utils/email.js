@@ -6,6 +6,38 @@ let genOTP = () => {
     return Math.floor(1000 + Math.random() * 9000);
 };
 
+export const forwordMail = async (data) => {
+    try {
+        const transport = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            service: "gmail",
+            secure: true,
+            auth: {
+                user: process.env.EMAIL_SENDER,
+                pass: process.env.EMAIL_SENDER_PASSWORD,
+            },
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL_SENDER,
+            to: data.email,
+            subject: data.subject,
+            html: data.body,
+        };
+
+        const email = await transport.sendMail(mailOptions);
+
+        if (!email) {
+            return { status: false, error: email, msg: 'Reply not send' };
+        }
+
+        return { status: true, error: null, msg: "Mail Sended !!" }
+    } catch (error) {
+        return { status: false, error: error, msg: null }
+    }
+}
+
 export const sendReply = async (data) => {
     try {
         const transport = nodemailer.createTransport({
@@ -105,11 +137,11 @@ export const sendMail = async (tagertEmail) => {
         const del = await otp.deleteOne({ email: tagertEmail });
 
         const OTPdoc = new otp({
-            OTP:Number(OneTimePassword),
+            OTP: Number(OneTimePassword),
             email: tagertEmail,
         });
 
-       const res= await OTPdoc.save();
+        const res = await OTPdoc.save();
 
         return { status: true, error: null, msg: "OPT Sended!!" }
     } catch (error) {

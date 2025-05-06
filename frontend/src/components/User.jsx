@@ -84,7 +84,7 @@ const User = () => {
                     <td className="px-4 py-3  text-center">{user.Reports.length || 0}</td>
                     {/* change user password */}
                     <td className="px-4 py-3 text-center min-w-72">
-                      <ChangePassword identifier={user._id} isList={true}/>
+                      <ChangePassword isAdmin={true} identifier={user._id} isList={true}/>
                     </td>
                     {/* delete user */}
                     <td className="px-4 py-3 text-center">

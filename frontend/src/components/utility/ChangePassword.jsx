@@ -38,6 +38,7 @@ export const ChangePassword = ({ isAdmin = false, isList = false, identifier = f
                 await AdminPostAPIs("/changepassword", { NewPassword: newPassword });
             } else if (isAdmin && identifier) {
                 // Admin changing another user's password
+
                 await AdminPostAPIs("/users/changepassword", { NewPassword: newPassword, identifier });
             }
 
@@ -47,7 +48,7 @@ export const ChangePassword = ({ isAdmin = false, isList = false, identifier = f
             setNewPassword(""); // Clear the input field
         } catch (error) {
             console.error("Error changing password:", error);
-            ShowAlert("Failed to change password. Please try again.", false);
+            // ShowAlert("Failed to change password. Please try again.", false);
         } finally {
             setLoading(false); // Reset loading state
         }
