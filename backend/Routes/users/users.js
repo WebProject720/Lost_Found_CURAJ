@@ -7,6 +7,7 @@ import { getUser } from '../../controllers/users/getUser.js';
 import { isUserLogged } from '../../controllers/users/islogged.js';
 import { user } from '../../controllers/reports/user.js';
 import { authenticateUser } from '../../middleware/authenticateUser.js';
+import { ChangePassword } from '../../controllers/users/changePassword.js';
 
 
 const UserRouter=Router();
@@ -20,6 +21,7 @@ UserRouter.route('/logout').post(logout);
 UserRouter.route('/getuser').post(getUser);
 UserRouter.route('/isuserlogged').post(isUserLogged);
 UserRouter.route('/user').get(authenticateUser,user);
+UserRouter.route('/changepassword').post(authenticateUser,ChangePassword);
 
 
 

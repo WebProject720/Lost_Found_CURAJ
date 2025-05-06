@@ -29,6 +29,7 @@ export const VerifyAdminMiddleware = async (req, res, next) => {
                 new ApiError('Admin not found', null, false, 400)
             )
         }
+        user.isAdmin=true;
         req.user = user;
 
         next();

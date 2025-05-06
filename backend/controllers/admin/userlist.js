@@ -6,7 +6,7 @@ import 'dotenv/config'
 
 export const UserList = async (req, res) => {
     try {
-        const users = await Users.find().select("-password");
+        const users = await Users.find().select("-password").sort({ _id: -1 });
 
         return res.status(200).json(
             new ApiResponse('User List', users, true, 200)

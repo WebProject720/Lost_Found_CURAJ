@@ -9,6 +9,7 @@ import { logoutAdmin } from '../../controllers/admin/logout.js';
 import AdminList from '../../controllers/admin/adminList.js';
 import deleteUser from '../../controllers/admin/deleteUser.js';
 import deleteComplaint from '../../controllers/admin/deleteComplaint.js';
+import { ChangePassword } from '../../controllers/users/changePassword.js';
 
 
 const AdminsRouter = Router();
@@ -20,12 +21,14 @@ AdminsRouter.route('/islogged').post(isAdminLogged);
 
 AdminsRouter.route('/users/list').get(VerifyAdminMiddleware, UserList);
 AdminsRouter.route('/users/delete').post(VerifyAdminMiddleware, deleteUser);
+AdminsRouter.route('/users/changepassword').post(VerifyAdminMiddleware, ChangePassword);
 
 
 AdminsRouter.route('/complaints/list').post(VerifyAdminMiddleware, ComplaintList);
 AdminsRouter.route('/complaints/delete').post(VerifyAdminMiddleware, deleteComplaint);
 
 AdminsRouter.route('/list').get(VerifyAdminMiddleware, AdminList);
+AdminsRouter.route('/changepassword').post(VerifyAdminMiddleware, ChangePassword);
 
 
 

@@ -19,10 +19,16 @@ export const ShowAlert = (msg: string, status: Boolean) => {
     if (!alertBox && (!error || !success)) return;
 
     if (!status) {
+        //if error occured
         error ? error.innerText = msg : null;
+        successBox?.classList.add('!hidden');
+        errorBox?.classList.remove('!hidden');
         errorBox?.classList.add('!flex');
     } else {
+        //if success case
         success ? (success.innerText = msg) : null;
+        errorBox?.classList.add('!hidden');
+        successBox?.classList.remove('!hidden');
         successBox?.classList.add('!flex');
     }
 

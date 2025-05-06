@@ -4,6 +4,8 @@ import { confirmBox, ShowAlert } from './alertLogic';
 import { Loader } from './utility/Loader';
 import { Button } from './utility/Button';
 import { Input } from './utility/Input';
+import { Images } from '../constants.astro';
+import { ChangePassword } from './utility/ChangePassword';
 
 const User = () => {
 
@@ -58,11 +60,12 @@ const User = () => {
           <table className="w-full table-auto bg-white border border-gray-300 shadow-md">
             <thead className="bg-gray-100">
               <tr>
-                <th className="px-6 py-3 text-center text-gray-700">User Name</th>
+                <th className="px-6 py-3 text-center text-gray-700 text-nowrap">User Name</th>
                 <th className="px-6 py-3 text-center text-gray-700">Email</th>
-                <th className="px-6 py-3 text-center text-gray-700">Account Created Date</th>
+                <th className="px-6 py-3 text-center text-gray-700 text-nowrap">Account Created Date</th>
                 <th className="px-6 py-3 text-center text-gray-700">Verified</th>
                 <th className="px-6 py-3 text-center text-gray-700 ">Complaints</th>
+                <th className="px-6 py-3 text-center text-gray-700 text-nowrap min-w-72">Change Password</th>
                 <th className="px-6 py-3 text-center text-gray-700">Actions</th>
               </tr>
             </thead>
@@ -72,13 +75,18 @@ const User = () => {
                   <tr key={user._id} className="border-t text-center hover:bg-orange-100 ">
                     <td className="px-4 py-3 text-center">{user.username}</td>
                     <td className="px-4 py-3 text-center">{user.email}</td>
-                    <td className="px-4 py-3 text-center">{new Date(user.createdAt).toLocaleString()}</td>
+                    <td className="px-4 py-3 text-center text-nowrap">{new Date(user.createdAt).toLocaleString()}</td>
                     <td className={`px-4 py-3 text-center`}>
                       <span className={`p-2 rounded-full text-xs ${user.isVerified ? 'bg-green-300' : 'bg-red-300'}`}>
                         {user.isVerified ? 'Verified' : 'Not Verify'}
                       </span>
                     </td>
                     <td className="px-4 py-3  text-center">{user.Reports.length || 0}</td>
+                    {/* change user password */}
+                    <td className="px-4 py-3 text-center min-w-72">
+                      <ChangePassword identifier={user._id} isList={true}/>
+                    </td>
+                    {/* delete user */}
                     <td className="px-4 py-3 text-center">
                       <Button
                         disabled={deletingUserId === user._id} // Disable only the button for the user being deleted

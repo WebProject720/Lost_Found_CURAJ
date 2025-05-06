@@ -110,7 +110,6 @@ export const sendMail = async (tagertEmail) => {
         });
 
        const res= await OTPdoc.save();
-       console.log(res);
 
         return { status: true, error: null, msg: "OPT Sended!!" }
     } catch (error) {

@@ -4,6 +4,7 @@ import { getUser } from "../store";
 import { Images } from "../constants.astro";
 import { Complain } from "../components/Complain";
 import { Loader } from "../components/utility/Loader";
+import { ChangePassword } from "../components/utility/ChangePassword";
 
 
 export const UserProfile = ({ ...props }) => {
@@ -27,7 +28,7 @@ export const UserProfile = ({ ...props }) => {
                 {
                     Username: user.username,
                     Email: user.email,
-                    Complaints: user?.Reports?.length||0,
+                    Complaints: user?.Reports?.length || 0,
                     'Account Created': new Date(user.createdAt).toDateString(),
                 }
             )
@@ -54,6 +55,7 @@ export const UserProfile = ({ ...props }) => {
                                     <h3 className="text-lg font-semibold text-gray-800">{value}</h3>
                                 </div>
                             ))}
+                            <ChangePassword ></ChangePassword>
                         </div>
                     )}
                 </div>

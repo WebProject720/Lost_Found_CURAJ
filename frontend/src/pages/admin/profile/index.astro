@@ -1,4 +1,5 @@
 ---
+import { ChangePassword } from "../../../components/utility/ChangePassword";
 import AdminLayout from "../../../layouts/AdminLayout.astro";
 import { getUser } from "../../../store";
 
@@ -6,12 +7,14 @@ const user = getUser();
 ---
 
 <AdminLayout>
-    <div class="mt-10 w-screen flex justify-center items-center p-4">
+    <div class="mt-10 w-screen gap-3 flex justify-center items-center p-4">
         <div
-            class="bg-white shadow-md rounded-lg p-6 w-full max-w-lg"
+            class="bg-white flex flex-col-reverse gap-2 shadow-md rounded-lg p-6 w-full max-w-lg"
             id="profile-container"
         >
             <!-- Profile content will be dynamically rendered here -->
+            <!-- Change Password -->
+            <ChangePassword isAdmin={true} client:load />
         </div>
     </div>
 </AdminLayout>
@@ -32,7 +35,8 @@ const user = getUser();
             return;
         }
 
-        profileContainer.innerHTML = `
+        profileContainer.innerHTML += `
+        <div>
             <div class="flex flex-col items-center">
                 <div class="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                     ${
@@ -72,7 +76,7 @@ const user = getUser();
                     <span class="font-medium text-gray-600">Session Key:</span>
                     <span class="text-gray-800">${user.sessionKey || "N/A"}</span>
                 </div>
-            </div>
+            </div></div>
         `;
     });
 </script>
