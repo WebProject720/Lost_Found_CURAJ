@@ -58,7 +58,7 @@ export const FeedbackForm = () => {
                 </h2>
 
                 <form
-                    className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-md space-y-6"
+                    className="max-w-4xl mx-auto bg-slate-100 p-8 rounded-2xl shadow-2xl border-b-slate-200 space-y-6"
                     onSubmit={handleSubmit}
                 >
                     <div>
