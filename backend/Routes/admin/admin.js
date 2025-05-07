@@ -10,7 +10,7 @@ import AdminList from '../../controllers/admin/adminList.js';
 import deleteUser from '../../controllers/admin/deleteUser.js';
 import deleteComplaint from '../../controllers/admin/deleteComplaint.js';
 import { ChangePassword } from '../../controllers/users/changePassword.js';
-
+import { changeActiveStatus } from '../../controllers/admin/blockStatus.js';
 
 const AdminsRouter = Router();
 
@@ -22,6 +22,7 @@ AdminsRouter.route('/islogged').post(isAdminLogged);
 AdminsRouter.route('/users/list').get(VerifyAdminMiddleware, UserList);
 AdminsRouter.route('/users/delete').post(VerifyAdminMiddleware, deleteUser);
 AdminsRouter.route('/users/changepassword').post(VerifyAdminMiddleware, ChangePassword);
+AdminsRouter.route('/users/changeblockstatus').post(VerifyAdminMiddleware, changeActiveStatus);
 
 
 AdminsRouter.route('/complaints/list').post(VerifyAdminMiddleware, ComplaintList);

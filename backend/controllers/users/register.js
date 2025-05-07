@@ -38,7 +38,13 @@ export const register = async (req, res) => {
         if (existUser && !existUser?.isVerified) {
             await Users.deleteOne({ _id: existUser?._id });
         }
-
+        if(existUser.isBlocked){
+            return res
+                .status(401)
+                .json(
+                    new ApiError('User blocked !! Please Contact Admin')
+                )
+        }
         if (existUser && existUser?.isVerified) {
             return res
                 .status(404)

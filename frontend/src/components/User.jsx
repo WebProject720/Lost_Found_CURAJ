@@ -4,7 +4,6 @@ import { confirmBox, ShowAlert } from './alertLogic';
 import { Loader } from './utility/Loader';
 import { Button } from './utility/Button';
 import { Input } from './utility/Input';
-import { Images } from '../constants.astro';
 import { ChangePassword } from './utility/ChangePassword';
 
 const User = () => {
@@ -12,6 +11,7 @@ const User = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deletingUserId, setDeletingUserId] = useState(null); // Track the user being deleted
+  const [changeActiveStatus, changingActiveStatus] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -21,12 +21,37 @@ const User = () => {
     })();
   }, []);
 
+  // Function to toggle active/deactive status
+  const changeStatus = async (id) => {
+    changingActiveStatus(id); // Set the loading state for the specific user
+
+    try {
+      const res = await AdminPostAPIs('/users/changeblockstatus', { id });
+      if (res.success) {
+        ShowAlert(`User ${res.data.isBlocked ? "deactivated" : "activated"} successfully`, true);
+
+        // Update the user's status in the state
+        setUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user._id === id ? { ...user, isBlocked: res.data.isBlocked } : user
+          )
+        );
+      } else {
+        ShowAlert("Failed to change user status", false);
+      }
+    } catch (error) {
+      console.error("Error changing user status:", error);
+      ShowAlert("An error occurred while changing user status", false);
+    } finally {
+      changingActiveStatus(null); // Reset the loading state
+    }
+  };
+
   //delete user on click
   const deleteUser = async (id) => {
     const confirmed = await confirmBox('Are you sure you want to delete this user?');
     if (!confirmed) return;
 
-    console.log('Deleting user with ID:', id);
     setDeletingUserId(id); // Set the ID of the user being deleted
 
     try {
@@ -39,7 +64,7 @@ const User = () => {
       }
     } catch (error) {
       console.error("Error deleting user:", error);
-      ShowAlert("An error occurred while deleting the user", false);
+      // ShowAlert("An error occurred while deleting the user", false);
     } finally {
       setDeletingUserId(null); // Reset the deleting state
     }
@@ -66,7 +91,8 @@ const User = () => {
                 <th className="px-6 py-3 text-center text-gray-700">Verified</th>
                 <th className="px-6 py-3 text-center text-gray-700 ">Complaints</th>
                 <th className="px-6 py-3 text-center text-gray-700 text-nowrap min-w-72">Change Password</th>
-                <th className="px-6 py-3 text-center text-gray-700">Actions</th>
+                <th className="px-6 py-3 text-center text-gray-700">Block User</th>
+                <th className="px-6 py-3 text-center text-gray-700">Delete</th>
               </tr>
             </thead>
             <tbody >
@@ -84,7 +110,23 @@ const User = () => {
                     <td className="px-4 py-3  text-center">{user.Reports.length || 0}</td>
                     {/* change user password */}
                     <td className="px-4 py-3 text-center min-w-72">
-                      <ChangePassword isAdmin={true} identifier={user._id} isList={true}/>
+                      <ChangePassword isAdmin={true} identifier={user._id} isList={true} />
+                    </td>
+                    {/* block user  */}
+                    <td className="px-4 py-3 text-center">
+                      <Button
+                        disabled={changeActiveStatus === user._id} // Disable only the button for the user being updated
+                        onClick={() => changeStatus(user._id)} // Call the changeStatus function
+                        className={`!bg-blue-600 ${changeActiveStatus === user._id ? 'disabled:!bg-gray-400' : ''}`}
+                      >
+                        {changeActiveStatus === user._id ? (
+                          <Loader />
+                        ) : user.isBlocked ? (
+                          <p>Activate</p>
+                        ) : (
+                          <p>Deactivate</p>
+                        )}
+                      </Button>
                     </td>
                     {/* delete user */}
                     <td className="px-4 py-3 text-center">
