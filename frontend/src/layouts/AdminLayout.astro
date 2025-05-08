@@ -50,17 +50,18 @@ import { AdminNavigationRoutes, Images } from "../constants.astro";
 </html>
 
 <script>
-  import { isAdminCookieExist, isAdminExists } from "../logic/checkislogged";
+  import { navigate } from "astro:transitions/client";
+  import { checkCookies } from "../logic/checkislogged";
+  //check for both cookies
   (async () => {
-    isAdminExists();
-    isAdminCookieExist();
+    const data = await checkCookies();
+    if(!data.ischeck)return;
+    if (!data?.admin) navigate("/");
+    if (data?.user) navigate("/dashboard");
   })();
 </script>
 
 <style is:global>
-
-  
-
   @import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
   @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
   html,
@@ -112,7 +113,8 @@ import { AdminNavigationRoutes, Images } from "../constants.astro";
       transform: scale(1);
     }
   }
-  th,td{
+  th,
+  td {
     text-wrap: nowrap;
   }
 </style>

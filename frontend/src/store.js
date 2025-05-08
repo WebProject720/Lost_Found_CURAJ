@@ -8,6 +8,7 @@ const defaultUser = {
     reports: [],
     stats: false,
     isAdmin: false,
+    cookieCheckedAt: null
 };
 
 // Function to safely get stored data from localStorage (client-side only)
@@ -57,6 +58,11 @@ const logout = () => {
     navigate('/');
 }
 
+export const earse = () => {
+    updateStore(defaultUser);
+    window.localStorage.clear(APP_NAME);
+}
+
 const setComplains = (data) => {
     const store = getStoreData();
     store.reports = data;
@@ -98,3 +104,33 @@ const isUserLogin = () => {
 
 // Export getter function
 export { getComplains, isUserLogin, getUser, getComplain, getStoreData, setComplains, updateStore, setUserLogin, setUserInfo, logout };
+
+
+//
+//init session store 
+//which remove after once I close tab 
+const SESSION_NAME = "SESSION_STORE";
+
+const SessionStoreSchema = {
+    lastCookieCheckedAt: null,
+    isCookiesChecked: false,
+}
+
+const init_session = () => {
+    if (typeof window != "undefined" && !window.sessionStorage.getItem(SESSION_NAME))
+        window.sessionStorage.setItem(SESSION_NAME, JSON.stringify(SessionStoreSchema))
+}
+init_session();
+
+export const get_session = () => {
+    if (typeof window != "undefined") {
+        const data = window.sessionStorage.getItem(SESSION_NAME);
+        return data ? JSON.parse(data) : SessionStoreSchema;
+    }
+    return SessionStoreSchema
+}
+//update with data
+export const update_session = (data) => {
+    if (typeof window != "undefined")
+        window.sessionStorage.setItem(SESSION_NAME, JSON.stringify(data))
+}

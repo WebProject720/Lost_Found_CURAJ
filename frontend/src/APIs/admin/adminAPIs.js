@@ -14,8 +14,8 @@ export const AdminPostAPIs = async (route, data) => {
     } catch ({ response }) {
         ShowAlert(response?.data?.message||"Something went wrong", false);
         if(response?.status==401)
-            logout();
-        return response.data
+            // logout();
+        return response.data;
     }
 }
 

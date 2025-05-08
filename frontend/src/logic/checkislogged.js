@@ -1,8 +1,10 @@
 import { navigate } from "astro:transitions/client";
-import { setUserLogin, setUserInfo, logout, getStoreData } from "../store";
+import { setUserLogin, setUserInfo, logout, getStoreData, get_session, update_session, earse } from "../store";
 import { adminLogout, checkAdminExist } from "../APIs/admin/adminAPIs";
 import { UserAPI } from "../APIs/users/usersAPI";
 import { ShowAlert } from "../components/alertLogic";
+
+
 
 // logout user if cookie  not exist
 export const isUserCookieExist = async () => {
@@ -48,8 +50,8 @@ export const isAdminCookieExist = async () => {
         // navigate("/auth?mode=0");
         console.log('checking for admin cookie...');
 
-        // container?.classList.add("hidden");
-        // loaderDiv?.classList.add("flex");
+        container?.classList.add("hidden");
+        loaderDiv?.classList.add("flex");
         checkAdminExist("/islogged")
             .then((res) => {
                 console.log(res);
@@ -75,3 +77,55 @@ export const isAdminExists = async () => {
     const store = getStoreData();
     if (!store.isAdmin && !store.loggedUser) adminLogout();
 }
+
+
+
+
+// check for both's cookie at open or after a time period
+export const checkCookies = async () => {
+    const response={
+        user:false,
+        admin:false,
+        ischeck:false
+    }
+    const data = get_session();
+    if (data.isCookiesChecked) return response;
+    response.ischeck=true;
+
+    data.isCookiesChecked = true;
+
+
+    console.log('Checking cookies for user and admin in parallel...');
+
+    try {
+        //run both apis in parallel order
+        const [userResponse, adminResponse] = await Promise.all([
+            UserAPI(null, "/getuser"),
+            checkAdminExist("/islogged"),
+        ]);
+
+        // Handle user response
+        if (userResponse.status === 200) {
+            setUserLogin(true);
+            setUserInfo(userResponse.data);
+            response.user=true;
+        } else {
+            throw new Error('Invalid user response status');
+        }
+
+        // Handle admin response
+        if (adminResponse?.status === 200 && adminResponse?.success) {
+            setUserLogin(true);
+            setUserInfo(adminResponse.data, true);
+            response.admin=true;
+        } else {
+            throw new Error('Invalid admin response status or unsuccessful response');
+        }
+    } catch (error) {
+        console.log(error);
+        earse();
+    }
+
+    update_session(data);
+    return response;
+};

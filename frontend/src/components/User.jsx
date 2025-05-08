@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { AdminGetAPIs, AdminPostAPIs } from '../APIs/admin/adminAPIs';
 import { confirmBox, ShowAlert } from './alertLogic';
 import { Loader } from './utility/Loader';
@@ -7,19 +7,34 @@ import { Input } from './utility/Input';
 import { ChangePassword } from './utility/ChangePassword';
 
 const User = () => {
-
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]); // State for filtered users
   const [loading, setLoading] = useState(true);
   const [deletingUserId, setDeletingUserId] = useState(null); // Track the user being deleted
   const [changeActiveStatus, changingActiveStatus] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(""); // State for search input
 
   useEffect(() => {
     (async () => {
       const data = await AdminGetAPIs('/users/list');
       setUsers(data.data);
+      setFilteredUsers(data.data); // Initialize filtered users
       setLoading(false);
     })();
   }, []);
+
+  // Function to handle search input change
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    // Filter users based on the search query
+    const filtered = users.filter((user) =>
+      user.username?.toLowerCase().includes(query) ||
+      user.email?.toLowerCase().includes(query)
+    );
+    setFilteredUsers(filtered);
+  };
 
   // Function to toggle active/deactive status
   const changeStatus = async (id) => {
@@ -36,6 +51,11 @@ const User = () => {
             user._id === id ? { ...user, isBlocked: res.data.isBlocked } : user
           )
         );
+        setFilteredUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user._id === id ? { ...user, isBlocked: res.data.isBlocked } : user
+          )
+        );
       } else {
         ShowAlert("Failed to change user status", false);
       }
@@ -47,7 +67,7 @@ const User = () => {
     }
   };
 
-  //delete user on click
+  // Function to delete a user
   const deleteUser = async (id) => {
     const confirmed = await confirmBox('Are you sure you want to delete this user?');
     if (!confirmed) return;
@@ -59,12 +79,13 @@ const User = () => {
       if (res.success) {
         ShowAlert("User deleted successfully", true);
         setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id)); // Remove the deleted user from the list
+        setFilteredUsers((prevUsers) => prevUsers.filter((user) => user._id !== id)); // Update filtered users
       } else {
         ShowAlert("Failed to delete user", false);
       }
     } catch (error) {
       console.error("Error deleting user:", error);
-      // ShowAlert("An error occurred while deleting the user", false);
+      ShowAlert("An error occurred while deleting the user", false);
     } finally {
       setDeletingUserId(null); // Reset the deleting state
     }
@@ -73,14 +94,19 @@ const User = () => {
   return (
     <div className="container w-screen mx-auto p-4">
       <h2 className="text-xl font-bold mb-4">Users List</h2>
-      <div className="desktop:w-1/4 pt-3 pb-6 tablet:w-full ">
-        <Input placeholder="Search" className="bg-transparent active:bg-transparent focus:bg-transparent"></Input>
+      <div className="desktop:w-1/4 pt-3 pb-6 tablet:w-full">
+        <Input
+          placeholder="Search by username or email"
+          value={searchQuery}
+          onChange={handleSearch} // Handle search input change
+          className="bg-transparent active:bg-transparent focus:bg-transparent"
+        />
       </div>
-      {loading ?
+      {loading ? (
         <div className='w-full h-80 flex justify-center items-center'>
-          <Loader></Loader>
+          <Loader />
         </div>
-        :
+      ) : (
         <div className='max-w-full overflow-x-scroll'>
           <table className="w-full table-auto bg-white border border-gray-300 shadow-md">
             <thead className="bg-gray-100">
@@ -95,9 +121,9 @@ const User = () => {
                 <th className="px-6 py-3 text-center text-gray-700">Delete</th>
               </tr>
             </thead>
-            <tbody >
-              {users?.length > 0 ? (
-                users.map(user => (
+            <tbody>
+              {filteredUsers?.length > 0 ? (
+                filteredUsers.map(user => (
                   <tr key={user._id} className="border-t text-center hover:bg-orange-100 ">
                     <td className="px-4 py-3 text-center">{user.username}</td>
                     <td className="px-4 py-3 text-center">{user.email}</td>
@@ -108,15 +134,13 @@ const User = () => {
                       </span>
                     </td>
                     <td className="px-4 py-3  text-center">{user.Reports.length || 0}</td>
-                    {/* change user password */}
                     <td className="px-4 py-3 text-center min-w-72">
                       <ChangePassword isAdmin={true} identifier={user._id} isList={true} />
                     </td>
-                    {/* block user  */}
                     <td className="px-4 py-3 text-center">
                       <Button
-                        disabled={changeActiveStatus === user._id} // Disable only the button for the user being updated
-                        onClick={() => changeStatus(user._id)} // Call the changeStatus function
+                        disabled={changeActiveStatus === user._id}
+                        onClick={() => changeStatus(user._id)}
                         className={`!bg-blue-600 ${changeActiveStatus === user._id ? 'disabled:!bg-gray-400' : ''}`}
                       >
                         {changeActiveStatus === user._id ? (
@@ -128,10 +152,9 @@ const User = () => {
                         )}
                       </Button>
                     </td>
-                    {/* delete user */}
                     <td className="px-4 py-3 text-center">
                       <Button
-                        disabled={deletingUserId === user._id} // Disable only the button for the user being deleted
+                        disabled={deletingUserId === user._id}
                         onClick={() => deleteUser(user._id)}
                         className={`!bg-red-600 ${deletingUserId === user._id ? 'disabled:!bg-gray-400' : ''}`}
                       >
@@ -142,7 +165,7 @@ const User = () => {
                 ))
               ) : (
                 <tr className='text-center'>
-                  <td className="px-6 py-3 text-center text-gray-500" colSpan="4">
+                  <td className="px-6 py-3 text-center text-gray-500" colSpan="8">
                     No users found.
                   </td>
                 </tr>
@@ -150,8 +173,7 @@ const User = () => {
             </tbody>
           </table>
         </div>
-      }
-
+      )}
     </div>
   );
 };

@@ -11,6 +11,8 @@ import deleteUser from '../../controllers/admin/deleteUser.js';
 import deleteComplaint from '../../controllers/admin/deleteComplaint.js';
 import { ChangePassword } from '../../controllers/users/changePassword.js';
 import { changeActiveStatus } from '../../controllers/admin/blockStatus.js';
+import { ChgStatus } from '../../controllers/reports/statuschange.js';
+
 
 const AdminsRouter = Router();
 
@@ -27,6 +29,7 @@ AdminsRouter.route('/users/changeblockstatus').post(VerifyAdminMiddleware, chang
 
 AdminsRouter.route('/complaints/list').post(VerifyAdminMiddleware, ComplaintList);
 AdminsRouter.route('/complaints/delete').post(VerifyAdminMiddleware, deleteComplaint);
+AdminsRouter.route('/complaints/changestatus').post(VerifyAdminMiddleware, ChgStatus);
 
 AdminsRouter.route('/list').get(VerifyAdminMiddleware, AdminList);
 AdminsRouter.route('/changepassword').post(VerifyAdminMiddleware, ChangePassword);

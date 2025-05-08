@@ -6,6 +6,8 @@ export const Input = ({ className = "", ...props }) => {
     const [type, setType] = useState(props.type || 'text');
 
     const onEyeClick = () => {
+        console.log('eye clicked');
+
         if (type == 'text') {
             setEye(Images.eye_close);
             setType('password');

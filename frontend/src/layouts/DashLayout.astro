@@ -52,9 +52,16 @@ import { Images, UserNavigationRoutes } from "../constants.astro";
 </html>
 
 <script>
-  import { isUserCookieExist } from "../logic/checkislogged";
+  import { navigate } from "astro:transitions/client";
+  import { checkCookies, isUserCookieExist } from "../logic/checkislogged";
   (async () => {
     isUserCookieExist();
+  })();
+  (async () => {
+    const data = await checkCookies();
+    if(!data.ischeck)return;
+    if (data?.admin) navigate("/admin");
+    if (!data?.user) navigate("/");
   })();
 </script>
 <style is:global>
