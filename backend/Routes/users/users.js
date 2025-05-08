@@ -8,6 +8,7 @@ import { isUserLogged } from '../../controllers/users/islogged.js';
 import { user } from '../../controllers/reports/user.js';
 import { authenticateUser } from '../../middleware/authenticateUser.js';
 import { ChangePassword } from '../../controllers/users/changePassword.js';
+import { forgetPassword } from '../../controllers/users/forgetPassword.js';
 
 
 const UserRouter=Router();
@@ -22,6 +23,7 @@ UserRouter.route('/getuser').post(getUser);
 UserRouter.route('/isuserlogged').post(isUserLogged);
 UserRouter.route('/user').get(authenticateUser,user);
 UserRouter.route('/changepassword').post(authenticateUser,ChangePassword);
+UserRouter.route('/forgetpassword').post(forgetPassword);
 
 
 

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Images } from "../../constants.astro";
 
-export const Input = ({ className = "", ...props }) => {
+export const Input = ({ BoxClassName = "", className = "", ...props }) => {
     const [eye, setEye] = useState(Images.eye_close);
     const [type, setType] = useState(props.type || 'text');
 
@@ -18,17 +18,18 @@ export const Input = ({ className = "", ...props }) => {
     }
 
     return (
-        <div className="flex flex-col gap-1">
+        <div className={`flex flex-col gap-1 ${BoxClassName}`}>
             <label htmlFor={props.id} className={`font-extralight ${props.label ? '' : 'hidden'}`}>
                 {props.label}
             </label>
 
-            <div className="flex flex-row group items-stretch w-full gap-0 flex-nowrap h-10 phone:h-9 ">
+            <div className="flex flex-row  group items-stretch w-full gap-0 flex-nowrap h-10 phone:h-9 ">
                 <input
                     className={`bg-gray-100 border-gray-400 outline-none border-[1px] 
                     rounded-md p-2 
-                    focus:bg-gray-200 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
+                    focus:bg-gray-100 focus:border-blue-800 focus:shadow-md focus:shadow-blue-200
                     transition-all duration-500 phone:p-1
+                    disabled:bg-gray-300 disabled:hover:cursor-not-allowed
                      ${props.text ? 'w-4/6 rounded-r-none' : 'w-full'} 
                      ${props.type == "password" ? 'rounded-r-none' : 'w-full'} ${className || ''} 
                      `}

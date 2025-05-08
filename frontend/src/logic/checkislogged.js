@@ -1,7 +1,7 @@
 import { navigate } from "astro:transitions/client";
 import { setUserLogin, setUserInfo, logout, getStoreData, get_session, update_session, earse } from "../store";
 import { adminLogout, checkAdminExist } from "../APIs/admin/adminAPIs";
-import { UserAPI } from "../APIs/users/usersAPI";
+import { UserAPI, UserPostAPI } from "../APIs/users/usersAPI";
 import { ShowAlert } from "../components/alertLogic";
 
 
@@ -83,14 +83,14 @@ export const isAdminExists = async () => {
 
 // check for both's cookie at open or after a time period
 export const checkCookies = async () => {
-    const response={
-        user:false,
-        admin:false,
-        ischeck:false
+    const response = {
+        user: false,
+        admin: false,
+        ischeck: false
     }
     const data = get_session();
     if (data.isCookiesChecked) return response;
-    response.ischeck=true;
+    response.ischeck = true;
 
     data.isCookiesChecked = true;
 
@@ -100,15 +100,17 @@ export const checkCookies = async () => {
     try {
         //run both apis in parallel order
         const [userResponse, adminResponse] = await Promise.all([
-            UserAPI(null, "/getuser"),
+            UserPostAPI(null, "/getuser"),
             checkAdminExist("/islogged"),
         ]);
 
         // Handle user response
-        if (userResponse.status === 200) {
+        console.log(userResponse, adminResponse);
+        if (userResponse?.status === 200) {
+
             setUserLogin(true);
             setUserInfo(userResponse.data);
-            response.user=true;
+            response.user = true;
         } else {
             throw new Error('Invalid user response status');
         }
@@ -117,7 +119,7 @@ export const checkCookies = async () => {
         if (adminResponse?.status === 200 && adminResponse?.success) {
             setUserLogin(true);
             setUserInfo(adminResponse.data, true);
-            response.admin=true;
+            response.admin = true;
         } else {
             throw new Error('Invalid admin response status or unsuccessful response');
         }
