@@ -16,7 +16,7 @@ export const register = async (req, res) => {
         password = password?.trim();
         const cookie = req?.cookies[process.env.TokenName];
 
-
+        console.log(req.body)
 
         if (cookie) {
             return res.status(300).json(
