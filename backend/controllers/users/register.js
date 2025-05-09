@@ -16,7 +16,6 @@ export const register = async (req, res) => {
         password = password?.trim();
         const cookie = req?.cookies[process.env.TokenName];
 
-        console.log(req.body)
 
         if (cookie) {
             return res.status(300).json(
@@ -38,7 +37,7 @@ export const register = async (req, res) => {
         if (existUser && !existUser?.isVerified) {
             await Users.deleteOne({ _id: existUser?._id });
         }
-        if(existUser.isBlocked){
+        if(existUser&&existUser?.isBlocked){
             return res
                 .status(401)
                 .json(
