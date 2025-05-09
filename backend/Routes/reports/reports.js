@@ -11,6 +11,7 @@ import { upload } from '../../middleware/multer.js';
 import { ImageUploadonDB } from '../../middleware/UploadImage.js';
 import { feedback } from '../../controllers/reports/feedback.js';
 import { getFeedbacks } from '../../controllers/reports/getfeedback.js';
+import { VerifyAdminMiddleware } from '../../middleware/adminVerify.js';
 
 
 const ReportsRouter = Router();
@@ -25,7 +26,7 @@ ReportsRouter.route('/reply').post(authenticateUser, reply);
 ReportsRouter.route('/get').post(authenticateUser, getOne);
 ReportsRouter.route('/imgupload').post(authenticateUser,upload.single('file'),ImageUploadonDB, ImageUpload);
 ReportsRouter.route('/feedback/add').post(feedback);
-ReportsRouter.route('/feedback/get').get(getFeedbacks);
+ReportsRouter.route('/feedback/get').get(VerifyAdminMiddleware,getFeedbacks);
 
 
 

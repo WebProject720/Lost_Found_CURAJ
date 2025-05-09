@@ -176,7 +176,7 @@ const ComplaintsList = () => {
                                             {deleting === complaint._id ? (
                                                 <Loader />
                                             ) : (
-                                                complaint.isOpen ? "Close" : "Closed"
+                                                complaint.isOpen ? "Deactivate" : "Closed"
                                             )}
                                         </Button>
                                     </td>

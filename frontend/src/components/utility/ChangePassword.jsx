@@ -56,7 +56,7 @@ export const ChangePassword = ({ isAdmin = false, isList = false, identifier = f
 
     return (
         <div className="flex w-full flex-col bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm">
-            {!isList && <p className="text-sm text-gray-500">Password</p>}
+            {!isList && <p className="text-sm text-gray-500">Change Password</p>}
             <div>
                 <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
                     {/* Hidden password placeholder */}

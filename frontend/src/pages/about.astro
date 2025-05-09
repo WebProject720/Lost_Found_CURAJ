@@ -1,7 +1,9 @@
 ---
 import Nav from "../components/Nav.astro";
 import Sidebar from "../components/Sidebar.astro";
+import AlertBox from "../components/utility/AlertBox.astro";
 import { Images } from "../constants.astro";
+
 ---
 
 <!doctype html>
@@ -17,6 +19,7 @@ import { Images } from "../constants.astro";
         />
     </head>
     <body class="bg-gray-100 text-gray-900">
+        <AlertBox />
         <div id="container" class="flex flex-col">
             <div class="w-screen" id="header-container">
                 <Nav />
