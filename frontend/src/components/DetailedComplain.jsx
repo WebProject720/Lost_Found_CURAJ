@@ -148,7 +148,7 @@ export const DetailedComplain = ({ ...props }) => {
                         </Button>
                         {complain.isOpen ? <Button
                             id="replyBtn"
-                            className="text-black px-4 py-2 rounded-lg flex items-center gap-2 hover:underline !bg-green-400"
+                            className="text-black px-4 py-2 rounded-lg flex items-center gap-2 hover:underline !bg-slate-200"
                             onClick={() => setReply(true)}
                         >
                             <img

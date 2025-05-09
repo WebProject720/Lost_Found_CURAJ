@@ -64,8 +64,8 @@ import { FeedbackForm } from "../blocks/FeedbackForm";
               rightful owners quickly and easily.
             </p>
 
-            <div class="flex flex-wrap justify-center md:justify-start gap-4">
-              <div id="auth-buttons" class=" flex gap-2 flex-wrap">
+            <div class="flex flex-wrap justify-center items-center md:justify-start gap-4">
+              <div id="auth-buttons" class=" w-full flex justify-center gap-2 flex-wrap">
                 <button
                   onclick="location.href='/auth'"
                   class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg"
@@ -82,11 +82,14 @@ import { FeedbackForm } from "../blocks/FeedbackForm";
                   >Admin Login</button
                 >
               </div>
-              <button
+              <div class="flex justify-center w-full">
+
+                <button
                 onclick="location.href='/about'"
                 class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-6 rounded-lg"
                 >About Us</button
-              >
+                >
+              </div>
             </div>
           </div>
         </div>
