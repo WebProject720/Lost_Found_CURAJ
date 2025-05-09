@@ -5,6 +5,8 @@ import { Reports } from "../../Models/model.js"
 export const ChgStatus = async (req, res) => {
     try {
         const { id } = req.body;
+        const {isAdmin}=req.user;
+        
         const complain = await Reports.findOne({ _id: id });
 
         if (!complain) {
@@ -14,12 +16,12 @@ export const ChgStatus = async (req, res) => {
         }
         
         if (!complain.isOpen) {
-            return res.status(480).json(
+            return res.status(401).json(
                 new ApiError("Can't Reopen Complaints", '', false, 304)
             )
         }
 
-        if (complain.userID.toString() !== req.user._id.toString()) {
+        if (complain.userID.toString() !== req.user._id.toString() && !isAdmin) {
             return res.status(401).json(
                 new ApiError("Access Denied", '', false, 405)
             )

@@ -5,37 +5,92 @@ import { Button } from "../components/utility/Button";
 import { Input } from "../components/utility/Input";
 import { confirmBox, ShowAlert } from "../components/alertLogic";
 
-
 const ComplaintsList = () => {
     const [complaints, setComplaints] = useState([]);
+    const [filteredComplaints, setFilteredComplaints] = useState([]); // State for filtered complaints
     const [loading, setLoading] = useState(true);
     const [deleting, setDeleting] = useState(false);
+    const [searchQuery, setSearchQuery] = useState(""); // State for search input
 
     useEffect(() => {
         (async () => {
             const complaints = await AdminPostAPIs('/complaints/list', null);
-            complaints?.data ? setComplaints(complaints.data) : setComplaints([]);
+            if (complaints?.data) {
+                setComplaints(complaints.data);
+                setFilteredComplaints(complaints.data); // Initialize filtered complaints
+            } else {
+                setComplaints([]);
+                setFilteredComplaints([]);
+            }
             setLoading(false);
         })();
     }, []);
 
-    const deleteComplaint = async (id) => {
-        const confirm =await confirmBox("Delete this Complaint ?");
+    // Function to handle search input change
+    const handleSearch = (e) => {
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+
+        // Filter complaints based on the search query
+        const filtered = complaints.filter((complaint) =>
+            complaint.title?.toLowerCase().includes(query) ||
+            complaint.userDetails?.username?.toLowerCase().includes(query)
+        );
+        setFilteredComplaints(filtered);
+    };
+
+    const closeComplaint = async (id) => {
+        const confirm = await confirmBox("Are you sure you want to close this complaint? This action cannot be undone.");
         if (!confirm) return;
+
+        setDeleting(id); // Set the loading state for the specific complaint
+
+        try {
+            const res = await AdminPostAPIs("/complaints/changestatus", { id });
+            if (res?.success) {
+                ShowAlert("Complaint closed successfully", true);
+                setComplaints((prevComplaints) =>
+                    prevComplaints.map((complaint) =>
+                        complaint._id === id ? { ...complaint, isOpen: false } : complaint
+                    )
+                );
+                setFilteredComplaints((prevComplaints) =>
+                    prevComplaints.map((complaint) =>
+                        complaint._id === id ? { ...complaint, isOpen: false } : complaint
+                    )
+                );
+            } else {
+                ShowAlert(res.message || "Failed to close the complaint", false);
+            }
+        } catch (error) {
+            console.error("Error closing complaint:", error);
+            ShowAlert("An error occurred while closing the complaint", false);
+        } finally {
+            setDeleting(false); // Reset the loading state
+        }
+    };
+
+    const deleteComplaint = async (id) => {
+        const confirm = await confirmBox("Delete this Complaint ?");
+        if (!confirm) return;
+
         setDeleting(id);
-        //Post Request
-        const res = await AdminPostAPIs('/complaints/delete', { id });
-        if (res.success)
-            ShowAlert("Complaint Deleted", true)
-        setComplaints((pre)=>{
-            return pre.filter((c)=>c._id!=id)
-        })
-
-        if (res?.status)
-            ShowAlert("Complaint Deleted ", true);
-
-        setDeleting(false);
-    }
+        try {
+            const res = await AdminPostAPIs('/complaints/delete', { id });
+            if (res.success) {
+                ShowAlert("Complaint Deleted", true);
+                setComplaints((prev) => prev.filter((c) => c._id !== id));
+                setFilteredComplaints((prev) => prev.filter((c) => c._id !== id));
+            } else {
+                ShowAlert("Failed to delete the complaint", false);
+            }
+        } catch (error) {
+            console.error("Error deleting complaint:", error);
+            ShowAlert("An error occurred while deleting the complaint", false);
+        } finally {
+            setDeleting(false);
+        }
+    };
 
     return (
         <div className="container p-4">
@@ -44,8 +99,13 @@ const ComplaintsList = () => {
                     Complaints List
                 </h1>
             </div>
-            <div className="desktop:w-1/4 pt-3 pb-6 tablet:w-full ">
-                <Input placeholder="Search" className="bg-transparent active:bg-transparent focus:bg-transparent"></Input>
+            <div className="desktop:w-1/4 pt-3 pb-6 tablet:w-full">
+                <Input
+                    placeholder="Search by title or username"
+                    value={searchQuery}
+                    onChange={handleSearch} // Handle search input change
+                    className="bg-transparent active:bg-transparent focus:bg-transparent"
+                />
             </div>
             <div>
                 {loading && (
@@ -55,7 +115,7 @@ const ComplaintsList = () => {
                 )}
             </div>
             <div className="overflow-x-auto mt-6">
-                {complaints.length > 0 ? (
+                {filteredComplaints.length > 0 ? (
                     <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
                         <thead className="bg-blue-200">
                             <tr>
@@ -70,13 +130,14 @@ const ComplaintsList = () => {
                                 </th>
                                 <th className="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
                                     Status
-                                </th><th className="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
+                                </th>
+                                <th className="px-6 text-center py-3 text-sm font-medium text-gray-600 uppercase tracking-wider">
                                     Operations
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {complaints.map((complaint, index) => (
+                            {filteredComplaints.map((complaint, index) => (
                                 <tr
                                     key={index}
                                     className={`${index % 2 === 0
@@ -103,9 +164,20 @@ const ComplaintsList = () => {
                                             {complaint.isOpen ? 'Open' : 'Close'}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 text-sm text-gray-700">
-                                        <Button disabled={deleting==complaint._id&&deleting} onClick={() => deleteComplaint(complaint._id)} className='!bg-red-600 disabled:!bg-gray-400'>
-                                            {deleting==complaint._id && deleting ? <Loader></Loader> : <p>Delete</p>}
+                                    <td className="px-6 py-4 text-sm flex gap-2 text-gray-700">
+                                        <Button disabled={deleting === complaint._id} onClick={() => deleteComplaint(complaint._id)} className='!bg-red-600 disabled:!bg-gray-400'>
+                                            {deleting === complaint._id ? <Loader /> : <p>Delete</p>}
+                                        </Button>
+                                        <Button
+                                            disabled={deleting === complaint._id}
+                                            onClick={() => closeComplaint(complaint._id)}
+                                            className={`!bg-blue-600 disabled:!bg-gray-400 ${complaint.isOpen ? "auto" : "hidden"}`}
+                                        >
+                                            {deleting === complaint._id ? (
+                                                <Loader />
+                                            ) : (
+                                                complaint.isOpen ? "Close" : "Closed"
+                                            )}
                                         </Button>
                                     </td>
                                 </tr>

@@ -2,7 +2,7 @@
 import { Images, UserNavigationRoutes } from "../constants.astro";
 import { NavActions } from "./NavActions";
 const className = Astro.props.className;
-const {routes}=Astro.props;
+const { routes } = Astro.props;
 ---
 
 <header
@@ -20,7 +20,7 @@ const {routes}=Astro.props;
     </div>
     <div class="flex flex-row gap-2 items-center" id="actions">
         <div class="font-bold tablet:hidden">
-            <NavActions  client:load />
+            <NavActions client:load />
         </div>
         <div id="">
             <div class="hidden tablet:flex">

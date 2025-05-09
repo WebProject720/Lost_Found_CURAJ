@@ -6,6 +6,8 @@ import { Button } from "./utility/Button";
 import { ReportsAPIs } from "../APIs/reports/reportsAPI";
 import { Loader } from "./utility/Loader";
 import { ShowAlert } from "./alertLogic";
+import { Button_Link } from "./utility/Btn_link";
+
 
 export const DetailedComplain = ({ ...props }) => {
     const [complain, setCompain] = useState(null);
@@ -38,7 +40,10 @@ export const DetailedComplain = ({ ...props }) => {
 
 
     const sendReply = async () => {
-        if (!replyText) return;
+        if (!replyText) {
+            ShowAlert("Reply must not empty",false);
+            return;
+        }
         setReplying(true);
         setStatus('Loading');
         const response = await ReportsAPIs('/reply', { reply: replyText, cid: id })
@@ -130,17 +135,20 @@ export const DetailedComplain = ({ ...props }) => {
                             </div>
                             : null
                     }
-
+            <hr  className="my-5"/>
                     <div className="mt-6 flex justify-between items-center text-xl">
-                        <a
+                        {/* <a
                             onClick={() => window.history.back()}
                             className="text-black  px-4 py-2 rounded-lg hover:underline hover:cursor-pointer"
                         >
                             ← Back to complains
-                        </a>
-                        {complain.isOpen ? <button
+                        </a> */}
+                        <Button onClick={() => window.history.back()}>
+                        ← Back to complains
+                        </Button>
+                        {complain.isOpen ? <Button
                             id="replyBtn"
-                            className="text-black px-4 py-2 rounded-lg flex items-center gap-2 hover:underline"
+                            className="text-black px-4 py-2 rounded-lg flex items-center gap-2 hover:underline !bg-green-400"
                             onClick={() => setReply(true)}
                         >
                             <img
@@ -149,7 +157,7 @@ export const DetailedComplain = ({ ...props }) => {
                                 className="w-6 h-5"
                             />
                             Reply
-                        </button> : ''}
+                        </Button> : ''}
                     </div>
                 </div>
             </div>

@@ -50,10 +50,14 @@ import { AdminNavigationRoutes, Images } from "../constants.astro";
 </html>
 
 <script>
-  import { isAdminCookieExist, isAdminExists } from "../logic/checkislogged";
+  import { navigate } from "astro:transitions/client";
+  import { checkCookies } from "../logic/checkislogged";
+  //check for both cookies
   (async () => {
-    isAdminExists();
-    isAdminCookieExist();
+    const data = await checkCookies();
+    if(!data.ischeck)return;
+    if (!data?.admin) navigate("/");
+    if (data?.user) navigate("/dashboard");
   })();
 </script>
 
@@ -108,5 +112,9 @@ import { AdminNavigationRoutes, Images } from "../constants.astro";
       opacity: 1;
       transform: scale(1);
     }
+  }
+  th,
+  td {
+    text-wrap: nowrap;
   }
 </style>

@@ -54,7 +54,13 @@ export const login = async (req, res) => {
                     new ApiError('user not found')
                 )
         }
-
+        if(user.isBlocked){
+            return res
+                .status(401)
+                .json(
+                    new ApiError('User blocked !! Please Contact Admin')
+                )
+        }
         if (!user.isVerified) {
             return res
                 .status(404)

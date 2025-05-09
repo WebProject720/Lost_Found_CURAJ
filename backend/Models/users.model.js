@@ -23,6 +23,11 @@ export const UserSchema = new Schema(
             type: String,
             default: null
         },
+        isBlocked: {
+            type: Boolean,
+            default: false
+        }
+        ,
         Reports: {
             type: [Schema.Types.ObjectId],
             ref: "Reports",
@@ -31,10 +36,10 @@ export const UserSchema = new Schema(
             type: String,
             default: null
         },
-        imgDetails:{
-            type:Object,
-            required:false,
-            default:null
+        imgDetails: {
+            type: Object,
+            required: false,
+            default: null
         }
     },
     { timestamps: true }

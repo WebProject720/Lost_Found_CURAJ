@@ -37,7 +37,7 @@ export default function RegisterBlock(props) {
 
 
     useEffect(() => {
-        setAlertFun(false,'');
+        setAlertFun(false, '');
     }, [watch('username'), watch('password'), watch('enrollment'), watch('repassword')])
 
 
@@ -46,7 +46,7 @@ export default function RegisterBlock(props) {
             setAlertFun(false, 'All field required');
             return
         }
-        if(data.username.includes(' ')){
+        if (data.username.includes(' ')) {
             setAlertFun(false, 'Space not allowed in username');
             return
         }
@@ -147,9 +147,9 @@ export default function RegisterBlock(props) {
                 <div className="w-full flex items-center justify-center">
                     <div className="flex flex-row gap-5 flex-wrap justify-evenly w-full">
                         <Button_Link to="/auth" className="bg-green-500 hover:bg-green-300">
-                            Login
+                            User Login
                         </Button_Link>
-                        <Button_Link to="/auth/reset-password" className="bg-gray-400 text-black border-0 border-black hover:bg-gray-300">
+                        <Button_Link to="/auth/reset-password" className="bg-gray-400 text-black border-0 border-black text-nowrap hover:bg-gray-300">
                             Forget Password
                         </Button_Link>
                     </div>

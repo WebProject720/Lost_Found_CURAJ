@@ -18,17 +18,13 @@ import { FeedbackForm } from "../blocks/FeedbackForm";
       href={Images.curaj_logo.src}
       type="image/x-icon"
     />
-    <style>
-      body {
-      }
-    </style>
   </head>
 
   <body class="bg-gray-100 text-gray-900 max-w-fit">
     <AlertBox />
     <div id="container" class="flex bg-black/40 flex-col">
       <div class="w-screen" id="header-container">
-        <Nav/>
+        <Nav />
       </div>
       <div class="flex flex-row relative">
         <div
@@ -36,237 +32,303 @@ import { FeedbackForm } from "../blocks/FeedbackForm";
           id="sidebarBox"
         >
           <Sidebar class="" />
-        </div></div>
-        <div 
-        class="flex flex-col md:flex-row items-center justify-center min-h-[90vh] px-6 py-10 gap-10 bg-cover bg-center"
-        style={`background-image: url('${bkdImage.src}');`}
-      >
-        <!-- Left Div (Image) -->
-        <div class="flex-1 flex justify-center">
-          <img 
-            src={Images.DskImage.src} 
-            alt="CURAJ Lost & Found" 
-            class="max-w-[220px] md:max-w-[490px] w-full rounded-2xl" 
-          />
         </div>
-      
-        <!-- Right Div (Text + Buttons) -->
-        <div class="flex-1 flex flex-col text-center md:text-left mt-0 md:mt-[-110px]">
-          <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">Welcome</h2>
-          <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6">Lost & Found Portal CURAJ</h1>
-          <p class="text-gray-600 text-base md:text-lg mb-8">
-            A dedicated platform for students and faculty to report lost or found items within the campus.
-            Help us reunite items with their rightful owners quickly and easily.
-          </p>
-      
-          <div class="flex flex-wrap justify-center md:justify-start gap-4">
-            <button onclick="location.href='/auth'" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg">Login</button>
-            <button onclick="location.href='/auth/register'" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg">Register Now</button>
-            <button onclick="location.href='/auth?mode=0'" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg">Admin Login</button>
-            <button onclick="location.href='/about'" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-6 rounded-lg">About Us</button>
+      </div>
+      <main>
+        <div
+          class="flex flex-col md:flex-row items-center justify-center min-h-[90vh] px-6 py-10 gap-10 bg-cover bg-center"
+          style={`background-image: url('${bkdImage.src}');`}
+        >
+          <!-- Left Div (Image) -->
+          <div class="flex-1 flex justify-center">
+            <img
+              src={Images.DskImage.src}
+              alt="CURAJ Lost & Found"
+              class="max-w-[220px] md:max-w-[490px] w-full rounded-2xl"
+            />
           </div>
-        </div>
-      </div>
 
-
-      <div class="absolute top-36 right-14 hidden sm:flex items-center space-x-2 p-2 rounded-full shadow-lg  backdrop-blur-md">
-        <img
-          src="https://www.curaj.ac.in/sites/all/themes/cmf/images/naac1.png"
-          alt="Profile"
-          class="w-20 h-12 rounded-full"
-        />
-        <div class="text-gray-800">
-          <p class="font-bold">A++ Grade by NAAC</p>
-          <p class="text-sm">Category 1st University</p>
-        </div>
-      </div>
-      
-
-      <!-- How It Works Section - Modern 2-in-1 Layout -->
-      <div
-        class="flex flex-col md:flex-row items-center justify-between gap-12 px-6 py-16 bg-gradient-to-br bg-slate-100"
-      >
-        <!-- Left Image -->
-        <div class="flex-1 flex justify-center">
-          <img
-            src={Images.C.src}
-            alt="CURAJ Lost & Found"
-            class="max-w-[250px] md:max-w-[550px] w-full rounded-2xl transition-transform duration-500 ease-in-out transform hover:scale-105"
-          />
-        </div>
-
-        <!-- Right Steps -->
-        <div class="flex-1 space-y-6">
-          <h2
-            class="text-4xl font-extrabold text-blue-800 text-center md:text-left"
+          <!-- Right Div (Text + Buttons) -->
+          <div
+            class="flex-1 flex flex-col text-center md:text-left mt-0 md:mt-[-110px]"
           >
-            How It Works?
-          </h2>
+            <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">
+              Welcome
+            </h2>
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6">
+              Lost & Found Portal CURAJ
+            </h1>
+            <p class="text-gray-600 text-base md:text-lg mb-8">
+              A dedicated platform for students and faculty to report lost or
+              found items within the campus. Help us reunite items with their
+              rightful owners quickly and easily.
+            </p>
 
-          <div class="space-y-4">
-            <div
-              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-blue-500"
-            >
-              <h3 class="text-blue-700 font-semibold text-lg">
-                🔹 Register on the Portal
-              </h3>
-              <p class="text-gray-600 text-sm">
-                Use your Enrollment Number or CURAJ Official Email ID to
-                register. Only CURAJ students/faculty can access the portal.
-              </p>
+            <div class="flex flex-wrap justify-center md:justify-start gap-4">
+              <div id="auth-buttons " class=" flex gap-2 flex-wrap">
+                <button
+                  onclick="location.href='/auth'"
+                  class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg"
+                  >Login</button
+                >
+                <button
+                  onclick="location.href='/auth/register'"
+                  class="bg-green-600 hover:bg-green-700  text-white font-bold py-2 px-6 rounded-lg"
+                  >Register Now</button
+                >
+                <button
+                  onclick="location.href='/auth?mode=0'"
+                  class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg"
+                  >Admin Login</button
+                >
+              </div>
+              <button
+                onclick="location.href='/about'"
+                class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-6 rounded-lg"
+                >About Us</button
+              >
             </div>
+          </div>
+        </div>
 
-            <div
-              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-green-500"
+        <div
+          class="absolute top-36 right-14 hidden sm:flex items-center space-x-2 p-2 rounded-full shadow-lg backdrop-blur-md"
+        >
+          <img
+            src="https://www.curaj.ac.in/sites/all/themes/cmf/images/naac1.png"
+            alt="Profile"
+            class="w-20 h-12 rounded-full"
+          />
+          <div class="text-gray-800">
+            <p class="font-bold">A++ Grade by NAAC</p>
+            <p class="text-sm">Category 1st University</p>
+          </div>
+        </div>
+
+        <!-- How It Works Section - Modern 2-in-1 Layout -->
+        <div
+          class="flex flex-col md:flex-row items-center justify-between gap-12 px-6 py-16 bg-gradient-to-br bg-slate-100"
+        >
+          <!-- Left Image -->
+          <div class="flex-1 flex justify-center">
+            <img
+              src={Images.C.src}
+              alt="CURAJ Lost & Found"
+              class="max-w-[250px] md:max-w-[550px] w-full rounded-2xl transition-transform duration-500 ease-in-out transform hover:scale-105"
+            />
+          </div>
+
+          <!-- Right Steps -->
+          <div class="flex-1 space-y-6">
+            <h2
+              class="text-4xl font-extrabold text-blue-800 text-center md:text-left"
             >
-              <h3 class="text-green-700 font-semibold text-lg">
-                🔹 Login to Your Account
-              </h3>
-              <p class="text-gray-600 text-sm">
-                Access the portal features after logging in with your registered
-                credentials.
-              </p>
+              How It Works?
+            </h2>
+
+            <div class="space-y-4">
+              <div
+                class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-blue-500"
+              >
+                <h3 class="text-blue-700 font-semibold text-lg">
+                  🔹 Register on the Portal
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Use your Enrollment Number or CURAJ Official Email ID to
+                  register. Only CURAJ students/faculty can access the portal.
+                </p>
+              </div>
+
+              <div
+                class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-green-500"
+              >
+                <h3 class="text-green-700 font-semibold text-lg">
+                  🔹 Login to Your Account
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Access the portal features after logging in with your
+                  registered credentials.
+                </p>
+              </div>
+
+              <div
+                class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-yellow-500"
+              >
+                <h3 class="text-yellow-700 font-semibold text-lg">
+                  🔹 Submit a Complaint
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Submit a Lost/Found report with Subject, Description, and
+                  Image for identification.
+                </p>
+              </div>
+
+              <div
+                class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-indigo-500"
+              >
+                <h3 class="text-indigo-700 font-semibold text-lg">
+                  🔹 Track Your Complaint
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Track your submitted complaints and stay updated on their
+                  status.
+                </p>
+              </div>
+
+              <div
+                class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-pink-500"
+              >
+                <h3 class="text-pink-700 font-semibold text-lg">
+                  🔹 Respond to Others
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Found something? Browse and respond to lost item complaints
+                  easily.
+                </p>
+              </div>
+
+              <div
+                class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-red-500"
+              >
+                <h3 class="text-red-700 font-semibold text-lg">
+                  🔹 Get Instant Notifications
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Receive instant email alerts when there’s a match or response
+                  on your complaint.
+                </p>
+              </div>
+
+              <div
+                class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-indigo-500"
+              >
+                <h3 class="text-indigo-700 font-semibold text-lg">
+                  🔹 Inappropriate Messages Will Be Deleted
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Any complaint or feedback with offensive or unnecessary
+                  content will be reviewed and may be deleted by the admin.
+                </p>
+              </div>
+
+              <div
+                class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-red-500"
+              >
+                <h3 class="text-red-700 font-semibold text-lg">
+                  🔹 User May Be Blocked
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Users posting repeated irrelevant or abusive messages can be
+                  blocked from using the portal by the admin.
+                </p>
+              </div>
             </div>
-
-            <div
-              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-yellow-500"
+          </div>
+        </div>
+        <FeedbackForm client:only />
+      </main>
+    </div>
+    <!-- Footer Section -->
+    <footer class="bg-gray-200 text-gray-800 py-8 px-6 mt-10">
+      <div
+        class="container mx-auto flex flex-col md:flex-row items-start gap-4 md:gap-0 justify-between"
+      >
+        <!-- Left Side: Website Links with Logos (More Width) -->
+        <div class="w-full md:w-2/3 flex flex-col gap-4">
+          <h3 class="text-lg font-semibold mb-2">Official Links</h3>
+          <div class="flex flex-wrap gap-6">
+            <a
+              href="https://www.curaj.ac.in"
+              target="_blank"
+              class="flex items-center gap-2"
             >
-              <h3 class="text-yellow-700 font-semibold text-lg">
-                🔹 Submit a Complaint
-              </h3>
-              <p class="text-gray-600 text-sm">
-                Submit a Lost/Found report with Subject, Description, and Image
-                for identification.
-              </p>
-            </div>
-
-            <div
-              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-indigo-500"
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/6/6d/Logo_of_Central_University_of_Rajasthan.gif"
+                alt="CURAJ Logo"
+                class="h-10 w-10"
+              />
+              <span class="text-blue-800">Central University Of Rajasthan</span>
+            </a>
+            <a
+              href="https://curaj.samarth.edu.in/index.php/site/login"
+              target="_blank"
+              class="flex items-center gap-2"
             >
-              <h3 class="text-indigo-700 font-semibold text-lg">
-                🔹 Track Your Complaint
-              </h3>
-              <p class="text-gray-600 text-sm">
-                Track your submitted complaints and stay updated on their
-                status.
-              </p>
-            </div>
+              <img
+                src="https://assamadmission.samarth.ac.in/assets/d38f46e/img/samarth-logo-min.png"
+                alt="MHRD Logo"
+                class="h-8 w-34"
+              />
+              <span class="text-blue-800">Samarth Portal</span>
+            </a>
+            <a href="#" target="_blank" class="flex items-center gap-2">
+              <img src={Images.logo.src} alt="UGC Logo" class="h-14 w-16" />
+              <span class="text-blue-800">Lost & Found Portal</span>
+            </a>
+          </div>
+        </div>
 
-            <div
-              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-pink-500"
-            >
-              <h3 class="text-pink-700 font-semibold text-lg">
-                🔹 Respond to Others
-              </h3>
-              <p class="text-gray-600 text-sm">
-                Found something? Browse and respond to lost item complaints
-                easily.
-              </p>
-            </div>
+        <!-- Right Side: Social Icons & Address Info -->
+        <div class="w-full md:w-1/3 flex flex-col gap-4 mt-6 md:mt-0">
+          <h3 class="text-lg font-semibold mb-2">Connect With Us</h3>
+          <div class="flex gap-4">
+            <a href="https://twitter.com" target="_blank">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/733/733579.png"
+                alt="Twitter"
+                class="h-6 w-6 hover:scale-110 transition"
+              />
+            </a>
+            <a href="https://linkedin.com" target="_blank">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
+                alt="LinkedIn"
+                class="h-6 w-6 hover:scale-110 transition"
+              />
+            </a>
+            <a href="https://instagram.com" target="_blank">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+                alt="Instagram"
+                class="h-6 w-6 hover:scale-110 transition"
+              />
+            </a>
+            <a href="https://github.com" target="_blank">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/733/733553.png"
+                alt="GitHub"
+                class="h-6 w-6 hover:scale-110 transition"
+              />
+            </a>
+          </div>
 
-            <div
-              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-red-500"
-            >
-              <h3 class="text-red-700 font-semibold text-lg">
-                🔹 Get Instant Notifications
-              </h3>
-              <p class="text-gray-600 text-sm">
-                Receive instant email alerts when there’s a match or response on
-                your complaint.
-              </p>
-            </div>
-
-            <div
-              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-indigo-500"
-            >
-              <h3 class="text-indigo-700 font-semibold text-lg">
-                🔹 Inappropriate Messages Will Be Deleted
-              </h3>
-              <p class="text-gray-600 text-sm">
-                Any complaint or feedback with offensive or unnecessary content
-                will be reviewed and may be deleted by the admin.
-              </p>
-            </div>
-
-            <div
-              class="bg-white p-4 rounded-xl shadow-md hover:shadow-xl border-l-4 border-red-500"
-            >
-              <h3 class="text-red-700 font-semibold text-lg">
-                🔹 User May Be Blocked
-              </h3>
-              <p class="text-gray-600 text-sm">
-                Users posting repeated irrelevant or abusive messages can be
-                blocked from using the portal by the admin.
-              </p>
+          <div class="flex items-start gap-2 text-sm">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/684/684908.png"
+              alt="Address Icon"
+              class="h-6 w-6"
+            />
+            <div>
+              <p>Central University of Rajasthan</p>
+              <p>NH-8, Bandar Sindri, Rajasthan - 305817</p>
             </div>
           </div>
         </div>
       </div>
-      <FeedbackForm client:only />
-    </div>
-  <!-- Footer Section -->
-  <footer class="bg-gray-200 text-gray-800 py-8 px-6 mt-10">
-    <div class="container mx-auto flex flex-col md:flex-row items-start gap-4 md:gap-0 justify-between">
-      
-      <!-- Left Side: Website Links with Logos (More Width) -->
-      <div class="w-full md:w-2/3 flex flex-col gap-4">
-        <h3 class="text-lg font-semibold mb-2">Official Links</h3>
-        <div class="flex flex-wrap gap-6">
-          <a href="https://www.curaj.ac.in" target="_blank" class="flex items-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/en/6/6d/Logo_of_Central_University_of_Rajasthan.gif" alt="CURAJ Logo" class="h-10 w-10" />
-            <span class="text-blue-800">Central University Of Rajasthan</span>
-          </a>
-          <a href="https://curaj.samarth.edu.in/index.php/site/login" target="_blank" class="flex items-center gap-2">
-            <img src="https://assamadmission.samarth.ac.in/assets/d38f46e/img/samarth-logo-min.png" alt="MHRD Logo" class="h-8 w-34" />
-            <span class="text-blue-800">Samarth Portal</span>
-          </a>
-          <a href="https://www.ugc.ac.in" target="_blank" class="flex items-center gap-2">
-            <img src={Images.logo.src} alt="UGC Logo" class="h-14 w-16" />
-            <span class="text-blue-800">Lost & Found Portal</span>
-          </a>
-          
-        </div>
-      </div>
-  
-      <!-- Right Side: Social Icons & Address Info -->
-      <div class="w-full md:w-1/3 flex flex-col gap-4 mt-6 md:mt-0">
-        <h3 class="text-lg font-semibold mb-2">Connect With Us</h3>
-        <div class="flex gap-4">
-          <a href="https://twitter.com" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" class="h-6 w-6 hover:scale-110 transition" />
-          </a>
-          <a href="https://linkedin.com" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="h-6 w-6 hover:scale-110 transition" />
-          </a>
-          <a href="https://instagram.com" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="h-6 w-6 hover:scale-110 transition" />
-          </a>
-          <a href="https://github.com" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub" class="h-6 w-6 hover:scale-110 transition" />
-          </a>
-        </div>
-  
-        <div class="flex items-start gap-2 text-sm">
-          <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Address Icon" class="h-6 w-6" />
-          <div>
-            <p>Central University of Rajasthan</p>
-            <p>NH-8, Bandar Sindri, Rajasthan - 305817</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="text-center text-sm text-gray-700 mt-6">
-      © 2025 CURAJ Lost & Found Portal. All rights reserved.
-    </div>
-  </footer>
-  
-  
-  
 
+      <div class="text-center text-sm text-gray-700 mt-6">
+        © 2025 CURAJ Lost & Found Portal. All rights reserved.
+      </div>
+    </footer>
   </body>
 
   <script>
+    //check for both cookie like user and admin
+    import { checkCookies } from "../logic/checkislogged";
+    (async()=>{
+      const data=await checkCookies();
+    })();
+
     import { isUserLogin } from "../store";
     isUserLogin()
       ? document.getElementById("auth-buttons")?.classList.add("hidden")
