@@ -49,7 +49,7 @@ export const adminLogout = async () => {
         return response.data;
     } catch ({ response }) {
         ShowAlert(response?.data?.message || "Something went wrong", false);
-        logout();
+        // logout();
         return response.data;
     }
 }

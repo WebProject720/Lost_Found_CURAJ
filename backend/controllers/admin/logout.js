@@ -15,7 +15,7 @@ export const logoutAdmin = async (req, res) => {
         // Check if the cookie exists
         if (!cookie) {
             return res.status(400).json(
-                new ApiError('Token not provided', null, false, 400)
+                new ApiError('Token not provided',{TokenName,CookieOptions,cookie}, false, 400)
             );
         }
 
