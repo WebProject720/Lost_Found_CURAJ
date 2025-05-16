@@ -18,7 +18,7 @@ const AdminsRouter = Router();
 
 AdminsRouter.route('/register').post(VerifyAdminMiddleware, AdminRegister);
 AdminsRouter.route('/login').post(AdminLogin);
-AdminsRouter.route('/logout').get(VerifyAdminMiddleware, logoutAdmin);
+AdminsRouter.route('/logout').post(logoutAdmin);
 AdminsRouter.route('/islogged').post(isAdminLogged);
 
 AdminsRouter.route('/users/list').get(VerifyAdminMiddleware, UserList);
