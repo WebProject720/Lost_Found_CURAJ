@@ -11,7 +11,7 @@ export const CookieOption = (production, bool = false) => {
     return {
         httpOnly: true,     // Cookie accessible only by web server
         secure: !production,       // Cookie sent only over HTTPS
-        // expires: new Date(Date.now() + 36000000),    // Cookie expiry time in milliseconds
+        expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),    // Cookie expiry 2 days
         sameSite: production ? 'Lax' : 'None', // Cookie sent only to the same site
         path: '/',
     }

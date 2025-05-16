@@ -100,28 +100,27 @@ export const checkCookies = async () => {
     try {
         //run both apis in parallel order
         const [userResponse, adminResponse] = await Promise.all([
-            UserPostAPI(null, "/getuser"),
+            UserPostAPI("/getuser",null),
             checkAdminExist("/islogged"),
         ]);
 
         // Handle user response
-        console.log(userResponse, adminResponse);
-        if (userResponse?.status === 200) {
+        if (userResponse?.success === 200 && userResponse?.success) {
 
             setUserLogin(true);
             setUserInfo(userResponse.data);
             response.user = true;
         } else {
-            throw new Error('Invalid user response status');
+            console.log('User not logged');
         }
 
         // Handle admin response
-        if (adminResponse?.status === 200 && adminResponse?.success) {
+        if (adminResponse?.statusCode === 200 && adminResponse?.success) {
             setUserLogin(true);
             setUserInfo(adminResponse.data, true);
             response.admin = true;
         } else {
-            throw new Error('Invalid admin response status or unsuccessful response');
+            console.log("Admin not logged");
         }
     } catch (error) {
         console.log(error);
