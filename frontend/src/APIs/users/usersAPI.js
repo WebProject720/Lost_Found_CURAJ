@@ -1,6 +1,5 @@
 import axios from "axios";
 import { SERVER_URL } from "../../constants.astro";
-import { logoutUser } from "../auth/logout";
 
 
 export const UserAPI = async (payload, path) => {
