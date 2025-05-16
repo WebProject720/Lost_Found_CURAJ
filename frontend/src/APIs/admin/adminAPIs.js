@@ -45,11 +45,11 @@ export const checkAdminExist = async () => {
 export const adminLogout = async () => {
     try {
         const response = await axios.post(server + '/admin/logout',null, { withCredentials: true });
-        // logout();
+        logout();
         return response.data;
     } catch ({ response }) {
         ShowAlert(response?.data?.message || "Something went wrong", false);
-        // logout();
+        logout();
         return response.data;
     }
 }
